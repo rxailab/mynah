@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Compose does all real theming; this only styles the window before the
+         first frame is drawn. The design is light in both system modes, so
+         there is no values-night variant. -->
+    <style name="Theme.VoiceCall" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">#E8EBE6</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>

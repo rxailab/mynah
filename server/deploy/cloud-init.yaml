@@ -1,0 +1,94 @@
+#cloud-config
+# Runs once, at first boot, before anything is deployed. Its job is only to make
+# the box ready: a runtime, a service account, somewhere to put state. The code,
+# the environment file and the systemd unit all arrive later via deploy.sh, so
+# that redeploying never means rebuilding the instance.
+
+package_update: true
+
+# The x86 free shape has 1 GB of RAM, which `npm ci` can exhaust while it
+# unpacks. Costs nothing on the larger Ampere shapes, where it simply never
+# gets touched.
+swap:
+  filename: /swapfile
+  size: 2147483648
+
+packages:
+  - ca-certificates
+  - curl
+  - gnupg
+  - unzip
+  - fail2ban
+
+# The service account owns state and nothing else. No shell, no home to log in
+# to: if the process is ever taken over, there is very little underneath it.
+users:
+  - default
+  - name: voicecall
+    system: true
+    shell: /usr/sbin/nologin
+    homedir: /var/lib/voicecall
+    create_groups: true
+
+write_files:
+  # cloud-init and unattended-upgrades both want the apt lock at first boot, and
+  # whichever loses simply fails. Everything below goes through this.
+  - path: /usr/local/sbin/apt-wait
+    permissions: '0755'
+    content: |
+      #!/bin/bash
+      set -e
+      for _ in $(seq 1 60); do
+        if ! fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1 &&
+           ! fuser /var/lib/apt/lists/lock >/dev/null 2>&1; then
+          exec apt-get -o DPkg::Lock::Timeout=300 "$@"
+        fi
+        sleep 5
+      done
+      exec apt-get -o DPkg::Lock::Timeout=300 "$@"
+
+  # SSH is the only port the security list lets in, and it is open to the world
+  # because a laptop's address moves. Keys only, and a ban after repeated
+  # failures, so that being open costs nothing.
+  - path: /etc/ssh/sshd_config.d/99-hardening.conf
+    permissions: '0644'
+    content: |
+      PasswordAuthentication no
+      KbdInteractiveAuthentication no
+      PermitRootLogin no
+
+  - path: /etc/fail2ban/jail.d/sshd.local
+    permissions: '0644'
+    content: |
+      [sshd]
+      enabled = true
+      maxretry = 5
+      bantime  = 1h
+
+runcmd:
+  # Node 24 LTS. The server stores calls through node:sqlite, which needs 22.5
+  # at the very least; 24 is the first release where it is not behind a flag.
+  - [ bash, -c, "curl -fsSL https://deb.nodesource.com/setup_24.x | bash -" ]
+  - [ /usr/local/sbin/apt-wait, install, -y, nodejs ]
+
+  # cloudflared, from Cloudflare's own repo so that it updates with the system.
+  # It reaches out to Cloudflare and holds the connection open, which is why no
+  # inbound port has to be open for the site to be reachable.
+  - [ bash, -c, "install -d -m 0755 /usr/share/keyrings" ]
+  - [ bash, -c, "curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg -o /usr/share/keyrings/cloudflare-main.gpg" ]
+  - [ bash, -c, "echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main' > /etc/apt/sources.list.d/cloudflared.list" ]
+  - [ /usr/local/sbin/apt-wait, update ]
+  - [ /usr/local/sbin/apt-wait, install, -y, cloudflared ]
+
+  # Code, state, secrets: three places, three owners.
+  - [ install, -d, -m, '0755', -o, ubuntu, -g, ubuntu, /opt/voicecall ]
+  - [ install, -d, -m, '0750', -o, voicecall, -g, voicecall, /var/lib/voicecall ]
+  - [ install, -d, -m, '0700', -o, root, -g, root, /etc/voicecall ]
+
+  - [ systemctl, restart, ssh ]
+  - [ systemctl, enable, --now, fail2ban ]
+
+  # deploy.sh polls for this before it tries to push anything.
+  - [ bash, -c, "node --version > /var/log/cloud-init-ready && echo ok >> /var/log/cloud-init-ready" ]
+
+final_message: "smartvoice base image ready after $UPTIME seconds"

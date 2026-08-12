@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The one directory the app ever hands out a URI into: the share images it
+  renders itself. Nothing else in the app's storage is reachable through the
+  provider, so a share intent cannot be talked into exporting a database or a
+  transcript.
+-->
+<paths>
+    <cache-path name="shared" path="shared/" />
+</paths>

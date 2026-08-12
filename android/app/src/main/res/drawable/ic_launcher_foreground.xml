@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Icon 2c: the mynah. A speech bubble that has grown a beak, an eye and two
+  crest feathers — your words, carried out of the door by the bird that is best
+  at repeating them.
+
+  Two things differ from the prototype's SVG, both on purpose:
+
+  · Scale. The design draws on a 108 artboard that is entirely visible, the way
+    an iOS tile is. An adaptive icon only guarantees the inner 72dp, so the
+    whole drawing is scaled by 72/108 about the centre. That keeps the bird the
+    same size *relative to the visible circle* as the mock, instead of letting
+    the launcher mask crop the beak and the tail.
+
+  · The soft ground shadow is dropped. It is a Gaussian blur, which vector
+    drawables cannot express, and at launcher size a 16% blur under a flat
+    shape is invisible anyway.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:scaleX="0.6667"
+        android:scaleY="0.6667">
+        <group android:translateY="-3">
+
+            <!-- Body: the speech bubble, tail swung out to the lower left. -->
+            <path
+                android:fillColor="#FF0E0F0C"
+                android:pathData="M42,32 L66,32 C74.8,32 82,39.2 82,48 L82,56 C82,64.8 74.8,72 66,72 L52,72 C48.5,78.5 42.5,82 36,82.5 C39,78.8 40.5,75.3 40.6,72 C32.3,71.3 26,64.2 26,56 L26,48 C26,39.2 33.2,32 42,32 Z" />
+
+            <!-- The folded wing, 8% lighter than the body: only reads at size. -->
+            <path
+                android:fillColor="#FF272B24"
+                android:pathData="M40,56 C40,47 47,42 55,43 C60,43.6 63,47 63,51 C63,58 57,63 49,63 C44,63 40,60 40,56 Z" />
+
+            <!-- Two crest feathers — the mynah's tell. -->
+            <path
+                android:strokeColor="#FF0E0F0C"
+                android:strokeWidth="3.5"
+                android:strokeLineCap="round"
+                android:pathData="M58,33 C58.5,29.5 61,27.2 64.5,26.5" />
+            <path
+                android:strokeColor="#FF0E0F0C"
+                android:strokeWidth="3.5"
+                android:strokeLineCap="round"
+                android:pathData="M64,34 C65.5,31.2 68,29.8 71,29.8" />
+
+            <!-- Beak, lit above and shaded below. -->
+            <path
+                android:fillColor="#FFB7EF8D"
+                android:pathData="M73,44 L86.5,51 L73,52 Z" />
+            <path
+                android:fillColor="#FF6FBE3F"
+                android:pathData="M73,52 L86.5,51 L73,59 Z" />
+
+            <!-- Eye, with a pupil placed off-centre so it looks at you. -->
+            <path
+                android:fillColor="#FFF7F9F4"
+                android:pathData="M56.4,45.5 a4.6,4.6 0 1,0 9.2,0 a4.6,4.6 0 1,0 -9.2,0 Z" />
+            <path
+                android:fillColor="#FF0E0F0C"
+                android:pathData="M60.4,46.2 a1.9,1.9 0 1,0 3.8,0 a1.9,1.9 0 1,0 -3.8,0 Z" />
+        </group>
+    </group>
+</vector>

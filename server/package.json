@@ -1,0 +1,28 @@
+{
+  "name": "voicecall-server",
+  "version": "1.0.0",
+  "description": "Backend that places phone calls on the user's behalf and runs an AI voice agent on the line.",
+  "type": "module",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "models": "node scripts/models.js",
+    "doctor": "node scripts/doctor.js",
+    "test": "node test/filter.mjs && node test/persist.mjs && node test/auth.mjs && node test/api.mjs && node test/billing.mjs && node test/stripe.mjs && node test/account.mjs && node test/profile.mjs && node test/timeout.mjs && node test/parse.mjs && node test/translate.mjs && node test/conversation.mjs",
+    "test:api": "node test/api.mjs",
+    "test:parse": "node test/parse.mjs",
+    "test:calls": "node test/conversation.mjs",
+    "demo": "node test/demo-live.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "openai": "^7.4.0",
+    "twilio": "^5.4.0",
+    "ws": "^8.18.0"
+  }
+}

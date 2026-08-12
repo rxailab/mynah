@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Debug builds only: lets the app reach a dev server over plain HTTP on
+         the machine hosting the emulator (10.0.2.2). Every other host still
+         requires TLS, and the release build has no such exemption at all. -->
+    <application android:networkSecurityConfig="@xml/network_security_config" />
+</manifest>

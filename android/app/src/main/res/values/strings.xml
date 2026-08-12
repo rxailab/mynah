@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The name of the app, not a word: it stays "Mynah" in every locale, so
+         there is nothing for values-zh to carry. -->
+    <string name="app_name" translatable="false">Mynah</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_home">New call</string>
+    <string name="nav_history">History</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_notifications">Notifications</string>
+
+    <!-- Status of a call -->
+    <string name="status_needs_you">Needs you</string>
+    <string name="status_on_the_call">On the call</string>
+    <string name="status_on_hold">On hold</string>
+    <string name="hold_queueing">Queueing</string>
+    <string name="hold_note">Waiting costs the same as talking. Hang up and try later if this is going nowhere.</string>
+    <string name="detail_queued">Spent queueing</string>
+    <string name="detail_of_which_queued">%1$s of it queueing</string>
+    <string name="status_dialling">Dialling</string>
+    <string name="status_done">Done</string>
+    <string name="status_no_answer">No answer</string>
+    <string name="status_dialing_now">Dialling…</string>
+    <string name="status_ringing">Ringing…</string>
+
+    <string name="headline_needs_you">%1$s needs you on the line</string>
+    <string name="subline_did_not_connect">The call did not connect.</string>
+    <string name="subline_transfer">The assistant will not answer for you. Pick up and you are straight through.</string>
+    <string name="subline_ringing">Ringing…</string>
+
+    <string name="day_today">Today</string>
+    <string name="day_yesterday">Yesterday</string>
+
+    <!-- History filter chips. "Done" and "Needs you" reuse the status labels. -->
+    <string name="filter_all">All</string>
+
+    <!-- Getting in -->
+    <string name="auth_title">Sign in to Mynah</string>
+    <string name="auth_sub">Calls are placed and recorded against your account, so the server needs to know it is you.</string>
+    <string name="auth_google">Continue with Google</string>
+    <string name="auth_or_email">or use your email</string>
+    <string name="auth_email_button">Continue with email</string>
+    <string name="auth_google_cancelled">Sign-in was cancelled.</string>
+    <string name="auth_no_google_account">There is no Google account on this phone. Add one in Android Settings, or use your email.</string>
+    <string name="auth_google_failed">Google would not sign you in: %1$s</string>
+    <string name="email_title">Continue with email</string>
+    <string name="email_sub">New here? We\'ll create your account automatically.</string>
+    <string name="field_email">Email</string>
+    <string name="field_password">Password</string>
+    <string name="email_password_rule">At least 8 characters.</string>
+    <string name="email_bad_address">That does not look like an email address.</string>
+    <string name="action_show_password">Show password</string>
+    <string name="action_hide_password">Hide password</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_signing_in">Signing in…</string>
+    <string name="action_sign_out">Sign out</string>
+
+    <!-- Forgetting, resetting and changing a password -->
+    <string name="password_forgot">Forgot password?</string>
+    <string name="reset_code_title">Enter the code</string>
+    <string name="reset_code_sub">The code has gone to %1$s. It works for 10 minutes.</string>
+    <string name="reset_code_none">Didn\'t get it?</string>
+    <string name="reset_code_resend">Send again</string>
+    <string name="reset_code_sent_again">Sent. Give it a moment.</string>
+    <string name="reset_new_title">Set a new password</string>
+    <string name="reset_new_sub">A new password for %1$s. Everything already signed in will be signed out.</string>
+    <string name="reset_save">Save and sign in</string>
+    <string name="change_password_title">Change password</string>
+    <string name="change_password_sub">Your other devices will be signed out when you save.</string>
+    <string name="change_password_current">Current password</string>
+    <string name="change_password_new">New password</string>
+    <string name="change_password_rule">Current password on top, new one below.</string>
+    <string name="change_password_forgot">Forgotten your current one?</string>
+    <string name="change_password_done">Password changed. Your other devices have been signed out.</string>
+    <string name="settings_account">Account</string>
+    <string name="settings_change_password_sub">Other devices sign out when you change it</string>
+
+    <!-- Booking a call for later. There is no repeat option anywhere here, and
+         that is the point: see NewScheduledRequest. -->
+    <string name="action_call_later">Call later</string>
+    <string name="schedule_title">Pick a time</string>
+    <string name="schedule_date">Date</string>
+    <string name="schedule_time">Time</string>
+    <string name="schedule_today">Today</string>
+    <string name="schedule_tomorrow">Tomorrow · %1$s</string>
+    <string name="schedule_pick_date">Pick a date</string>
+    <string name="schedule_custom_time">Custom…</string>
+    <string name="schedule_note">The assistant will not dial on its own. It gets the call ready, asks you to check it over, and only rings once you say so.</string>
+    <string name="schedule_confirm">Schedule · %1$s</string>
+    <string name="schedule_no_time">Pick a time first</string>
+    <string name="schedule_past">That time has gone. Pick a later one.</string>
+
+    <!-- Rating a call, and sharing what it got done -->
+    <string name="feedback_prompt">How did this call go?</string>
+    <string name="feedback_good">Got it done</string>
+    <string name="feedback_bad">Didn\'t work</string>
+    <string name="feedback_detail">Write more</string>
+    <string name="feedback_thanks">Thanks — that helps.</string>
+    <string name="feedback_title">Call feedback</string>
+    <string name="feedback_verdict_label">How did this call go</string>
+    <string name="feedback_reasons_label">What could be better · pick any</string>
+    <string name="feedback_reason_wrong_details">Got the details wrong</string>
+    <string name="feedback_reason_misheard">Didn\'t understand them</string>
+    <string name="feedback_reason_too_wordy">Talked too much</string>
+    <string name="feedback_reason_queued_too_long">Queued too long</string>
+    <string name="feedback_reason_other">Something else</string>
+    <string name="feedback_note_hint">Anything else (optional). Sent with this call\'s transcript.</string>
+    <string name="feedback_note">Feedback is only used to improve the assistant. It never reaches the business and never redials.</string>
+    <string name="feedback_send">Send feedback</string>
+    <string name="share_title">Share the result</string>
+    <string name="share_card_footer">A call made for you by Mynah</string>
+    <string name="share_no_number">The image has no phone number and no transcript in it.</string>
+    <string name="share_image">Share image</string>
+    <string name="share_save">Save to photos</string>
+    <string name="share_saved">Saved to your photos.</string>
+    <string name="share_failed">Could not make the image.</string>
+    <string name="action_share">Share</string>
+
+    <!-- Onboarding: three welcome slides, then the profile step, then the
+         first-run coach marks over Home. -->
+    <string name="action_skip">Skip</string>
+    <string name="action_next">Next</string>
+    <string name="action_get_started">Get started</string>
+    <string name="welcome_title_1">Hand your calls to an assistant</string>
+    <string name="welcome_body_1">Book the table, move the appointment, chase the parcel — say it once and the assistant dials, talks it through and gets it done.</string>
+    <string name="welcome_title_2">Check first. Then it dials</string>
+    <string name="welcome_body_2">Anything you didn\'t say stays blank — the assistant never guesses. Watch every line as it\'s said, type facts in mid-call, or take over any time.</string>
+    <string name="welcome_title_3">English or 中文, subtitled live</string>
+    <string name="welcome_body_3">The call speaks the other side\'s language. Every line lands as it\'s said, with a translation underneath — names and reference numbers kept as-is.</string>
+    <string name="welcome_subtitle_pill">English call · Chinese subtitles</string>
+    <string name="welcome_sample_when">Friday 19:30 · 4 people</string>
+    <string name="welcome_line_assistant_1">Friday at half seven, four people, by the window if possible.</string>
+    <string name="welcome_line_assistant_1_sub">周五晚上七点半，四位，想要靠窗。</string>
+    <string name="welcome_line_business_1">One moment — let me check the window tables.</string>
+    <string name="welcome_line_business_1_sub">好的，稍等，我看一下靠窗的位子。</string>
+    <string name="welcome_line_business_2">We\'ve got a window table at half seven — under what name?</string>
+    <string name="welcome_line_business_2_sub">靠窗的位子七点半有——用什么名字？</string>
+    <string name="welcome_line_assistant_2">Rui — R, U, I.</string>
+    <string name="welcome_line_assistant_2_sub">瑞——R、U、I。</string>
+
+    <string name="profile_step_label">One last step</string>
+    <string name="action_save_and_start">Save and start</string>
+    <string name="action_fill_in_later">Fill this in later, in Settings</string>
+
+    <!-- Getting their own number cleared to show to the places they call.
+         Twilio will only present a number it has confirmed you hold, and it
+         confirms it by ringing you for a code — so the code and the number
+         about to ring are on screen before the call is placed. Not optional:
+         calls go out under your own number or they do not go out. -->
+    <string name="callerid_step_label">Before you can call</string>
+    <string name="callerid_title">Show your own number</string>
+    <string name="callerid_body">Calls go out under your own number so the business can ring you straight back, and a familiar-looking local number gets answered more often. There is no shared number to fall back on, so this has to be done before the assistant can call.</string>
+    <string name="callerid_your_number">Your number</string>
+    <string name="callerid_start">Verify this number</string>
+    <string name="callerid_starting">Setting it up…</string>
+    <string name="callerid_heads_up">We\'ll ring you in a moment. It is an automated check, not a person — nobody will speak.</string>
+
+    <string name="callerid_waiting_title">Answer and press these six digits</string>
+    <string name="callerid_resumed_title">Still ringing you</string>
+    <string name="callerid_resumed_note">This is the same check as before, not a new one — the digits below have not changed. Nothing was sent twice.</string>
+    <string name="callerid_incoming_label">THE CALL COMES FROM</string>
+    <string name="callerid_code_label">PRESS THIS ON THE KEYPAD</string>
+    <string name="callerid_waiting_note">This number is Twilio\'s, not ours, and it is a US one — that is expected. Nobody will ask you for anything else. Never key a code into a call you did not start yourself.</string>
+    <string name="callerid_waiting_status">Waiting for the call to finish…</string>
+    <string name="callerid_retry">Ring me again</string>
+
+    <string name="callerid_done_title">Your number is verified</string>
+    <string name="callerid_done_body">From now on the assistant calls out as %1$s.</string>
+    <string name="callerid_verified_badge">Verified</string>
+    <string name="callerid_not_verified">Not verified — the assistant cannot place calls yet.</string>
+    <string name="callerid_remove">Stop showing my number</string>
+
+    <string name="action_skip_for_now">Look around first</string>
+    <string name="action_done">Done</string>
+
+    <string name="action_skip_tour">Skip tour</string>
+    <string name="action_got_it">Got it</string>
+    <string name="coach_title_1">Say it in one sentence</string>
+    <string name="coach_body_1">Time, place, party size, special asks — all in one line. Anything you leave out stays blank, never guessed.</string>
+    <string name="coach_title_2">Hold to speak</string>
+    <string name="coach_body_2">Hold the mic and talk; release to finish. Words land as you say them.</string>
+    <string name="coach_title_3">Nothing dials until you confirm</string>
+    <string name="coach_body_3">Next only checks the details. The assistant dials after you\'ve seen the number and the time.</string>
+
+    <!-- The published documents, and the account-deletion path Google Play
+         requires of any app that lets you create an account. -->
+    <string name="auth_consent">By continuing you agree to</string>
+    <string name="legal_section">Legal</string>
+    <string name="legal_terms">Terms of Service</string>
+    <string name="legal_privacy">Privacy Policy</string>
+    <string name="action_delete_account">Delete account</string>
+    <string name="delete_account_title">Delete your account?</string>
+    <string name="delete_account_body">This removes your account, the name and number the assistant calls with, and every call, transcript and result you have. It happens straight away and cannot be undone.</string>
+    <string name="action_delete_forever">Delete everything</string>
+    <string name="action_cancel">Cancel</string>
+
+    <!-- Deleting one call from the history. Separate from deleting the account
+         above: this is one record, and the wording has to make clear that the
+         transcript goes with it. -->
+    <string name="action_delete_call">Delete this record</string>
+    <string name="delete_call_title">Delete this record?</string>
+    <string name="delete_call_body">The transcript and what the call agreed go with it. It cannot be undone.</string>
+    <string name="action_delete">Delete</string>
+
+    <!-- Home -->
+    <string name="home_title">Let the assistant make this call for you</string>
+    <string name="home_sub">Tell the assistant what to get done in one sentence. Nothing is dialled until you confirm.</string>
+    <string name="home_placeholder">e.g. Book a table for four at The Ivy this Friday 7:30 pm, by the window, with a high chair</string>
+    <string name="home_example_1">Reschedule my dentist to Tuesday</string>
+    <string name="home_example_2">Ask DPD about my parcel</string>
+    <string name="mic_hold">Hold to speak</string>
+    <string name="mic_release">Release to finish · live transcription</string>
+    <string name="action_next_check">Next: check the details</string>
+    <string name="action_parsing">Working it out…</string>
+
+    <!-- The redesigned home: a feed of what the assistant has been doing, with
+         the composer moved behind the bar at its foot. -->
+    <string name="feed_composer_hint">Ask the assistant to call…</string>
+    <string name="feed_view_all">See all calls</string>
+    <string name="feed_enter_call">Open call</string>
+    <!-- Home with nothing to show and no way to fetch any -->
+    <string name="offline_title">Can\'t reach the server</string>
+    <string name="offline_body">Check your connection and try again. Calls already running carry on at the server, and they will fill themselves in when you are back.</string>
+    <string name="action_retry">Try again</string>
+
+    <string name="feed_empty_title">Nothing yet</string>
+    <string name="feed_empty_body">Tell the assistant what to get done and it will show up here while it runs.</string>
+
+    <!-- Templates: example sentences, not saved state -->
+    <string name="templates_title">Templates</string>
+    <string name="templates_intro">Pick the kind of call and the assistant knows what to ask and what to confirm. Tapping one fills in the composer — edit it however you like.</string>
+    <string name="tpl_booking">Restaurant booking</string>
+    <string name="tpl_booking_blurb">Book a table, then read the date, party size and requests back to catch a mishearing.</string>
+    <string name="tpl_booking_seed">Book a table for four at The Ivy this Friday at 7:30pm, by the window, with a high chair</string>
+    <string name="tpl_appointment">Appointments and rescheduling</string>
+    <string name="tpl_appointment_blurb">Get a slot and ask what to bring; a reschedule gives the old time first.</string>
+    <string name="tpl_appointment_seed">Move my Thursday hygienist appointment at Smile Dental to Tuesday afternoon</string>
+    <string name="tpl_parcel">Parcels and orders</string>
+    <string name="tpl_parcel_blurb">Give the tracking number, ask for the delivery window, write down the answer.</string>
+    <string name="tpl_parcel_seed">Ask DPD what time my parcel arrives, tracking number 15501234567890</string>
+    <string name="tpl_bank">Banks and helplines</string>
+    <string name="tpl_bank_blurb">Gets through the menus and the queue, then hands the call to you for security.</string>
+    <string name="tpl_bank_seed">Call Virgin Media and ask whether my broadband renewal can stay at £24 a month</string>
+    <string name="tpl_custom">Something else</string>
+    <string name="tpl_custom_blurb">Describe the call yourself, in one sentence.</string>
+
+    <!-- Businesses: the call history, grouped by number -->
+    <string name="businesses_title">Places you call</string>
+    <string name="businesses_intro">Numbers you have called end up here. Pick one to start another call with the same request.</string>
+    <string name="businesses_empty">Nothing here yet — the first call you place will add one.</string>
+    <string name="businesses_call_count">%1$d calls</string>
+
+    <!-- Plan, top-ups, and the month's calls summed from the calls themselves -->
+    <string name="usage_title">Plan and usage</string>
+    <string name="usage_balance_label">Calls left</string>
+    <string name="usage_balance_note">One call is one conversation. If nobody answers, you keep the call.</string>
+    <string name="usage_balance_empty">You are out of calls. Add a top-up and the next one goes straight out.</string>
+    <string name="usage_used_this_month">%1$d placed this month</string>
+    <string name="usage_shop">Top up</string>
+    <string name="usage_pack_calls">%1$d calls</string>
+    <string name="usage_pack_price_pending">…</string>
+    <string name="usage_shop_unavailable">Top-ups are not on sale yet. Nothing is charged in the meantime.</string>
+    <string name="usage_paying">Opening payment…</string>
+    <string name="usage_pay_cancelled">Payment cancelled. Nothing has been charged.</string>
+    <string name="usage_pay_done">Paid. The calls land in a moment.</string>
+    <string name="usage_other_ways">Other ways to pay</string>
+    <string name="usage_other_ways_sub">In your browser, with whatever this account takes</string>
+    <string name="usage_other_open">Open</string>
+    <string name="usage_other_copy">Copy link</string>
+    <string name="usage_other_copied">Link copied. It works for 30 minutes, and can be sent to whoever is paying.</string>
+    <string name="usage_other_note">The link only adds calls to this account — it cannot sign in or see your calls. Send it to someone else if they are paying for you.</string>
+    <string name="usage_bought">Added. You have %1$d calls.</string>
+    <string name="usage_working">Talking to Google Play…</string>
+    <string name="usage_breakdown">This month</string>
+    <string name="usage_empty">No calls this month.</string>
+    <string name="usage_total">Total</string>
+    <string name="usage_footnote">The figures above are what your calls cost us to run, shown because you should be able to see it. Twilio rates the phone line a few minutes after each call, and the speech relay is billed monthly rather than per call, so its share is worked out from the call length — which makes these close, not exact.</string>
+    <string name="cost_pending_short">—</string>
+
+    <!-- Help -->
+    <string name="help_title">Help and FAQ</string>
+    <string name="faq_q_guessing">Does the assistant make things up?</string>
+    <string name="faq_a_guessing">No. Anything you did not mention stays blank rather than being guessed. There is a check step before anything is dialled, and every line on it can be edited. Mid-call, if it needs a detail it was not given, it stalls and waits for you to type it rather than inventing one.</string>
+    <string name="faq_q_caller_id">What number do they see?</string>
+    <string name="faq_a_caller_id">Your own. Calls go out under the number you verified — there is no shared number to fall back on, which is why verifying comes before your first call. Verifying means Twilio rings you once to confirm you hold the line. Withdraw the number and the assistant stops calling until you verify again.</string>
+    <string name="faq_q_recordings">Where do transcripts go?</string>
+    <string name="faq_a_recordings">Transcripts are stored against your account on the server so you can read a call back. Deleting your account deletes them, along with the name and number the assistant calls with.</string>
+    <string name="faq_q_handover">When does it hand the call to me?</string>
+    <string name="faq_a_handover">Whenever continuing would need something it must not do: passing security, moving money, agreeing to a contract, or giving out details it was not given. It tells the other party it is bringing you on, then rings you and bridges you in. You can also take over at any point yourself.</string>
+    <string name="faq_q_cost">How is the cost worked out?</string>
+    <string name="faq_a_cost">It is what Twilio charges for the phone line, per call, rated a few minutes after the call ends. Nothing is estimated or marked up in the figures you see.</string>
+    <string name="help_contact_title">Still stuck?</string>
+    <string name="help_contact_body">Email support and you will hear back within a working day</string>
+    <string name="help_contact_action">Contact us</string>
+    <string name="support_email" translatable="false">support@mynah.app</string>
+
+    <!-- Scheduled calls. Nothing here dials on its own: a task that comes due
+         waits to be confirmed and then walks the ordinary check step. -->
+    <string name="scheduled_title">Scheduled calls</string>
+    <string name="scheduled_intro">When the time comes the assistant does not dial — it gets the call ready and waits for you to check it, the same as any other.</string>
+    <string name="scheduled_empty">Nothing scheduled.</string>
+    <string name="scheduled_new">Schedule a call</string>
+    <string name="scheduled_ready">Ready — waiting for you to check it</string>
+    <string name="scheduled_paused">Paused</string>
+    <string name="scheduled_once">Once</string>
+    <string name="scheduled_daily">Every day</string>
+    <string name="scheduled_weekly">Every week</string>
+    <string name="scheduled_every_days">Every %1$d days</string>
+    <string name="scheduled_check_and_call">Check and call</string>
+    <string name="scheduled_skip">Skip this one</string>
+    <string name="settings_scheduled_sub">Calls set to happen later</string>
+
+    <!-- Search: local, over the calls already on the device -->
+    <string name="search_hint">Search your calls</string>
+    <string name="search_results">%1$d results</string>
+    <string name="search_none">Nothing matched.</string>
+    <string name="search_recent">Recent searches</string>
+
+    <!-- Notifications, derived from what the calls did -->
+    <string name="notifs_empty">Nothing to catch up on.</string>
+    <string name="notifs_started">Call started · %1$s</string>
+    <string name="notifs_finished">Call finished · %1$s</string>
+    <string name="notifs_no_answer">Nobody answered · %1$s</string>
+
+    <!-- New call (the composer, now its own screen) -->
+    <string name="compose_title">New call</string>
+    <string name="compose_no_guessing">Anything you leave out stays blank, never guessed</string>
+    <string name="compose_needs_callerid_title">Verify your number before you can call</string>
+    <string name="compose_needs_callerid_body">Calls go out under your own number so the business can ring you back. There is no shared number to fall back on.</string>
+    <string name="feed_composer_blocked">Verify your number to start calling</string>
+    <string name="callerid_remove_warning">Removing your number stops the assistant making calls until you verify again.</string>
+
+    <!-- Confirm -->
+    <string name="confirm_title">Check the details</string>
+    <string name="confirm_step" translatable="false">2 / 2</string>
+    <string name="field_who">Who to call</string>
+    <string name="field_when">When</string>
+    <string name="field_notes">Notes</string>
+    <string name="field_call_language">Call language</string>
+    <string name="field_auto_language">Chosen from the number</string>
+    <string name="field_phone">Phone number</string>
+    <string name="action_from_contacts">Pick from contacts</string>
+    <string name="phone_ok">Number looks good</string>
+    <string name="phone_needs_code">Include the country code, e.g. +44 20 7836 4751</string>
+    <string name="confirm_blanks_note">Anything you didn\'t mention stays blank — the assistant never guesses. Every line here can be edited.</string>
+    <string name="opener_label">OPENING LINE · FIRST THING THEY HEAR</string>
+    <string name="callback_title">Accept a callback</string>
+    <string name="callback_on">If they offer to ring back instead of holding, the assistant will take it and give them your number. That call comes to you, on your own.</string>
+    <string name="callback_off">The assistant stays in the queue so it can hand the call to you when someone answers.</string>
+    <string name="action_dial">Dial · the assistant takes over</string>
+    <string name="action_need_number">Add the phone number to dial</string>
+    <string name="action_dialling">Dialling…</string>
+
+    <!-- Live call -->
+    <string name="call_goals">Goals for this call</string>
+    <string name="speaker_assistant">ASSISTANT</string>
+    <string name="speaker_system">SYSTEM</string>
+    <string name="speaker_owner">YOU</string>
+    <string name="bubble_noted">Noted</string>
+    <string name="transcript_waiting">Waiting for someone to answer…</string>
+    <string name="interject_placeholder">Type a fact — the assistant weaves it in…</string>
+    <string name="coach_send">Send to the assistant</string>
+    <string name="action_take_over">Take over</string>
+    <string name="action_hangup">Hang up</string>
+    <string name="takeover_calling">Calling you back now</string>
+    <string name="takeover_calling_sub">Answer to be bridged into this call. The assistant has stepped aside.</string>
+    <string name="done_title">Done</string>
+    <string name="cost_pending">Real call cost and duration are filled in automatically, a few minutes after the call.</string>
+    <string name="action_view_record">View record</string>
+    <string name="action_finish">Finish</string>
+
+    <!-- History -->
+    <string name="history_title">Call history</string>
+    <string name="history_empty">Nothing yet</string>
+    <string name="history_empty_body">Ask the assistant to call someone and it will show up here while it runs.</string>
+    <string name="action_redial">Redial</string>
+
+    <!-- Detail -->
+    <string name="detail_outcome">Recorded outcome</string>
+    <string name="detail_summary">Summary</string>
+    <string name="detail_transcript">Transcript</string>
+    <string name="detail_cost">Cost &amp; duration</string>
+    <string name="detail_needs_you">The assistant needs you</string>
+    <string name="action_bridge_me">Call me to take over</string>
+    <string name="action_redial_same">Redial with the same task</string>
+    <string name="cost_calculating">Calculating…</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_ui_language">Interface language</string>
+    <string name="language_system">Follow system</string>
+    <string name="language_english">English</string>
+    <string name="language_chinese">中文</string>
+    <string name="settings_language_note">Interface language and call language are independent — a call to a Manchester restaurant should be in English, whatever your phone is set to.</string>
+    <string name="settings_translation_note">Subtitle translations appear only when the call language differs from the interface language; originals always arrive instantly. Names and reference numbers are kept as-is.</string>
+
+
+    <string name="settings_who">Who it calls for</string>
+    <string name="settings_who_note">Calls do not open with your name, and the assistant does not volunteer it — it gives it when it is actually needed, such as the name a booking goes under. Your number is where it rings you when it must not continue alone.</string>
+    <string name="field_your_name">Your name</string>
+    <string name="support_your_name">Given when a booking needs a name, so use your real one.</string>
+    <string name="field_your_phone">Your phone number</string>
+    <string name="support_your_phone_ok">International format, starting with +. This is where transfers ring.</string>
+    <string name="support_your_phone_bad">Needs to start with + and the country code.</string>
+
+    <string name="action_save">Save</string>
+    <string name="action_saving">Saving…</string>
+    <string name="settings_saved">Saved.</string>
+
+    <string name="settings_calling">Calling</string>
+    <string name="settings_who_sub">The name a booking goes under, and where transfers ring</string>
+    <string name="settings_calls_this_month">%1$d this month</string>
+    <string name="settings_language_row_sub">Independent of the language a call is held in</string>
+    <string name="settings_templates_sub">The kinds of call the assistant knows the shape of</string>
+    <string name="settings_businesses_sub">Numbers you have called before</string>
+    <string name="settings_usage_sub">Calls left, top-ups, and what this month cost</string>
+
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_notif_title">Call status notifications</string>
+    <string name="settings_notif_sub">A hand-over arrives at the highest priority; tap it to go straight there.</string>
+    <string name="settings_notif_local">A call is followed even after you leave the app. This is a local watcher, not push — if Android kills the app process, the watch stops with it.</string>
+
+    <!-- Notifications -->
+    <string name="notif_channel_live">Live call</string>
+    <string name="notif_channel_alerts">Needs you</string>
+    <string name="notif_ongoing">On the call · %1$s</string>
+    <string name="notif_needs_you_title">Pick up — %1$s needs you</string>
+    <string name="notif_done_title">Call finished · %1$s</string>
+    <string name="notif_no_answer_title">No answer · %1$s</string>
+
+    <string name="action_back">Back</string>
+    <string name="action_dismiss">Dismiss</string>
+
+    <!-- Things that go wrong. Raised outside Compose, so resolved through a
+         context the language setting has been applied to. -->
+    <string name="error_configure_first">Sign in first.</string>
+    <string name="error_generic">Something went wrong.</string>
+    <string name="error_need_https">Set a valid https:// server address in Settings first.</string>
+    <string name="error_bad_url">The server address in Settings is not a valid URL.</string>
+    <string name="error_need_address">Set a server address starting with https:// in Settings.</string>
+    <string name="error_need_token">Sign in first.</string>
+    <string name="error_unreachable">Could not reach the server: %1$s</string>
+    <string name="error_network">network error</string>
+    <string name="error_unexpected_body">The server sent something unexpected: %1$s</string>
+    <string name="error_bad_token">The API token does not match the server.</string>
+    <string name="error_no_such_call">That call no longer exists on the server.</string>
+    <string name="error_http">The server returned HTTP %1$d.</string>
+    <string name="error_feed_dropped">The live connection dropped.</string>
+</resources>

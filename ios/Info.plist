@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Mynah</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<!-- Both languages ship in the app. Settings lets the interface language be
+	     picked independently of the phone's, so neither can be stripped. -->
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>zh-Hans</string>
+	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>LaunchCanvas</string>
+	</dict>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+	</array>
+	<!-- Dictation in the composer: the phone transcribes, and the sentence is
+	     shown before anything is sent. -->
+	<key>NSMicrophoneUsageDescription</key>
+	<string>So you can dictate a call instead of typing it.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>To turn what you dictate into the sentence the assistant works from.</string>
+	<!-- Picking who to call from the address book. -->
+	<key>NSContactsUsageDescription</key>
+	<string>To fill in a number from your contacts instead of typing it.</string>
+	<!-- Saving a result card. Add-only: the app never gains the right to read
+	     what is already in the library. -->
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>To save a call's result card to your photos.</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<!-- Lets a debug build reach a dev server over plain HTTP on the machine
+	     hosting the simulator. Scoped to local addresses only: every other host
+	     still requires TLS, and ServerSettings.normalisedBase() refuses a
+	     cleartext address outright in a release build. The counterpart of the
+	     Android debug build's network_security_config.xml. -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>inter_400.ttf</string>
+		<string>inter_500.ttf</string>
+		<string>inter_600.ttf</string>
+		<string>inter_700.ttf</string>
+		<string>inter_800.ttf</string>
+		<string>inter_900.ttf</string>
+		<string>roboto_mono_light.ttf</string>
+		<string>roboto_mono_medium.ttf</string>
+		<string>roboto_mono_regular.ttf</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,35 @@
+# The secrets and the call history are the two things that must never leave this
+# machine. Both are also ignored by server/.gitignore — repeated here because a
+# rule this important should not depend on which directory you run git from.
+server/.env
+server/data/
+*.env.local
+
+# macOS. The `._*` rule matters more than it looks: this tree lives on an exFAT
+# disk, which has no Unix permissions, so every file written to it grows an
+# AppleDouble sidecar carrying the metadata.
+.DS_Store
+._*
+
+# Node
+node_modules/
+*.log
+*.err
+
+# Xcode
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
+# Android
+.gradle/
+.kotlin/
+local.properties
+*.iml
+*.jks
+*.keystore
+
+# Local tool configuration, not project configuration.
+**/.claude/settings.local.json

@@ -1,0 +1,53 @@
+[Unit]
+Description=SmartVoice call server
+Documentation=https://voice.rxstudio.co.uk/legal/terms
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=voicecall
+Group=voicecall
+WorkingDirectory=/opt/voicecall
+
+# Secrets live here, root-owned and 0600. systemd reads the file before it drops
+# privileges, so the service account never needs to see it on disk.
+EnvironmentFile=/etc/voicecall/voicecall.env
+Environment=NODE_ENV=production
+# State is addressed explicitly and sits outside the code directory, so that a
+# deploy that mirrors /opt/voicecall cannot take the call history with it.
+Environment=DB_FILE=/var/lib/voicecall/calls.db
+Environment=PROFILE_FILE=/var/lib/voicecall/profile.json
+
+ExecStart=/usr/bin/node src/index.js
+
+# The process may be holding several live phone calls; index.js already refuses
+# to die over a stray rejection. This covers the cases it cannot catch.
+Restart=always
+RestartSec=3
+KillSignal=SIGTERM
+# index.js stops accepting, then exits within five. Twenty is slack, not a wait.
+TimeoutStopSec=20
+
+# Only the state directory is writable, and only /tmp is private. Everything
+# else the process can see, it can only read.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/voicecall
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+ProtectClock=true
+RestrictSUIDSGID=true
+RestrictRealtime=true
+LockPersonality=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=voicecall
+
+[Install]
+WantedBy=multi-user.target
