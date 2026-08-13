@@ -4,17 +4,17 @@
 <resources>
     <!-- app_name 不在这里覆盖：中英文都叫 Mynah，回落到 values/strings.xml。 -->
 
-    <string name="nav_home">发起</string>
-    <string name="nav_history">记录</string>
+    <string name="nav_home">首页</string>
+    <string name="nav_history">历史</string>
     <string name="nav_settings">设置</string>
     <string name="nav_search">搜索</string>
     <string name="nav_notifications">通知</string>
 
-    <string name="status_needs_you">需要你</string>
+    <string name="status_needs_you">需要您</string>
     <string name="status_on_the_call">通话中</string>
     <string name="status_on_hold">等待接听</string>
     <string name="hold_queueing">排队中</string>
-    <string name="hold_note">排队和通话一样计费。如果看着没有进展，可以先挂断，晚点再打。</string>
+    <string name="hold_note">排队和通话一样计费。如果进展缓慢，可以先挂断，晚点再打。</string>
     <string name="detail_queued">排队时长</string>
     <string name="detail_of_which_queued">其中 %1$s 在排队</string>
     <string name="status_dialling">拨号中</string>
@@ -23,9 +23,9 @@
     <string name="status_dialing_now">正在拨号…</string>
     <string name="status_ringing">响铃中…</string>
 
-    <string name="headline_needs_you">%1$s 需要你接进来</string>
-    <string name="subline_did_not_connect">这通电话没接通。</string>
-    <string name="subline_transfer">助手不会替你回答。接起来就能直接和对方说话。</string>
+    <string name="headline_needs_you">%1$s 需要您接进来</string>
+    <string name="subline_did_not_connect">电话未接通。</string>
+    <string name="subline_transfer">助手不会替您应答。接听后可直接与对方交谈。</string>
     <string name="subline_ringing">正在响铃…</string>
 
     <string name="day_today">今天</string>
@@ -35,19 +35,19 @@
 
     <!-- 进入 App -->
     <string name="auth_title">登录 Mynah</string>
-    <string name="auth_sub">通话都记在你的账号名下，所以服务器需要确认是你本人。</string>
+    <string name="auth_sub">所有通话都关联到您的账号，因此服务器需验证您的身份。</string>
     <string name="auth_google">使用 Google 继续</string>
     <string name="auth_or_email">或使用邮箱</string>
     <string name="auth_email_button">使用邮箱继续</string>
     <string name="auth_google_cancelled">已取消登录。</string>
-    <string name="auth_no_google_account">这台手机上还没有 Google 账号。可以在系统设置里添加，或者改用邮箱登录。</string>
+    <string name="auth_no_google_account">此设备尚未添加 Google 账号。可在系统设置中添加，或使用邮箱登录。</string>
     <string name="auth_google_failed">Google 未能完成登录：%1$s</string>
     <string name="email_title">使用邮箱继续</string>
-    <string name="email_sub">第一次用？会自动为你创建账号。</string>
+    <string name="email_sub">第一次用？会自动为您创建账号。</string>
     <string name="field_email">邮箱</string>
     <string name="field_password">密码</string>
     <string name="email_password_rule">至少 8 个字符。</string>
-    <string name="email_bad_address">这看起来不像一个邮箱地址。</string>
+    <string name="email_bad_address">这似乎不是有效的邮箱地址。</string>
     <string name="action_show_password">显示密码</string>
     <string name="action_hide_password">隐藏密码</string>
     <string name="action_continue">继续</string>
@@ -57,22 +57,22 @@
     <!-- 忘记、重置与修改密码 -->
     <string name="password_forgot">忘记密码？</string>
     <string name="reset_code_title">输入验证码</string>
-    <string name="reset_code_sub">验证码已发到 %1$s，10 分钟内有效。</string>
+    <string name="reset_code_sub">验证码已发送至 %1$s，10 分钟内有效。</string>
     <string name="reset_code_none">没收到？</string>
     <string name="reset_code_resend">重新发送</string>
     <string name="reset_code_sent_again">已重发，请稍等片刻。</string>
     <string name="reset_new_title">设置新密码</string>
-    <string name="reset_new_sub">给 %1$s 设一个新密码。保存后，所有登录过的设备都需要重新登录。</string>
+    <string name="reset_new_sub">请为 %1$s 设置新密码。保存后，所有已登录设备需重新登录。</string>
     <string name="reset_save">保存并登录</string>
     <string name="change_password_title">修改密码</string>
     <string name="change_password_sub">保存后，其他登录过的设备会退出。</string>
     <string name="change_password_current">当前密码</string>
     <string name="change_password_new">新密码</string>
-    <string name="change_password_rule">上面是当前密码，下面是新密码。</string>
+    <string name="change_password_rule">上方为当前密码，下方为新密码。</string>
     <string name="change_password_forgot">忘记了当前密码？</string>
     <string name="change_password_done">密码已修改，其他设备已退出登录。</string>
     <string name="settings_account">账号</string>
-    <string name="settings_change_password_sub">改完后其他设备需要重新登录</string>
+    <string name="settings_change_password_sub">修改后，其他设备需重新登录</string>
 
     <!-- 预约稍后拨打。这里没有任何「重复」选项，这是刻意的 -->
     <string name="action_call_later">稍后拨出</string>
@@ -83,10 +83,10 @@
     <string name="schedule_tomorrow">明天 · %1$s</string>
     <string name="schedule_pick_date">选个日期</string>
     <string name="schedule_custom_time">自定义…</string>
-    <string name="schedule_note">到点后助理不会直接拨出——它会把这通电话准备好，先提醒你核对，你确认了才拨。</string>
+    <string name="schedule_note">到达设定时间后，助理不会自动拨出——它会先准备好通话，提醒您核对，待您确认后才拨出。</string>
     <string name="schedule_confirm">定时 · %1$s</string>
     <string name="schedule_no_time">请先选择时间</string>
-    <string name="schedule_past">这个时间已经过了，请选择更晚的时间。</string>
+    <string name="schedule_past">该时间已过，请选择更晚的时间。</string>
 
     <!-- 通话评价与结果分享 -->
     <string name="feedback_prompt">这通电话办得怎么样？</string>
@@ -96,17 +96,17 @@
     <string name="feedback_thanks">谢谢，这对我们很有帮助。</string>
     <string name="feedback_title">通话反馈</string>
     <string name="feedback_verdict_label">这通电话办得怎么样</string>
-    <string name="feedback_reasons_label">哪里可以更好 · 可多选</string>
+    <string name="feedback_reasons_label">需要改进的地方 · 可多选</string>
     <string name="feedback_reason_wrong_details">信息记错了</string>
     <string name="feedback_reason_misheard">没听懂对方</string>
     <string name="feedback_reason_too_wordy">说得太啰嗦</string>
     <string name="feedback_reason_queued_too_long">排队太久</string>
     <string name="feedback_reason_other">其它</string>
-    <string name="feedback_note_hint">补充说明（可选）。会连同这通电话的转写一起提交。</string>
+    <string name="feedback_note_hint">补充说明（可选），将随本通电话的转写记录一并提交。</string>
     <string name="feedback_note">反馈只用来改进助理，不会打扰对方，也不会重拨。</string>
     <string name="feedback_send">提交反馈</string>
     <string name="share_title">分享通话结果</string>
-    <string name="share_card_footer">AI 替你打的这通电话 · Mynah</string>
+    <string name="share_card_footer">由 AI 代拨的电话 · Mynah</string>
     <string name="share_no_number">图片不包含电话号码和通话转写。</string>
     <string name="share_image">分享图片</string>
     <string name="share_save">保存到相册</string>
@@ -119,11 +119,11 @@
     <string name="action_next">下一步</string>
     <string name="action_get_started">开始使用</string>
     <string name="welcome_title_1">打电话的事，交给助理</string>
-    <string name="welcome_body_1">订位、改约、查包裹——把要办的事说一句，助理替你拨号、开口、办妥。</string>
+    <string name="welcome_body_1">订位、改约、查包裹——只需告知需求，助理即可代拨、沟通并完成办理。</string>
     <string name="welcome_title_2">先核对，再拨出</string>
-    <string name="welcome_body_2">没提到的信息留空，助理不会自己猜。通话逐句上屏，可随时插话，也可一键接管。</string>
+    <string name="welcome_body_2">未提及的信息将留空，助理不会自行猜测。通话内容逐句显示，可随时插话或一键接管。</string>
     <string name="welcome_title_3">双语通话，字幕实时翻译</string>
-    <string name="welcome_body_3">通话语言跟着对方走。每句话即时上屏，译文跟在原文下面——人名和参考号保持原样。</string>
+    <string name="welcome_body_3">通话语言跟着对方走。每句话实时显示，译文跟在原文下面——人名和参考号保持原样。</string>
     <string name="welcome_subtitle_pill">英文通话 · 中文字幕</string>
     <string name="welcome_sample_when">周五 19:30 · 4 人</string>
     <string name="welcome_line_assistant_1">Friday at half seven, four people, by the window if possible.</string>
@@ -140,19 +140,19 @@
     <string name="action_fill_in_later">稍后在设置里填</string>
 
     <string name="callerid_step_label">拨出前必须完成</string>
-    <string name="callerid_title">用你自己的号码拨出</string>
-    <string name="callerid_body">电话用你自己的号码拨出，商家才能直接回拨给你，而且看起来眼熟的本地号码更容易被接。没有可以退回去用的共用号码，所以这一步必须先做完，助理才能打电话。</string>
-    <string name="callerid_your_number">你的号码</string>
+    <string name="callerid_title">用您自己的号码拨出</string>
+    <string name="callerid_body">电话将以您的号码拨出，方便商家直接回拨。熟悉的本地号码更易被接听。由于没有备用共享号码，必须完成此步骤后助理才能拨号。</string>
+    <string name="callerid_your_number">您的号码</string>
     <string name="callerid_start">验证这个号码</string>
     <string name="callerid_starting">正在准备…</string>
-    <string name="callerid_heads_up">我们马上会打给你。这是自动核验，不是真人，不会有人说话。</string>
+    <string name="callerid_heads_up">我们将立即致电给您。这是自动验证，非人工操作，无人说话。</string>
 
     <string name="callerid_waiting_title">接起后按这六位数字</string>
-    <string name="callerid_resumed_title">还在打给你</string>
-    <string name="callerid_resumed_note">这还是刚才那次核验，不是新的一次——下面的数字没有变，也没有重复发送。</string>
+    <string name="callerid_resumed_title">还在打给您</string>
+    <string name="callerid_resumed_note">这仍是之前的验证，并非新的验证——下方数字未变，也未重复发送。</string>
     <string name="callerid_incoming_label">来电号码</string>
     <string name="callerid_code_label">在键盘上按</string>
-    <string name="callerid_waiting_note">这个号码属于 Twilio，不是我们的，而且是美国号码——这是正常的。不会再向你要任何其他信息。任何不是你自己发起的通话，都不要按验证码。</string>
+    <string name="callerid_waiting_note">此号码属于 Twilio，非我方所有，且为美国号码——此为正常现象。不会索取任何其他信息。切勿在任何非本人发起的通话中输入验证码。</string>
     <string name="callerid_waiting_status">等待通话结束…</string>
     <string name="callerid_retry">再打给我一次</string>
 
@@ -160,7 +160,7 @@
     <string name="callerid_done_body">之后助理会用 %1$s 拨出。</string>
     <string name="callerid_verified_badge">已验证</string>
     <string name="callerid_not_verified">未验证——助理还不能拨出电话。</string>
-    <string name="callerid_remove">不再显示我的号码</string>
+    <string name="callerid_remove">不再使用我的号码</string>
 
     <string name="action_skip_for_now">先四处看看</string>
     <string name="action_done">完成</string>
@@ -168,20 +168,20 @@
     <string name="action_skip_tour">跳过引导</string>
     <string name="action_got_it">知道了</string>
     <string name="coach_title_1">一句话说清要办的事</string>
-    <string name="coach_body_1">时间、地点、人数、要求，都放在一句话里。没说的会留空，不会被瞎猜。</string>
+    <string name="coach_body_1">时间、地点、人数、要求，请在一句话中说明。未提及的内容将留空，不会被随意猜测。</string>
     <string name="coach_title_2">按住说话更快</string>
-    <string name="coach_body_2">按住麦克风直接说，松手就好——边说边上屏。</string>
-    <string name="coach_title_3">你确认之前，不会拨出</string>
+    <string name="coach_body_2">按住麦克风直接说，松手就好——边说边显示。</string>
+    <string name="coach_title_3">您确认之前，不会拨出</string>
     <string name="coach_body_3">下一步只是核对信息。号码、时间都过目后，才轮到助理拨号。</string>
 
     <!-- 条款与上架必备 -->
-    <string name="auth_consent">继续即表示你同意</string>
+    <string name="auth_consent">继续即表示您同意</string>
     <string name="legal_section">条款与隐私</string>
     <string name="legal_terms">用户条款</string>
     <string name="legal_privacy">隐私政策</string>
     <string name="action_delete_account">删除账号</string>
     <string name="delete_account_title">删除账号？</string>
-    <string name="delete_account_body">会删除你的账号、助理代你打电话时用的名字和号码，以及你的每一通电话、转写和结果。立即生效，无法撤销。</string>
+    <string name="delete_account_body">这将删除您的账号、助理代拨时使用的姓名和号码，以及所有通话记录、转写和结果。操作立即生效，无法撤销。</string>
     <string name="action_delete_forever">全部删除</string>
     <string name="action_cancel">取消</string>
 
@@ -190,29 +190,29 @@
     <string name="delete_call_body">通话的转写和谈成的结果会一并删除，无法撤销。</string>
     <string name="action_delete">删除</string>
 
-    <string name="home_title">让助理替你打这通电话</string>
-    <string name="home_sub">用一句话告诉助理要办什么事。你确认之前，不会拨出电话。</string>
+    <string name="home_title">让助理替您打这通电话</string>
+    <string name="home_sub">请用一句话告知助理需求。在您确认之前，不会拨出电话。</string>
     <string name="home_placeholder">例如：周五晚七点半在 The Ivy 订四人桌，靠窗，要一个儿童椅</string>
     <string name="home_example_1">帮我改约周二的牙医</string>
     <string name="home_example_2">问 DPD 包裹几点送到</string>
     <string name="mic_hold">按住说话</string>
-    <string name="mic_release">松手结束 · 边说边上屏</string>
+    <string name="mic_release">松手结束 · 边说边显示</string>
     <string name="action_next_check">下一步：核对信息</string>
     <string name="action_parsing">正在理解…</string>
 
-    <string name="feed_composer_hint">让助理打个电话…</string>
+    <string name="feed_composer_hint">让助理拨打电话…</string>
     <string name="feed_view_all">查看全部记录</string>
     <string name="feed_enter_call">进入通话</string>
     <!-- 首页拉不到数据时的整页状态 -->
     <string name="offline_title">连不上服务器</string>
-    <string name="offline_body">检查网络后再试。进行中的通话在服务器上继续，恢复连接后记录会自动补上。</string>
+    <string name="offline_body">请检查网络后重试。进行中的通话将在服务器上继续，恢复连接后记录将自动同步。</string>
     <string name="action_retry">重试</string>
 
     <string name="feed_empty_title">还没有记录</string>
-    <string name="feed_empty_body">告诉助理要办什么事，它拨出后就会出现在这里。</string>
+    <string name="feed_empty_body">告知助理需求后，通话记录将显示在此处。</string>
 
     <string name="templates_title">模板库</string>
-    <string name="templates_intro">选一类任务，助理知道该问什么、该确认什么。点击即填入输入框，之后随你改。</string>
+    <string name="templates_intro">选一类任务，助理知道该问什么、该确认什么。点击即填入输入框，之后随您改。</string>
     <string name="tpl_booking">餐厅订位</string>
     <string name="tpl_booking_blurb">订一张桌子，并把日期、人数、要求逐项复述确认。</string>
     <string name="tpl_booking_seed">周五晚七点半在 The Ivy 订四人桌，靠窗，要一个儿童椅</string>
@@ -223,8 +223,8 @@
     <string name="tpl_parcel_blurb">报单号，问派送时间或订单状态，记下答复。</string>
     <string name="tpl_parcel_seed">问 DPD 包裹几点送到，单号 15501234567890</string>
     <string name="tpl_bank">银行或客服热线</string>
-    <string name="tpl_bank_blurb">替你过语音菜单和排队；到需要身份验证时转接给你。</string>
-    <string name="tpl_bank_seed">打 Virgin Media 问宽带续约能不能保持 £24/月</string>
+    <string name="tpl_bank_blurb">替您过语音菜单和排队；到需要身份验证时转接给您。</string>
+    <string name="tpl_bank_seed">致电 Virgin Media 咨询宽带续约能否维持 £24/月</string>
     <string name="tpl_custom">自定义</string>
     <string name="tpl_custom_blurb">用一句话自己描述这通电话。</string>
 
@@ -235,13 +235,13 @@
 
     <string name="usage_title">套餐与用量</string>
     <string name="usage_balance_label">剩余通话</string>
-    <string name="usage_balance_note">一通就是一次真正的对话。没人接听不算，次数照样留给你。</string>
+    <string name="usage_balance_note">一次通话即一次真实对话。若无人接听，次数仍将保留。</string>
     <string name="usage_balance_empty">通话次数已用完。充值后下一通即可直接拨出。</string>
     <string name="usage_used_this_month">本月已拨 %1$d 通</string>
     <string name="usage_shop">充值</string>
     <string name="usage_pack_calls">%1$d 通</string>
     <string name="usage_pack_price_pending">…</string>
-    <string name="usage_shop_unavailable">暂时还没有开放充值，在此期间不会产生任何费用。</string>
+    <string name="usage_shop_unavailable">充值功能暂未开放，期间不会产生任何费用。</string>
     <string name="usage_paying">正在打开支付…</string>
     <string name="usage_pay_cancelled">已取消，未产生任何费用。</string>
     <string name="usage_pay_done">支付成功，通话次数马上到账。</string>
@@ -249,36 +249,36 @@
     <string name="usage_other_ways_sub">在浏览器里付，可用的方式以付款页为准</string>
     <string name="usage_other_open">打开</string>
     <string name="usage_other_copy">复制链接</string>
-    <string name="usage_other_copied">链接已复制，30 分钟内有效，可以发给替你付款的人。</string>
-    <string name="usage_other_note">这个链接只能给本账号充值，无法登录、也看不到你的通话记录。如果是家人替你付，直接把它发过去就行。</string>
+    <string name="usage_other_copied">链接已复制，30 分钟内有效，可发送给代付人。</string>
+    <string name="usage_other_note">此链接仅可为本账号充值，无法用于登录或查看通话记录。如需家人代付，直接发送此链接即可。</string>
     <string name="usage_bought">已到账，现在还有 %1$d 通。</string>
     <string name="usage_working">正在与 Google Play 通信…</string>
     <string name="usage_breakdown">本月明细</string>
     <string name="usage_empty">本月还没有通话。</string>
     <string name="usage_total">合计</string>
-    <string name="usage_footnote">上面是这些通话在我们这边的实际成本，列出来是因为你有权看到。电话线路由 Twilio 在通话结束数分钟后计价；语音转写按月整体计费、没有逐通价格，那部分按通话时长折算——因此这些数字接近实际，但不是精确账单。</string>
+    <string name="usage_footnote">以上显示通话的实际成本，供您查阅。电话线路费用由 Twilio 在通话结束后数分钟计算；语音转写按月计费而非按通计费，因此按通话时长分摊——这些数字接近实际成本，但非精确账单。</string>
     <string name="cost_pending_short">—</string>
 
     <string name="help_title">帮助与常见问题</string>
     <string name="faq_q_guessing">助理会不会自己编信息？</string>
-    <string name="faq_a_guessing">不会。你没提到的信息会留空，助理不会自己猜。拨出前有核对一步，每一行都可以改。通话中如果缺一个没告诉它的细节，它会先拖一句、等你打字，而不是自己编一个。</string>
+    <string name="faq_a_guessing">不会。您未提及的信息将留空，助理不会自行猜测。拨出前有核对步骤，每行均可编辑。通话中如需未提供的细节，助理会暂停等待您输入，而非自行编造。</string>
     <string name="faq_q_caller_id">对方看到的来电号码是什么？</string>
-    <string name="faq_a_caller_id">你自己的号码。电话只会用你验证过的号码拨出，没有可以退回去用的共用号码——这也是为什么第一通电话之前必须先验证。验证的方式是 Twilio 打给你一次，确认这条线在你手上。撤销之后助理就不能再拨出，直到你重新验证。</string>
+    <string name="faq_a_caller_id">您本人的号码。电话仅使用您验证过的号码拨出，没有备用共享号码——因此首次通话前必须验证。验证方式为 Twilio 致电一次，确认您持有该号码。撤销验证后，助理将无法拨号，直至重新验证。</string>
     <string name="faq_q_recordings">通话录音和转写存在哪里？</string>
-    <string name="faq_a_recordings">转写存在服务器上你的账号名下，方便你回头看。删除账号会一并删掉它们，以及助理用来称呼你的名字和转接号码。</string>
+    <string name="faq_a_recordings">转写记录存储在服务器上您的账号下，便于随时查看。删除账号将同时删除这些记录，以及助理使用的姓名和转接号码。</string>
     <string name="faq_q_handover">什么情况下会转接给我？</string>
-    <string name="faq_a_handover">任何继续下去就得做它不该做的事的时候：过安全验证、动钱、答应合同，或者给出没告诉过它的信息。它会先告诉对方要把你接进来，然后拨你的号码桥接。你也可以随时自己接管。</string>
+    <string name="faq_a_handover">当继续通话需要执行其不应操作的事项时：通过安全验证、处理资金、签署合同，或提供未被告知的信息。助理会告知对方将转接给您，然后拨打您的号码完成转接。您也可随时主动接管。</string>
     <string name="faq_q_cost">话费是怎么计算的？</string>
-    <string name="faq_a_cost">就是 Twilio 对这条电话线路的实际收费，按通计，通话结束几分钟后出账。你看到的数字没有估算，也没有加价。</string>
+    <string name="faq_a_cost">即 Twilio 对该电话线路的实际收费，按通话次数计费，通话结束后数分钟生成账单。您看到的数字未经估算，亦无加价。</string>
     <string name="help_contact_title">没找到答案？</string>
     <string name="help_contact_body">写邮件给客服，一个工作日内回复</string>
     <string name="help_contact_action">联系我们</string>
 
     <string name="scheduled_title">定时任务</string>
-    <string name="scheduled_intro">到点后助理不会直接拨出——它会把这通电话准备好，照常走核对一步，你确认了才拨。</string>
+    <string name="scheduled_intro">到达设定时间后，助理不会自动拨出——它会准备好通话，按常规流程进行核对，待您确认后才拨出。</string>
     <string name="scheduled_empty">还没有定时任务。</string>
     <string name="scheduled_new">新建定时任务</string>
-    <string name="scheduled_ready">已就绪——等你核对</string>
+    <string name="scheduled_ready">已就绪——等您核对</string>
     <string name="scheduled_paused">已暂停</string>
     <string name="scheduled_once">只一次</string>
     <string name="scheduled_daily">每天</string>
@@ -286,9 +286,9 @@
     <string name="scheduled_every_days">每 %1$d 天</string>
     <string name="scheduled_check_and_call">核对并拨出</string>
     <string name="scheduled_skip">跳过这次</string>
-    <string name="settings_scheduled_sub">到点提醒你确认的通话</string>
+    <string name="settings_scheduled_sub">到点提醒您确认的通话</string>
 
-    <string name="search_hint">搜索你的通话</string>
+    <string name="search_hint">搜索您的通话</string>
     <string name="search_results">%1$d 条结果</string>
     <string name="search_none">没有匹配的记录。</string>
     <string name="search_recent">最近搜索</string>
@@ -299,11 +299,11 @@
     <string name="notifs_no_answer">没人接 · %1$s</string>
 
     <string name="compose_title">新通话</string>
-    <string name="compose_no_guessing">没说的会留空，不会被瞎猜</string>
+    <string name="compose_no_guessing">未提及的内容将留空，不会被随意猜测</string>
     <string name="compose_needs_callerid_title">先验证号码才能拨出</string>
-    <string name="compose_needs_callerid_body">电话用你自己的号码拨出，这样商家才能回拨给你。没有可以退回去用的共用号码。</string>
+    <string name="compose_needs_callerid_body">电话将以您的号码拨出，方便商家回拨。没有备用共享号码。</string>
     <string name="feed_composer_blocked">验证号码后即可开始拨打</string>
-    <string name="callerid_remove_warning">移除后助理将无法拨出电话，直到你重新验证。</string>
+    <string name="callerid_remove_warning">移除后助理将无法拨出电话，直到您重新验证。</string>
 
     <string name="confirm_title">核对信息</string>
     <string name="field_who">打给谁</string>
@@ -315,11 +315,11 @@
     <string name="action_from_contacts">从联系人选取</string>
     <string name="phone_ok">号码格式正确</string>
     <string name="phone_needs_code">号码需要带国家区号，如 +44 20 7836 4751</string>
-    <string name="confirm_blanks_note">你没提到的信息会留空，助理不会自己猜。每一行都可以直接修改。</string>
+    <string name="confirm_blanks_note">您未提及的信息将留空，助理不会自行猜测。每行均可直接修改。</string>
     <string name="opener_label">开场白预览 · 对方听到的第一句</string>
     <string name="callback_title">接受对方回拨</string>
-    <string name="callback_on">如果对方提出稍后回拨而不是继续排队，助理会答应，并把你的号码给他们。那通电话会直接打给你，届时助理不在线上。</string>
-    <string name="callback_off">助理会一直排队等下去，接通之后再把电话转给你。</string>
+    <string name="callback_on">如果对方提出稍后回拨而不是继续排队，助理会答应，并把您的号码给他们。那通电话会直接打给您，届时助理不在线上。</string>
+    <string name="callback_off">助理会一直排队等下去，接通之后再把电话转给您。</string>
     <string name="action_dial">拨出 · 助理接管</string>
     <string name="action_need_number">补上电话号码后拨出</string>
     <string name="action_dialling">正在拨出…</string>
@@ -327,23 +327,23 @@
     <string name="call_goals">这通电话要办的事</string>
     <string name="speaker_assistant">助理</string>
     <string name="speaker_system">系统</string>
-    <string name="speaker_owner">你</string>
+    <string name="speaker_owner">您</string>
     <string name="bubble_noted">已插话</string>
     <string name="transcript_waiting">等对方接起来…</string>
     <string name="interject_placeholder">输入一句话，助理会自然带入对话…</string>
     <string name="coach_send">发给助理</string>
     <string name="action_take_over">接管</string>
     <string name="action_hangup">挂断</string>
-    <string name="takeover_calling">正在回拨你的号码</string>
-    <string name="takeover_calling_sub">接听后即桥接进这通电话。助理已退到一旁。</string>
-    <string name="done_title">已办妥</string>
+    <string name="takeover_calling">正在回拨您的号码</string>
+    <string name="takeover_calling_sub">接听后即接入这通电话。助理已退到一旁。</string>
+    <string name="done_title">已完成</string>
     <string name="cost_pending">真实话费与时长将在数分钟后自动补全</string>
     <string name="action_view_record">查看记录</string>
     <string name="action_finish">完成</string>
 
     <string name="history_title">通话记录</string>
     <string name="history_empty">还没有通话</string>
-    <string name="history_empty_body">让助理打个电话，进行中的会出现在这里。</string>
+    <string name="history_empty_body">请助理拨打电话后，进行中的通话将显示在此处。</string>
     <string name="action_redial">重拨</string>
 
     <string name="detail_outcome">AI 记录的结果</string>
@@ -365,10 +365,10 @@
 
 
     <string name="settings_who">代谁打电话</string>
-    <string name="settings_who_note">开场白不会报你的名字，助理也不会主动提 —— 只在真正需要时才给，比如订位用谁的名字。碰到它不该自己处理的事，会拨你这个号码。</string>
-    <string name="field_your_name">你的名字</string>
-    <string name="support_your_name">订位需要名字时才会给出，填真名。</string>
-    <string name="field_your_phone">你的手机号</string>
+    <string name="settings_who_note">开场白不会报出您的姓名，助理也不会主动提及——仅在必要时提供，例如订位时使用的姓名。遇到不应自行处理的情况，助理将拨打您的号码。</string>
+    <string name="field_your_name">您的姓名</string>
+    <string name="support_your_name">仅在订位需要时提供，请填写真实姓名。</string>
+    <string name="field_your_phone">您的手机号</string>
     <string name="support_your_phone_ok">用国际格式，以 + 开头。转接时打的就是这个号。</string>
     <string name="support_your_phone_bad">需要以 + 和国家码开头。</string>
 
@@ -377,7 +377,7 @@
     <string name="settings_saved">已保存。</string>
 
     <string name="settings_calling">通话</string>
-    <string name="settings_who_sub">订位报的名字与转接号码</string>
+    <string name="settings_who_sub">订位使用的姓名与转接号码</string>
     <string name="settings_calls_this_month">本月 %1$d 通</string>
     <string name="settings_language_row_sub">与通话语言相互独立</string>
     <string name="settings_templates_sub">助理已经知道该怎么问的几类任务</string>
@@ -387,12 +387,12 @@
     <string name="settings_notifications">通知</string>
     <string name="settings_notif_title">通话状态通知</string>
     <string name="settings_notif_sub">转接请求以最高优先级送达，点击直达。</string>
-    <string name="settings_notif_local">拨号后即使退出 App 也持续跟踪。属本地监听而非推送；App 进程被系统杀死则监听终止。</string>
+    <string name="settings_notif_local">拨号后即使退出 App 也会持续跟踪。此为本地状态监测，非推送通知；若 App 被系统终止，监测也将停止。</string>
 
     <string name="notif_channel_live">通话进行中</string>
-    <string name="notif_channel_alerts">需要你</string>
+    <string name="notif_channel_alerts">需要您</string>
     <string name="notif_ongoing">通话中 · %1$s</string>
-    <string name="notif_needs_you_title">接电话 — %1$s 需要你</string>
+    <string name="notif_needs_you_title">接电话 — %1$s 需要您</string>
     <string name="notif_done_title">通话结束 · %1$s</string>
     <string name="notif_no_answer_title">没人接 · %1$s</string>
 
@@ -401,13 +401,13 @@
 
     <string name="error_configure_first">请先登录。</string>
     <string name="error_generic">出了点问题。</string>
-    <string name="error_need_https">先在设置里填一个有效的 https:// 服务器地址。</string>
+    <string name="error_need_https">请先在设置中填写有效的 https:// 服务器地址。</string>
     <string name="error_bad_url">设置里的服务器地址不是有效的 URL。</string>
-    <string name="error_need_address">在设置里填一个 https:// 开头的服务器地址。</string>
+    <string name="error_need_address">请在设置中填写以 https:// 开头的服务器地址。</string>
     <string name="error_need_token">请先登录。</string>
     <string name="error_unreachable">连不上服务器：%1$s</string>
     <string name="error_network">网络错误</string>
-    <string name="error_unexpected_body">服务器返回了看不懂的内容：%1$s</string>
+    <string name="error_unexpected_body">服务器返回了无法解析的内容：%1$s</string>
     <string name="error_bad_token">API 令牌和服务器对不上。</string>
     <string name="error_no_such_call">这通电话在服务器上已经不存在了。</string>
     <string name="error_http">服务器返回 HTTP %1$d。</string>
