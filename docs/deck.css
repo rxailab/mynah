@@ -1,0 +1,182 @@
+/* The product's own design system, so the deck and the app read as one thing:
+   sage canvas, white cards at 24px, one lime accent, near-black ink. */
+@font-face { font-family: 'Inter'; font-weight: 400;
+  unicode-range: U+0000-024F, U+2000-206F, U+20A0-20BF, U+2100-214F;
+  src: url('/Volumes/Extreme SSD/smartvoice/ios/Mynah/Resources/Fonts/inter_400.ttf'); }
+@font-face { font-family: 'Inter'; font-weight: 600;
+  unicode-range: U+0000-024F, U+2000-206F, U+20A0-20BF, U+2100-214F;
+  src: url('/Volumes/Extreme SSD/smartvoice/ios/Mynah/Resources/Fonts/inter_600.ttf'); }
+@font-face { font-family: 'Inter'; font-weight: 700;
+  unicode-range: U+0000-024F, U+2000-206F, U+20A0-20BF, U+2100-214F;
+  src: url('/Volumes/Extreme SSD/smartvoice/ios/Mynah/Resources/Fonts/inter_700.ttf'); }
+@font-face { font-family: 'Inter'; font-weight: 800;
+  unicode-range: U+0000-024F, U+2000-206F, U+20A0-20BF, U+2100-214F;
+  src: url('/Volumes/Extreme SSD/smartvoice/ios/Mynah/Resources/Fonts/inter_800.ttf'); }
+@font-face { font-family: 'Inter'; font-weight: 900;
+  unicode-range: U+0000-024F, U+2000-206F, U+20A0-20BF, U+2100-214F;
+  src: url('/Volumes/Extreme SSD/smartvoice/ios/Mynah/Resources/Fonts/inter_900.ttf'); }
+
+/* Chinese, by file rather than by family name: Chrome resolves a system font
+   by name and then declines to embed it, which drops every CJK glyph from the
+   PDF while leaving the Latin looking fine. PingFang refuses even by file — it
+   is the one macOS marks hardest — so this is STHeiti, whose Light and Medium
+   ship as two separate files and therefore give two real weights with no
+   synthesis. Synthesised weights fall back to the same unembeddable path. */
+@font-face { font-family: 'CN'; font-weight: 400; src: url('/System/Library/Fonts/STHeiti%20Light.ttc'); }
+@font-face { font-family: 'CN'; font-weight: 600; src: url('/System/Library/Fonts/STHeiti%20Medium.ttc'); }
+@font-face { font-family: 'CN'; font-weight: 700; src: url('/System/Library/Fonts/STHeiti%20Medium.ttc'); }
+@font-face { font-family: 'CN'; font-weight: 800; src: url('/System/Library/Fonts/STHeiti%20Medium.ttc'); }
+@font-face { font-family: 'CN'; font-weight: 900; src: url('/System/Library/Fonts/STHeiti%20Medium.ttc'); }
+
+:root {
+  --lime: #9FE870;   --lime-pale: #E2F6D5;  --lime-neutral: #C5EDAB;
+  --ink: #0E0F0C;    --deep: #163300;       --body: #454745;   --mute: #868685;
+  --card: #FFFFFF;   --canvas: #E8EBE6;     --canvas-soft: #F2F4EF;
+  --divider: #EEF0EA; --rim: #C9CDC5;
+  --positive: #2EAD4B; --warning: #FFD11A;  --warning-ink: #4A3B1C;
+  --negative: #D03238; --negative-wash: #FBE4E5;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+@page { size: A4; margin: 0; }
+
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+body {
+  font-family: 'Inter', 'CN';
+  color: var(--ink);
+  background: var(--canvas);
+  font-feature-settings: 'tnum' 1;
+}
+
+.page {
+  width: 210mm; height: 297mm;
+  padding: 20mm 18mm 16mm;
+  background: var(--canvas);
+  page-break-after: always;
+  position: relative;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.page:last-child { page-break-after: auto; }
+
+/* --- the mark: three bars, the shape in the app's own icon ---------------- */
+.logo { display: flex; align-items: flex-end; gap: 3px; height: 22px; }
+.logo i { width: 5px; border-radius: 3px; background: var(--lime); display: block; }
+.logo i:nth-child(1) { height: 12px; }
+.logo i:nth-child(2) { height: 22px; }
+.logo i:nth-child(3) { height: 16px; }
+.logo.big { height: 44px; gap: 6px; }
+.logo.big i { width: 10px; border-radius: 6px; }
+.logo.big i:nth-child(1) { height: 24px; }
+.logo.big i:nth-child(2) { height: 44px; }
+.logo.big i:nth-child(3) { height: 32px; }
+
+.wordmark { display: flex; align-items: center; gap: 10px; }
+.wordmark span {
+  font-weight: 700; letter-spacing: .16em; font-size: 13px; color: var(--mute);
+}
+
+/* --- running head -------------------------------------------------------- */
+.head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-bottom: 7mm; margin-bottom: 8mm;
+  border-bottom: 1px solid var(--rim);
+  flex-shrink: 0;
+}
+.head .sec { font-size: 11px; font-weight: 600; color: var(--mute); letter-spacing: .1em; }
+
+h1 { font-size: 30px; font-weight: 800; line-height: 1.25; letter-spacing: -.01em; }
+h2 { font-size: 22px; font-weight: 800; line-height: 1.3; margin-bottom: 3mm; }
+h3 { font-size: 15px; font-weight: 700; line-height: 1.4; }
+p  { font-size: 12.5px; line-height: 1.75; color: var(--body); }
+.lead { font-size: 15px; line-height: 1.7; color: var(--ink); }
+
+.card {
+  background: var(--card); border-radius: 20px; padding: 7mm 7mm;
+}
+.card.tight { padding: 5mm 6mm; }
+.card.ink { background: var(--ink); color: #fff; }
+.card.ink h3, .card.ink h2 { color: #fff; }
+.card.ink p { color: #C9CDC5; }
+.card.lime { background: var(--lime-pale); }
+
+.grid { display: grid; gap: 5mm; }
+.g2 { grid-template-columns: 1fr 1fr; }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+
+.num {
+  width: 26px; height: 26px; border-radius: 13px; background: var(--lime);
+  color: var(--deep); font-weight: 800; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+.chip {
+  display: inline-block; padding: 4px 11px; border-radius: 20px;
+  background: var(--lime-pale); color: var(--deep);
+  font-size: 11px; font-weight: 700;
+}
+.chip.warn { background: #FFF3C4; color: var(--warning-ink); }
+.chip.plain { background: var(--canvas-soft); color: var(--body); }
+
+.foot {
+  margin-top: auto; padding-top: 6mm; flex-shrink: 0;
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 10px; color: var(--mute);
+  border-top: 1px solid var(--rim);
+}
+
+/* --- a phone, drawn rather than photographed ----------------------------- */
+.phone {
+  width: 100%; aspect-ratio: 9 / 17.5; background: var(--canvas);
+  border: 7px solid var(--ink); border-radius: 26px;
+  padding: 9px 8px; display: flex; flex-direction: column; gap: 6px;
+  overflow: hidden;
+}
+.phone.dark { background: var(--ink); border-color: var(--ink); }
+.phone .bar {
+  display: flex; justify-content: space-between; font-size: 6.5px;
+  font-weight: 700; color: var(--mute); padding: 0 3px 1px;
+}
+.phone .t   { font-size: 9.5px; font-weight: 800; line-height: 1.35; }
+.phone .s   { font-size: 7px; color: var(--mute); line-height: 1.45; }
+.phone .row {
+  background: #fff; border-radius: 9px; padding: 6px 7px;
+  display: flex; gap: 5px; align-items: flex-start;
+}
+.phone.dark .row { background: #1C1E1A; }
+.phone.dark .t { color: #fff; }
+.phone .dot {
+  width: 6px; height: 6px; border-radius: 3px; margin-top: 3px; flex-shrink: 0;
+}
+.phone .btn {
+  background: var(--lime); color: var(--deep); border-radius: 12px;
+  text-align: center; padding: 7px; font-size: 8.5px; font-weight: 800;
+}
+.phone .field {
+  background: #fff; border-radius: 9px; padding: 7px;
+  font-size: 7.5px; color: var(--body); line-height: 1.5;
+}
+.caption { font-size: 9.5px; color: var(--mute); text-align: center; margin-top: 3mm; }
+
+.kv { display: flex; justify-content: space-between; padding: 3.2mm 0; font-size: 12px; }
+.kv + .kv { border-top: 1px solid var(--divider); }
+.kv b { font-weight: 700; }
+.kv span { color: var(--body); }
+
+ul.ticks { list-style: none; }
+ul.ticks li {
+  font-size: 12px; line-height: 1.7; color: var(--body);
+  padding-left: 16px; position: relative; margin-bottom: 2mm;
+}
+ul.ticks li::before {
+  content: ''; position: absolute; left: 0; top: 8px;
+  width: 6px; height: 6px; border-radius: 3px; background: var(--lime);
+}
+
+.todo {
+  border: 1.5px dashed var(--rim); border-radius: 14px;
+  padding: 5mm 6mm; background: transparent;
+}
+.todo .chip { background: #FFF3C4; color: var(--warning-ink); }

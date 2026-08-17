@@ -1,0 +1,352 @@
+<meta charset="utf-8">
+<title>Mynah 项目介绍</title>
+<link rel="stylesheet" href="deck.css">
+
+<!-- 1 ── 封面 ------------------------------------------------------------- -->
+<div class="page">
+  <div style="height:38mm"></div>
+  <div class="logo big"><i></i><i></i><i></i></div>
+  <div style="height:9mm"></div>
+  <div style="font-weight:800;letter-spacing:.18em;font-size:15px;color:var(--mute)">MYNAH</div>
+  <div style="height:5mm"></div>
+  <h1 style="font-size:42px;line-height:1.22">替人打电话的<br>AI 助理</h1>
+  <div style="height:6mm"></div>
+  <p class="lead" style="max-width:125mm">
+    一句话交代要办的事，助理拨号、用对方的语言谈完、把结果带回来。
+    需要人的时候——身份验证、涉及资金、签字画押——它把电话转给用户。
+  </p>
+  <div style="height:9mm"></div>
+  <div style="display:flex;gap:8px">
+    <span class="chip">服务端 · iOS · Android 均已建成</span>
+    <span class="chip">中文 / English</span>
+  </div>
+  <div class="foot"><span>项目介绍 · 保密</span><span>2026</span></div>
+</div>
+
+<!-- 2 ── 问题 ------------------------------------------------------------- -->
+<div class="page">
+  <div class="head">
+    <div class="wordmark"><span class="logo"><i></i><i></i><i></i></span><span>MYNAH</span></div>
+    <div class="sec">01 · 问题</div>
+  </div>
+
+  <h2>电话仍然是很多事情唯一能办成的通道</h2>
+  <p style="max-width:155mm">餐厅改一次订位、诊所挪一次预约、宽带续约谈一个价——这些事没有 API，也没有网页入口。能办成它的只有一通电话，而这通电话的成本几乎全在"打"这个动作上，不在内容上。</p>
+  <div style="height:8mm"></div>
+
+  <div class="grid g2">
+    <div class="card"><h3>时间错配</h3><div style="height:2mm"></div>
+      <p>对方营业的时段正是用户上班的时段。这不是效率问题，是结构问题——不请假就打不了。</p></div>
+    <div class="card"><h3>排队与语音菜单</h3><div style="height:2mm"></div>
+      <p>银行、运营商、快递，接通前是一串按键和等待音。等待本身占掉的时间远超对话本身。</p></div>
+    <div class="card"><h3>语言门槛</h3><div style="height:2mm"></div>
+      <p>移民、留学生、跨境经营者面对的是同一件事：内容会说，但在电话上、有口音、有压力时说不好。</p></div>
+    <div class="card"><h3>结果无处留存</h3><div style="height:2mm"></div>
+      <p>谈成了什么、对方给了什么参考号，全靠记。事后争议时没有任何凭据。</p></div>
+  </div>
+
+  <div style="height:8mm"></div>
+  <div class="card ink">
+    <h3>已有方案没有覆盖这一段</h3>
+    <div style="height:2mm"></div>
+    <p>呼叫中心机器人服务的是"接电话"的企业，不是"打电话"的个人。通用语音助手能拨号，但不会替你谈判、不会在中途把电话交还给你、也不划定自己不该做的事。</p>
+  </div>
+
+  <div class="foot"><span>Mynah 项目介绍</span><span>2</span></div>
+</div>
+
+<!-- 3 ── 产品 ------------------------------------------------------------- -->
+<div class="page">
+  <div class="head">
+    <div class="wordmark"><span class="logo"><i></i><i></i><i></i></span><span>MYNAH</span></div>
+    <div class="sec">02 · 产品</div>
+  </div>
+
+  <h2>从一句话到办妥</h2>
+  <div style="height:5mm"></div>
+
+  <div style="display:flex;gap:4mm;align-items:stretch">
+    <div class="card tight" style="flex:1"><div class="num">1</div><div style="height:3mm"></div>
+      <h3 style="font-size:13.5px">解析</h3><div style="height:1.5mm"></div>
+      <p style="font-size:11px">自然语言变成结构化任务单：拨给谁、办什么、什么条件。</p></div>
+    <div class="card tight" style="flex:1"><div class="num">2</div><div style="height:3mm"></div>
+      <h3 style="font-size:13.5px">核对</h3><div style="height:1.5mm"></div>
+      <p style="font-size:11px">逐项确认，每行可改。未提及的留空，不猜。</p></div>
+    <div class="card tight" style="flex:1"><div class="num">3</div><div style="height:3mm"></div>
+      <h3 style="font-size:13.5px">通话</h3><div style="height:1.5mm"></div>
+      <p style="font-size:11px">代理上线谈判，过菜单、排队，逐句转写与翻译。</p></div>
+    <div class="card tight" style="flex:1"><div class="num">4</div><div style="height:3mm"></div>
+      <h3 style="font-size:13.5px">交还</h3><div style="height:1.5mm"></div>
+      <p style="font-size:11px">越界即转接：拨回用户号码，把人接进这通电话。</p></div>
+    <div class="card tight" style="flex:1"><div class="num">5</div><div style="height:3mm"></div>
+      <h3 style="font-size:13.5px">留存</h3><div style="height:1.5mm"></div>
+      <p style="font-size:11px">结果、转写、实际成本入账，可查可删。</p></div>
+  </div>
+
+  <div style="height:9mm"></div>
+  <h2>真正的差异在第 2 步和第 4 步</h2>
+  <p style="max-width:155mm">拨号和语音合成是商品化能力。产品的价值集中在两处约束上——它们决定用户敢不敢把一件真事交给它。</p>
+  <div style="height:5mm"></div>
+
+  <div class="grid g2">
+    <div class="card lime">
+      <h3 style="color:var(--deep)">不猜</h3><div style="height:2mm"></div>
+      <p style="color:var(--deep)">用户没说的信息一律留空。通话中如需未提供的细节，助理暂停并等待用户输入，而不是编一个听起来合理的答案。幻觉在这里不是体验问题，是会订错位、报错号的事故。</p>
+    </div>
+    <div class="card lime">
+      <h3 style="color:var(--deep)">不越界</h3><div style="height:2mm"></div>
+      <p style="color:var(--deep)">四类情形强制转人：通过安全验证、处理资金、签署合同、提供未被告知的信息。这既是产品边界，也是合规边界——助理不经手钱，也不代替用户承诺。</p>
+    </div>
+  </div>
+
+  <div class="foot"><span>Mynah 项目介绍</span><span>3</span></div>
+</div>
+
+<!-- 4 ── 已建成 ----------------------------------------------------------- -->
+<div class="page">
+  <div class="head">
+    <div class="wordmark"><span class="logo"><i></i><i></i><i></i></span><span>MYNAH</span></div>
+    <div class="sec">03 · 现状</div>
+  </div>
+
+  <h2>已经建成的部分</h2>
+  <p>不是原型。服务端与两个客户端均已完成并可运行，功能对齐。</p>
+  <div style="height:6mm"></div>
+
+  <div class="card" style="padding:2mm 7mm">
+    <div class="kv"><b>服务端</b><span>Node · 通话编排、代理、账号、计费、定时任务；单实例部署，一条脚本上线</span></div>
+    <div class="kv"><b>iOS</b><span>SwiftUI，零第三方依赖</span></div>
+    <div class="kv"><b>Android</b><span>Kotlin · Jetpack Compose</span></div>
+    <div class="kv"><b>双语</b><span>中英全量文案，单一术语表生成两端，不会分叉</span></div>
+  </div>
+
+  <div style="height:7mm"></div>
+  <div class="grid g2">
+    <div class="card">
+      <h3>通话能力</h3><div style="height:2.5mm"></div>
+      <ul class="ticks">
+        <li>自然语言解析成任务单</li>
+        <li>拨出前逐项核对，每行可编辑</li>
+        <li>实时转写，逐句翻译并保留人名与参考号</li>
+        <li>过语音菜单、排队等待并计时</li>
+        <li>用户可随时插话或一键接管</li>
+        <li>越界自动转接：回拨用户并接入</li>
+        <li>对方提出回拨时可代为留号</li>
+        <li>定时任务：到点准备好，仍需用户确认才拨</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>账号 · 计费 · 数据</h3><div style="height:2.5mm"></div>
+      <ul class="ticks">
+        <li>邮箱 / 手机验证码 / Google 三种登录，双端</li>
+        <li>用户本人号码作为主叫，含号码验证流程</li>
+        <li>按通计费，未接通不扣</li>
+        <li>Stripe 支付链接（卡 / 微信 / 支付宝）</li>
+        <li>Google Play 内购</li>
+        <li>向用户展示每通电话的真实线路成本</li>
+        <li>单条记录可删；删除账号即全量清除</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot"><span>Mynah 项目介绍</span><span>4</span></div>
+</div>
+
+<!-- 5 ── 架构 ------------------------------------------------------------- -->
+<div class="page">
+  <div class="head">
+    <div class="wordmark"><span class="logo"><i></i><i></i><i></i></span><span>MYNAH</span></div>
+    <div class="sec">04 · 技术</div>
+  </div>
+
+  <h2>通话链路</h2>
+  <div style="height:6mm"></div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:3mm">
+      <div style="flex:1;text-align:center">
+        <div style="background:var(--canvas);border-radius:12px;padding:4mm 2mm">
+          <div style="font-weight:800;font-size:12px">App</div>
+          <div style="font-size:9.5px;color:var(--mute);margin-top:1mm">iOS / Android</div>
+        </div>
+      </div>
+      <div style="color:var(--rim);font-size:16px">→</div>
+      <div style="flex:1.4;text-align:center">
+        <div style="background:var(--ink);border-radius:12px;padding:4mm 2mm;color:#fff">
+          <div style="font-weight:800;font-size:12px">编排服务</div>
+          <div style="font-size:9.5px;color:#C9CDC5;margin-top:1mm">任务解析 · 会话状态 · 转接判定 · 计费</div>
+        </div>
+      </div>
+      <div style="color:var(--rim);font-size:16px">→</div>
+      <div style="flex:1;text-align:center">
+        <div style="background:var(--canvas);border-radius:12px;padding:4mm 2mm">
+          <div style="font-weight:800;font-size:12px">电话网络</div>
+          <div style="font-size:9.5px;color:var(--mute);margin-top:1mm">运营商线路</div>
+        </div>
+      </div>
+      <div style="color:var(--rim);font-size:16px">→</div>
+      <div style="flex:1;text-align:center">
+        <div style="background:var(--lime-pale);border-radius:12px;padding:4mm 2mm">
+          <div style="font-weight:800;font-size:12px;color:var(--deep)">商家</div>
+          <div style="font-size:9.5px;color:var(--deep);margin-top:1mm">真人接听</div>
+        </div>
+      </div>
+    </div>
+    <div style="height:5mm"></div>
+    <div style="border-top:1px solid var(--divider);padding-top:4mm;display:flex;gap:4mm">
+      <div style="flex:1"><h3 style="font-size:12.5px">实时环</h3>
+        <p style="font-size:10.5px;margin-top:1mm">语音进 → 转写 → 代理决策 → 语音出，同时把字幕与译文推给 App。</p></div>
+      <div style="flex:1"><h3 style="font-size:12.5px">转接环</h3>
+        <p style="font-size:10.5px;margin-top:1mm">命中边界即向对方说明，另拨用户号码，把两条线接在一起。</p></div>
+      <div style="flex:1"><h3 style="font-size:12.5px">留存环</h3>
+        <p style="font-size:10.5px;margin-top:1mm">转写、结果与实际线路成本落库，按账号隔离，可单条删除。</p></div>
+    </div>
+  </div>
+
+  <div style="height:8mm"></div>
+  <h2>工程上的几个取舍</h2>
+  <div style="height:4mm"></div>
+  <div class="grid g2">
+    <div class="card tight"><h3 style="font-size:13px">双端原生，不用跨平台框架</h3><div style="height:2mm"></div>
+      <p style="font-size:11.5px">通话是系统能力密集的场景——后台存活、音频会话、通话状态监听。原生代价更低。iOS 端零第三方依赖，供应链面为空。</p></div>
+    <div class="card tight"><h3 style="font-size:13px">文案只有一处源头</h3><div style="height:2mm"></div>
+      <p style="font-size:11.5px">两端界面文字由同一份术语表生成。双语产品最容易腐坏的地方是两端各改各的，这条从流程上堵死。</p></div>
+    <div class="card tight"><h3 style="font-size:13px">部署面刻意做小</h3><div style="height:2mm"></div>
+      <p style="font-size:11.5px">单实例 + 隧道出网，除 SSH 外无入站端口。一条脚本上线，回滚即重跑。</p></div>
+    <div class="card tight"><h3 style="font-size:13px">成本对用户可见</h3><div style="height:2mm"></div>
+      <p style="font-size:11.5px">每通电话的真实线路费用直接展示。定价可以由此谈，而不是靠遮蔽。</p></div>
+  </div>
+
+  <div class="foot"><span>Mynah 项目介绍</span><span>5</span></div>
+</div>
+
+<!-- 6 ── 商业模式 --------------------------------------------------------- -->
+<div class="page">
+  <div class="head">
+    <div class="wordmark"><span class="logo"><i></i><i></i><i></i></span><span>MYNAH</span></div>
+    <div class="sec">05 · 商业模式</div>
+  </div>
+
+  <h2>按通计费</h2>
+  <p style="max-width:155mm">一次通话即一次真实对话。无人接听不计次——这条写进产品，因为用户对"打不通还扣钱"的容忍度是零。</p>
+  <div style="height:6mm"></div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>收入</h3><div style="height:2.5mm"></div>
+      <ul class="ticks">
+        <li>预付通话包，账号内计次</li>
+        <li>Stripe 收款：银行卡、微信支付、支付宝</li>
+        <li>Google Play 内购</li>
+        <li>充值链接可转发给代付人，适配替家人付费的场景</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>可变成本</h3><div style="height:2.5mm"></div>
+      <ul class="ticks">
+        <li>电话线路：按通计价，通话结束后数分钟出账</li>
+        <li>语音转写：按月整体计费，按时长分摊到每通</li>
+        <li>模型推理：随对话轮次变化</li>
+      </ul>
+      <div style="height:2mm"></div>
+      <p style="font-size:11px">三项均可按通归集，单位经济模型可直接算。</p>
+    </div>
+  </div>
+
+  <div style="height:8mm"></div>
+  <div class="card ink">
+    <h3>为什么"代付链接"值得单独说</h3><div style="height:2mm"></div>
+    <p>目标用户里有相当一部分——年长者、留学生、不熟悉本地语言的人——不是付款决策人。链接只能充值，无法登录、无法查看通话记录，让"子女替父母付"这条路走得通且安全。</p>
+  </div>
+
+  <div class="foot"><span>Mynah 项目介绍</span><span>6</span></div>
+</div>
+
+<!-- 7 ── 壁垒 ------------------------------------------------------------- -->
+<div class="page">
+  <div class="head">
+    <div class="wordmark"><span class="logo"><i></i><i></i><i></i></span><span>MYNAH</span></div>
+    <div class="sec">06 · 壁垒</div>
+  </div>
+
+  <h2>模型会变便宜，这四件事不会</h2>
+  <div style="height:6mm"></div>
+
+  <div class="grid g2">
+    <div class="card"><h3>边界判定</h3><div style="height:2mm"></div>
+      <p>"什么时候必须交还给人"是产品的核心判断，也是最难调对的部分：转早了体验碎，转晚了出事故。这条规则集随真实通话积累，不随模型升级重置。</p></div>
+    <div class="card"><h3>真实通话语料</h3><div style="height:2mm"></div>
+      <p>菜单树、话术、拒绝方式、什么时候会被挂断——这些只能从打过的电话里长出来，且高度地域化。</p></div>
+    <div class="card"><h3>主叫号码合规链路</h3><div style="height:2mm"></div>
+      <p>用用户本人号码拨出需要完整的号码归属验证。这条链路做通的成本，比它看起来高。</p></div>
+    <div class="card"><h3>双语一致性</h3><div style="height:2mm"></div>
+      <p>不是把界面翻译一遍，而是通话本身双语：对方说什么语言就用什么语言谈，字幕同时给用户看懂。</p></div>
+  </div>
+
+  <div style="height:8mm"></div>
+  <h2>风险，以及已经做了什么</h2>
+  <div style="height:4mm"></div>
+  <div class="card" style="padding:2mm 7mm">
+    <div class="kv"><b>合规与告知</b><span style="max-width:110mm;text-align:right">已设强制转人边界；助理不经手资金、不代签合同</span></div>
+    <div class="kv"><b>幻觉导致的错单</b><span style="max-width:110mm;text-align:right">缺信息即暂停等待用户输入，拨出前另有逐项核对</span></div>
+    <div class="kv"><b>线路成本波动</b><span style="max-width:110mm;text-align:right">按通归集，成本对用户可见，定价可随之调整</span></div>
+    <div class="kv"><b>平台依赖</b><span style="max-width:110mm;text-align:right">电话与支付均为可替换的服务层，未与单一供应商耦合</span></div>
+  </div>
+
+  <div class="foot"><span>Mynah 项目介绍</span><span>7</span></div>
+</div>
+
+<!-- 8 ── 待补充 ----------------------------------------------------------- -->
+<div class="page">
+  <div class="head">
+    <div class="wordmark"><span class="logo"><i></i><i></i><i></i></span><span>MYNAH</span></div>
+    <div class="sec">07 · 待补充</div>
+  </div>
+
+  <h2>这几页需要你自己填</h2>
+  <p style="max-width:155mm">以下数字只有你手上有。这份文件里没有一个编造的数据——空着比填一个看起来合理的数字安全得多，投资人核起来也是先核这些。</p>
+  <div style="height:7mm"></div>
+
+  <div class="todo">
+    <span class="chip">待填</span>
+    <div style="height:3mm"></div>
+    <h3>市场</h3><div style="height:2mm"></div>
+    <p>目标市场口径与规模测算：英国 / 华人群体 / 其他。建议自下而上算——目标人群 × 年通话次数 × 单价，而不是引用整体市场报告。</p>
+  </div>
+  <div style="height:4mm"></div>
+
+  <div class="todo">
+    <span class="chip">待填</span>
+    <div style="height:3mm"></div>
+    <h3>进展数据</h3><div style="height:2mm"></div>
+    <p>注册与活跃用户、累计通话数、通话成功率、转人率、复购率、单位经济模型（单通收入 − 单通成本）。<br>
+    其中<b>转人率</b>和<b>通话成功率</b>是这个产品最有说服力的两个数——它们直接回答"它到底能不能把事办成"。</p>
+  </div>
+  <div style="height:4mm"></div>
+
+  <div class="todo">
+    <span class="chip">待填</span>
+    <div style="height:3mm"></div>
+    <h3>团队</h3><div style="height:2mm"></div>
+    <p>成员、分工、相关背景。</p>
+  </div>
+  <div style="height:4mm"></div>
+
+  <div class="todo">
+    <span class="chip">待填</span>
+    <div style="height:3mm"></div>
+    <h3>融资</h3><div style="height:2mm"></div>
+    <p>融资额、估值、资金用途与里程碑、未来 12–18 个月规划。</p>
+  </div>
+
+  <div style="height:8mm"></div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <span class="logo"><i></i><i></i><i></i></span>
+    <div>
+      <div style="font-weight:800;font-size:15px">Mynah</div>
+      <div style="font-size:11px;color:var(--mute);margin-top:2px">替人打电话的 AI 助理 · 服务端与双端均已建成</div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Mynah 项目介绍</span><span>8</span></div>
+</div>
