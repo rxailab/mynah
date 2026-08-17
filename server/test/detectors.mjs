@@ -117,10 +117,15 @@ const TOOL_NARRATION = [
   /\bi'?ll (?:record|save|note|log) (?:that|this)\b[^.?!]{0,20}\b(?:down|in the system|for (?:you|them))?/i,
   /\b(?:note_step|record_result|end_call|send_dtmf|transfer_to_user|on_hold)\b/,
   /\bcalling the \w+ tool\b/i,
+  // Pressing a key is a thing you do, not a thing you announce: "I'll press
+  // three" tells a menu what you are about to do to it.
+  /\bi'?(?:ll|m going to| will) (?:now )?press\b/i,
   // Seen on a live adversarial run: "I need to note my progress first, then
   // answer your question." The progress list is for the owner's screen and the
   // other party has no idea it exists.
-  /\b(?:note|record|update|mark|log) (?:my|the) (?:progress|steps?|checklist)\b/i,
+  // "my"/"the" was too tight: an HSBC run opened a turn with "Let me update
+  // those steps properly" — same leak, different determiner.
+  /\b(?:note|record|update|mark|log) (?:my|the|those|these) (?:progress|steps?|checklist)\b/i,
   /\bi need to .{0,30}\bfirst,? (?:then|before) (?:i )?answer\b/i,
 ]
 

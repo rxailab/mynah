@@ -191,6 +191,31 @@ export const soundsLikeMenu = (text) => {
 }
 
 /**
+ * Whether whoever just picked up has already asked what the call is about.
+ *
+ * The fixed opener ends with "Is now a good time?", which is the right thing to
+ * say to someone who has only said their name — and the wrong thing to say to
+ * someone who has just asked what you want. After a menu the second is common:
+ * by the time a person reaches the line they open with "how can I help", and the
+ * opener answers a question they did not ask while ignoring the one they did.
+ */
+const INVITES_BUSINESS = [
+  /\bhow (?:can|may) I help\b/i,
+  /\bwhat can I (?:do for you|help you with)\b/i,
+  /\bhow can I assist\b/i,
+  /\bwhat(?:'?s| is) (?:it|this) (?:regarding|about|in regard to)\b/i,
+  /\bwhat can I get (?:for )?you\b/i,
+  /\bwhat(?:'?re| are) you (?:calling|ringing) about\b/i,
+  /请问(?:有什么|需要什么|什么事)/,
+  /有什么(?:可以帮|能帮)/,
+]
+
+export const invitesBusiness = (text) => {
+  const said = String(text ?? '')
+  return INVITES_BUSINESS.some((re) => re.test(said))
+}
+
+/**
  * Whether they have just taken you for the person you represent — "oh, is that
  * Rui?" — which is a belief that a specific human is on the line.
  *

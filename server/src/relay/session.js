@@ -1,7 +1,7 @@
 import { Agent } from '../agent/brain.js'
 import { buildSystemPrompt, welcomeGreeting } from '../agent/prompts.js'
 import { queueSummaryTranslation } from '../agent/translate.js'
-import { asksIfOwner, seatRewrite, soundsLikeMenu, speechFilter } from './speech.js'
+import { asksIfOwner, invitesBusiness, seatRewrite, soundsLikeMenu, speechFilter } from './speech.js'
 import { transferToOwner } from '../twilio/client.js'
 import { config } from '../config.js'
 import { profileForCall } from '../profile.js'
@@ -365,6 +365,28 @@ export function handleRelayConnection(ws, callId) {
           log.info('relay', `call ${callId} was answered by a menu; letting the model take it`)
           if (busy) return
           await respond(text)
+          break
+        }
+
+        // Someone who has already asked what the call is about gets an answer,
+        // not the opener. "I'm calling about a question about an account. Is now
+        // a good time?" replies to a question they did not ask and leaves theirs
+        // hanging, so the errand costs two turns instead of one — and on a bank
+        // line the second turn is the one that gets "about what, sorry?".
+        //
+        // The opener stays fixed everywhere else. Its job is to keep the owner's
+        // name and the disclosure out of the first words said to a stranger, and
+        // both of those are prompt rules that hold for this turn as much as any
+        // other — with name-volunteered-early and disclosure-unprompted in the
+        // suite watching that they do.
+        if (!greeted && invitesBusiness(text)) {
+          log.info('relay', `call ${callId} was asked its business on pickup; answering rather than opening`)
+          greeted = true
+          clearTimeout(greetNudge)
+          clearTimeout(greetForce)
+          if (busy) return
+          await respond(text)
+          drainNotes()
           break
         }
 
