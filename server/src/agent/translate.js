@@ -44,7 +44,7 @@ export async function translateLine(text, from, to) {
   if (!trimmed) return null
 
   try {
-    const completion = await withTokenLimit((limitParam) =>
+    const completion = await withTokenLimit(config.translationModel, (limitParam, extras) =>
       client.chat.completions.create({
         model: config.translationModel,
         messages: [
@@ -52,6 +52,7 @@ export async function translateLine(text, from, to) {
           { role: 'user', content: trimmed },
         ],
         [limitParam]: 400,
+        ...extras,
       }),
     )
     const out = completion.choices[0]?.message?.content?.trim()

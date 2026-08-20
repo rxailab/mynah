@@ -107,7 +107,7 @@ record_brief({
  *   when: string|null, constraints: string[], template: string, goal: string, opening: string}>}
  */
 export async function parseBrief(text) {
-  const completion = await withTokenLimit((limitParam) =>
+  const completion = await withTokenLimit(config.model, (limitParam, extras) =>
     client.chat.completions.create({
       model: config.model,
       messages: [
@@ -117,6 +117,7 @@ export async function parseBrief(text) {
       tools: [BRIEF_TOOL],
       tool_choice: { type: 'function', function: { name: 'record_brief' } },
       [limitParam]: 600,
+      ...extras,
     }),
   )
 

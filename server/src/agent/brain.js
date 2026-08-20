@@ -147,7 +147,7 @@ export function warmUp() {
     .create({
       model: config.model,
       messages: [{ role: 'user', content: 'hi' }],
-      [tokenLimitName()]: 4,
+      [tokenLimitName(config.model)]: 4,
     })
     .then(() => log.info('brain', `${config.model} warmed up`))
     .catch((err) => log.warn('brain', `warm-up failed, carrying on: ${err.message}`))
@@ -212,7 +212,11 @@ export class Agent {
       }
       this.abort = null
 
-      this.messages.push(message)
+      // A turn that only called tools comes back with no words in it, and
+      // models disagree about how to say so: some send an empty string, others
+      // send null. Sending a null back as history is rejected outright, so the
+      // whole conversation dies one turn after the first silent tool call.
+      this.messages.push({ ...message, content: message.content ?? '' })
 
       if (finishReason === 'content_filter') {
         log.warn('brain', 'the model declined the turn (content_filter)')
@@ -260,7 +264,7 @@ export class Agent {
   }
 
   async #streamOnce(signal, onDelta) {
-    const run = async (limitParam) => {
+    const run = async (limitParam, extras) => {
       const stream = client.chat.completions.stream(
         {
           model: config.model,
@@ -268,13 +272,21 @@ export class Agent {
           tools: TOOLS,
           tool_choice: 'auto',
           [limitParam]: config.maxTokens,
+          ...extras,
         },
         { signal },
       )
       stream.on('content', onDelta)
+      // The SDK reports a failure twice: once by rejecting the promise below,
+      // and once on this channel. Without a listener the second copy escapes as
+      // an unhandled error and kills the turn — including the turn that a retry
+      // has already gone on to answer successfully, which is how a recovered
+      // 400 still managed to end a call. The rejection is the reporting path;
+      // this handler exists so the duplicate has somewhere to land.
+      stream.on('error', () => {})
       return stream.finalChatCompletion()
     }
 
-    return withTokenLimit(run, { signal })
+    return withTokenLimit(config.model, run, { signal })
   }
 }
