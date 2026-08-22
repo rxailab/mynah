@@ -27,8 +27,12 @@ export MSYS2_ARG_CONV_EXCL='*'
 : "${VCN_CIDR:=10.0.0.0/16}"
 : "${SUBNET_CIDR:=10.0.1.0/24}"
 
-# A key that exists only for this box, so revoking it costs nothing else.
+# A key that exists only for this box, so revoking it costs nothing else. The
+# filename still says oci because that is where the key was first used; it is an
+# ordinary ed25519 key and works against any host you add it to.
 : "${SSH_KEY:=$HOME/.ssh/id_ed25519_oci}"
+# root on most providers, ubuntu on Oracle and on any image with a sudo user
+# baked in. Override per host rather than editing this.
 : "${SSH_USER:=ubuntu}"
 
 # --- where things live on the instance ---------------------------------------

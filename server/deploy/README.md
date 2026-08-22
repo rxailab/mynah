@@ -1,7 +1,6 @@
-# Deploying to Oracle Cloud
+# Deploying
 
-The server runs on one Always Free Ampere A1 instance in Oracle Cloud, and is
-published through a Cloudflare tunnel. Nothing listens on the public internet:
+The server runs on one small Ubuntu box, published through a Cloudflare tunnel. Nothing listens on the public internet:
 `cloudflared` dials out from the instance and Cloudflare sends requests back
 down that connection, so the only inbound port in the whole deployment is SSH.
 
@@ -27,6 +26,40 @@ Code and state are deliberately in different places. `deploy.sh` mirrors
 ordinary deploy.
 
 ## First run
+
+Two routes to a box. Both end at the same place — a plain Ubuntu host with Node
+24, `cloudflared` and a service account — and everything after that is identical.
+
+- **Any provider** — you create the box, `./adopt.sh` prepares it. Start here
+  unless you specifically want Oracle's free tier.
+- **Oracle Cloud** — `./oci-provision.sh` creates it and prepares it in one go,
+  on the Always Free allowance. Documented further down.
+
+Either way you need a Cloudflare account that already holds the `rxstudio.co.uk`
+zone.
+
+### Any provider
+
+Create a VPS: Ubuntu 24.04, 1 GB of memory is enough, London if your numbers are
+UK ones — the media path is Twilio to this box and back, so the region it sits in
+is audible. Add your public key at creation so there is no password to type.
+
+If the console offers a **user data** field, paste `cloud-init.yaml` into it and
+the box arrives ready. If it does not, or the box already exists, adopt it:
+
+```bash
+./adopt.sh 203.0.113.10                 # ubuntu@, Oracle and most images
+SSH_USER=root ./adopt.sh 203.0.113.10   # Hetzner, Vultr, Linode default
+```
+
+`adopt.sh` is the same base image said over ssh instead of at first boot. It is
+safe to re-run and checks before each step, so adopting a box that already had
+`cloud-init.yaml` does almost nothing. It also drops the Oracle identifiers from
+`.state`, which describe a machine that is no longer yours.
+
+Then carry on at **From here, both routes are the same** below.
+
+### Oracle Cloud
 
 You need the OCI CLI and a Cloudflare account that already holds the
 `rxstudio.co.uk` zone.
@@ -71,6 +104,8 @@ is pure JavaScript with no native dependencies — and the script drops
 `--shape-config` by itself, since only the `.Flex` shapes are sized at launch.
 1 GB of RAM is tight but workable for a process that spends its life waiting on
 sockets.
+
+### From here, both routes are the same
 
 **3. Ship the code.**
 
