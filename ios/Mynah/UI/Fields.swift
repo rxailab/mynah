@@ -7,6 +7,28 @@ func isE164(_ phone: String) -> Bool {
     phone.wholeMatch(of: /\+[1-9]\d{6,14}/) != nil
 }
 
+/// The same number, in the shape ``isE164`` accepts.
+///
+/// A number copied from Contacts, a chat, or this app's own welcome screen
+/// arrives as "+44 20 7836 4751". Rejecting that is technically correct and
+/// practically useless: the digits are right, the spaces are how humans write
+/// them down, and the person is left retyping a number they already had.
+///
+/// Everything a person might paste between the digits goes — spaces, brackets,
+/// hyphens, dots. Only a leading plus survives, because a plus anywhere else is
+/// not punctuation, it is a wrong number.
+func tidyPhone(_ phone: String) -> String {
+    var trimmed = phone.trimmingCharacters(in: .whitespacesAndNewlines)
+    // "(0)" is not punctuation around a digit, it is an instruction: the zero
+    // belongs to the national form and must go when the country code is there.
+    // Stripping the brackets and keeping the zero turns +44 (0)20 7836 4751
+    // into +4402078364751 — the right length, the wrong number, and no warning.
+    if trimmed.hasPrefix("+") { trimmed.replace("(0)", with: "") }
+    let plus = trimmed.hasPrefix("+")
+    let digits = trimmed.filter { $0.isNumber }
+    return plus ? "+" + digits : digits
+}
+
 func looksLikeEmail(_ text: String) -> Bool {
     text.wholeMatch(of: /[^@\s]+@[^@\s]+\.[^@\s]+/) != nil
 }

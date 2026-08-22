@@ -409,6 +409,28 @@
     <string name="action_saving">Saving…</string>
     <string name="settings_saved">Saved.</string>
 
+    <!-- The number screen, after the v2 review. Saving here can silently stop
+         the assistant being able to call at all, so the receipt says so and
+         offers the way out rather than leaving a row to go grey unnoticed. -->
+    <string name="support_your_name_bad">The assistant needs a name it can give — at least two characters.</string>
+    <string name="save_blocked_name">Add the name a booking should go under.</string>
+    <string name="save_blocked_phone">Add the number a hand-over should ring.</string>
+    <string name="save_blocked_phone_bad">The number needs to start with + and the country code.</string>
+    <string name="save_nothing_to_do">Nothing to save.</string>
+    <string name="saved_unverified_title">Saved. This number is not verified yet.</string>
+    <string name="saved_unverified_body">The assistant cannot place calls until it is. We ring you once and you key in six digits — about a minute.</string>
+    <string name="action_verify_now">Verify %1$s</string>
+    <string name="action_later">Later</string>
+    <string name="saved_all_done">Saved. Nothing else to do.</string>
+    <string name="callerid_release_title">Stop showing your number?</string>
+    <string name="callerid_release_body">The number goes back to Twilio and the assistant cannot place calls until you verify one again.</string>
+    <string name="callerid_release_confirm">Stop showing it</string>
+    <string name="callerid_released">Your number has been released. Verify one again before the assistant can call.</string>
+    <string name="leave_unsaved_title">Leave without saving?</string>
+    <string name="leave_unsaved_body">This screen holds the number a hand-over rings. Changes you have not saved will go.</string>
+    <string name="action_discard">Discard changes</string>
+    <string name="action_keep_editing">Keep editing</string>
+
     <string name="settings_calling">Calling</string>
     <string name="settings_who_sub">The name a booking goes under, and where transfers ring</string>
     <string name="settings_calls_this_month">%1$d this month</string>

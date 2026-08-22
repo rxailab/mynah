@@ -16,7 +16,12 @@ struct ProfileSetupScreen: View {
 
     @State private var name = ""
     @State private var phone = ""
-    @State private var seeded = false
+    /// Per field, so a profile that arrives late fills only what is still
+    /// untouched. One flag for the screen meant a slow connection could replace
+    /// what someone was in the middle of typing — on the first screen they ever
+    /// see, with the value they had just decided to change.
+    @State private var nameTouched = false
+    @State private var phoneTouched = false
     @State private var saving = false
     @State private var error: String?
 
@@ -46,7 +51,7 @@ struct ProfileSetupScreen: View {
                         support: t("support_your_name"),
                         content: .name,
                         autocapitalisation: .words,
-                        onChange: { error = nil }
+                        onChange: { nameTouched = true; error = nil }
                     )
 
                     Spacer().frame(height: 16)
@@ -58,7 +63,7 @@ struct ProfileSetupScreen: View {
                         mono: true,
                         keyboard: .phonePad,
                         content: .telephoneNumber,
-                        onChange: { error = nil }
+                        onChange: { phoneTouched = true; error = nil }
                     )
 
                     if let error {
@@ -103,13 +108,11 @@ struct ProfileSetupScreen: View {
     }
 
     private func seed() {
-        guard !seeded else { return }
-        let known = model.profile?.ownerName.nilIfBlank ?? model.account?.name?.nilIfBlank
-        let knownPhone = model.profile?.ownerPhone.nilIfBlank
-        guard known != nil || knownPhone != nil else { return }
-        name = known ?? ""
-        phone = knownPhone ?? ""
-        seeded = true
+        if !nameTouched, let known = model.profile?.ownerName.nilIfBlank
+            ?? model.account?.name?.nilIfBlank { name = known }
+        if !phoneTouched, let knownPhone = model.profile?.ownerPhone.nilIfBlank {
+            phone = knownPhone
+        }
     }
 
     private func save() {

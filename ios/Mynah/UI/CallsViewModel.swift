@@ -551,6 +551,7 @@ final class CallsViewModel: ObservableObject {
         onDone: @escaping () -> Void,
         onError: @escaping (String) -> Void
     ) {
+        let nameChanged = profile?.ownerName != ownerName.trimmed
         Task {
             do {
                 profile = try await api.saveProfile(
@@ -562,7 +563,10 @@ final class CallsViewModel: ObservableObject {
                 // from sign-in until the app is restarted — and the one it shows
                 // is not the one the assistant gives out on a call.
                 loadAccount()
-                refresh()
+                // Only the name reaches the feed. Refetching every call because
+                // a phone number changed redraws the whole list to arrive at the
+                // same pixels.
+                if nameChanged { refresh() }
                 onDone()
             } catch {
                 if expired(error) { return }
@@ -672,7 +676,7 @@ final class CallsViewModel: ObservableObject {
     /// Stop presenting their number. This also gives it back to Twilio rather
     /// than only forgetting it here: a number left on the account is one we could
     /// still put on a call, and one we said we were no longer holding.
-    func releaseCallerId() {
+    func releaseCallerId(onDone: @escaping () -> Void = {}) {
         guard settings.isSignedIn else { return }
         Task {
             do {
@@ -680,6 +684,7 @@ final class CallsViewModel: ObservableObject {
                 lastCallerId.verified = false
                 callerId = state(of: lastCallerId)
                 loadProfile()
+                onDone()
             } catch { report(error) }
         }
     }
