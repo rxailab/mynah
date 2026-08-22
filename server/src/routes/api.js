@@ -16,7 +16,7 @@ import {
 } from '../scheduled.js'
 import { clearVerifiedCallerId, getUser, saveUserProfile, userForSession } from '../accounts.js'
 import {
-  pendingAttempt, reconcileCallerId, releaseCallerId, requestVerification,
+  pendingAttempt, reconcileCallerId, releaseCallerId, requestVerification, verifyCooldownRemaining,
 } from '../twilio/callerId.js'
 import { balanceOf, refundCredit, spendCredit } from '../billing/credits.js'
 import { priceOf, stripeConfigured } from '../billing/stripe.js'
@@ -131,6 +131,20 @@ api.post('/caller-id/verify', wrap(async (req, res) => {
   if (!req.body?.force) {
     const pending = await pendingAttempt(getUser(req.user.id))
     if (pending) return answer(pending.code, true)
+  }
+
+  // Past this point a new call goes out, and each one dials a real phone and is
+  // billed. Resuming above is deliberately not rate limited — it places no call
+  // and hands back a code already on their screen, so making someone wait for it
+  // would be a penalty for reopening a screen.
+  const retryAfterSeconds = verifyCooldownRemaining(getUser(req.user.id))
+  if (retryAfterSeconds > 0) {
+    res.set('Retry-After', String(retryAfterSeconds))
+    return res.status(429).json({
+      retryAfterSeconds,
+      error: `We already rang you. Give it ${retryAfterSeconds} more second`
+        + `${retryAfterSeconds === 1 ? '' : 's'} before asking for another call.`,
+    })
   }
 
   try {

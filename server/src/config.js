@@ -60,6 +60,13 @@ export const config = {
   // Seconds Twilio waits before placing that call, so the code is on screen
   // first. Twilio's own default is 0.
   callerIdVerifyDelay: Number(process.env.CALLER_ID_VERIFY_DELAY || 12),
+  // How long before another verification call may be placed for the same
+  // account. Every one of them dials a real phone and is billed, and the screen
+  // has a "ring me again" button one tap from the code, so an impatient person
+  // and a slow network can put several calls out for one verification. Long
+  // enough to outlast a ring-out and a voicemail greeting; short enough that a
+  // call which genuinely never arrived does not strand anyone.
+  callerIdVerifyCooldown: Number(process.env.CALLER_ID_VERIFY_COOLDOWN || 90),
 
   // Google sign-in verifies the ID token against Google, so the server needs to
   // know which client it should have been issued for. Blank hides the option.

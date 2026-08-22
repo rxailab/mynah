@@ -39,6 +39,25 @@ const ATTEMPT_WINDOW_MS = 5 * 60_000
 const STILL_RINGING = new Set(['queued', 'initiated', 'ringing', 'in-progress'])
 
 /** @returns {{code: string, callSid: string}} the code to put on screen. */
+/**
+ * Seconds until another verification call may be placed for this account, or 0
+ * when one may go now.
+ *
+ * Reads the last call rather than the pending attempt on purpose: the attempt is
+ * cleared the moment its call resolves, and a cooldown has to remember exactly
+ * the call that has already finished.
+ */
+export function verifyCooldownRemaining(user, now = Date.now()) {
+  const cooldown = config.callerIdVerifyCooldown * 1000
+  if (cooldown <= 0) return 0
+  // Clamped at both ends. A stored time in the future — a clock corrected
+  // backwards, a restored backup — would otherwise lock the account out for as
+  // long as the skew, and the person cannot see or fix the thing keeping them
+  // out. The worst a bad timestamp may cost is one ordinary cooldown.
+  const since = Math.max(0, now - (user?.callerIdLastCallAt ?? 0))
+  return since >= cooldown ? 0 : Math.ceil((cooldown - since) / 1000)
+}
+
 export async function requestVerification(phone, userId, friendlyName) {
   const params = {
     phoneNumber: phone,

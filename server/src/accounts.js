@@ -52,6 +52,11 @@ for (const column of [
   'caller_id_pending_code TEXT',
   'caller_id_pending_sid TEXT',
   'caller_id_pending_at INTEGER',
+  // When a verification call was last placed for this account. Kept apart from
+  // the pending attempt above, which is cleared the moment the call resolves —
+  // a cooldown needs to remember a call that has already finished, which is
+  // exactly the one the attempt record no longer holds.
+  'caller_id_last_call_at INTEGER',
 ]) {
   try {
     db.exec(`ALTER TABLE users ADD COLUMN ${column}`)
@@ -96,6 +101,8 @@ const rowToUser = (row) =>
     // until then, and empty is what stops this account placing calls at all.
     verifiedCallerId: row.verified_caller_id || '',
     callerIdSid: row.caller_id_sid || '',
+    // Survives the attempt it belongs to; see the column comment.
+    callerIdLastCallAt: row.caller_id_last_call_at || 0,
     // Null unless a verification call is out there somewhere.
     callerIdAttempt: row.caller_id_pending_code
       ? {
@@ -259,10 +266,11 @@ export function saveUserProfile(userId, { name, ownerPhone }) {
 
 /** Remembers a verification Twilio has just been asked for. */
 export function saveCallerIdAttempt(userId, { code, callSid }) {
+  const now = Date.now()
   db.prepare(
     'UPDATE users SET caller_id_pending_code = ?, caller_id_pending_sid = ?, ' +
-    'caller_id_pending_at = ? WHERE id = ?',
-  ).run(String(code ?? ''), String(callSid ?? ''), Date.now(), userId)
+    'caller_id_pending_at = ?, caller_id_last_call_at = ? WHERE id = ?',
+  ).run(String(code ?? ''), String(callSid ?? ''), now, now, userId)
   return getUser(userId)
 }
 
