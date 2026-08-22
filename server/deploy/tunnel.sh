@@ -67,11 +67,42 @@ create)
           | sed -n 's/.*\"id\"[[:space:]]*:[[:space:]]*\"\\([^\"]*\\)\".*/\\1/p' | head -1"
   }
 
+  # Each live connection object carries a colo_name; a tunnel nobody is serving
+  # has none. Counted rather than parsed, because the only question here is
+  # whether some other machine is still answering for this name.
+  connection_count() {
+    ssh_ "cloudflared tunnel list --name '$TUNNEL_NAME' --output json 2>/dev/null \
+          | grep -o '\"colo_name\"' | wc -l" 2>/dev/null || echo 0
+  }
+
   TUNNEL_ID="$(read_id || true)"
   if [ -z "$TUNNEL_ID" ]; then
     say "creating tunnel '$TUNNEL_NAME'"
     ssh_ "cloudflared tunnel create '$TUNNEL_NAME'"
     TUNNEL_ID="$(read_id || true)"
+  elif ! ssh_ "test -f ~/.cloudflared/$TUNNEL_ID.json" 2>/dev/null; then
+    # The name existing is not the same as being able to serve it. Credentials
+    # are written once, by whichever machine ran `tunnel create`, and Cloudflare
+    # will not hand them out again — so a tunnel adopted from a dead box has an
+    # id, a DNS route, and no way to connect. Rebuilding is the only recovery.
+    #
+    # Unless something is still serving it. Connections mean another machine
+    # holds the credentials and is answering right now, and deleting the tunnel
+    # would take that site down to fix this one.
+    live="$(connection_count)"
+    live="${live//[^0-9]/}"
+    [ "${live:-0}" -eq 0 ] || die \
+      "Tunnel '$TUNNEL_NAME' has ${live} live connection(s) but its credentials are not on this box.
+   Another machine is serving it. Point that one at the new host, or use a different
+   TUNNEL_NAME here — do not delete a tunnel something is still answering for."
+
+    warn "tunnel '$TUNNEL_NAME' exists but its credentials are not on this box"
+    say "rebuilding it — nothing is connected, so nothing is being taken down"
+    ssh_ "cloudflared tunnel delete -f '$TUNNEL_NAME'"
+    ssh_ "cloudflared tunnel create '$TUNNEL_NAME'"
+    TUNNEL_ID="$(read_id || true)"
+    # The id changed, so the DNS record points at a tunnel that no longer exists.
+    warn "the tunnel id changed — run ./tunnel.sh dns to repoint $HOSTNAME_FQDN"
   else
     say "reusing tunnel '$TUNNEL_NAME'"
   fi

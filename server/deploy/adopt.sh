@@ -87,6 +87,23 @@ install -d -m 0755 -o "$DEPLOY_USER" -g "$DEPLOY_USER" /opt/voicecall
 install -d -m 0750 -o voicecall -g voicecall /var/lib/voicecall
 install -d -m 0700 -o root -g root /etc/voicecall
 
+# sshd takes the FIRST value it sees for a keyword, not the last, and reads
+# sshd_config.d in lexical order. Cloud images ship 50-cloud-init.conf with
+# PasswordAuthentication yes, which therefore beats anything written at 99 —
+# so hardening that only adds a file leaves password login quietly enabled.
+# Seen on a Vultr Ubuntu 26.04 box: sshd -T said yes with both files present.
+for f in /etc/ssh/sshd_config.d/*.conf; do
+  [ -e "$f" ] || continue
+  case "$f" in */99-hardening.conf) continue;; esac
+  if grep -qiE '^\s*PasswordAuthentication\s+yes' "$f"; then
+    if [ "$(grep -cvE '^\s*(#|$)' "$f")" -eq 1 ]; then
+      mv "$f" "$f.disabled"          # nothing else in it worth keeping
+    else
+      sed -i -E 's/^(\s*PasswordAuthentication\s+yes)/#\1/I' "$f"
+    fi
+  fi
+done
+
 cat > /etc/ssh/sshd_config.d/99-hardening.conf <<'HARDEN'
 PasswordAuthentication no
 KbdInteractiveAuthentication no
@@ -102,7 +119,10 @@ maxretry = 5
 bantime  = 1h
 JAIL
 
+sshd -t || { echo 'sshd config is invalid; not restarting' >&2; exit 1; }
 systemctl restart ssh 2>/dev/null || systemctl restart sshd
+sshd -T 2>/dev/null | grep -qi '^passwordauthentication no' \
+  || echo 'WARNING: password login is still enabled — check /etc/ssh/sshd_config.d' >&2
 systemctl enable --now fail2ban >/dev/null 2>&1 || true
 
 node --version
