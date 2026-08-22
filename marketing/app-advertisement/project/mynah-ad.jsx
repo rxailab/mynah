@@ -36,7 +36,13 @@ const PATHS = {
   arrowLeft: ['M19 12H5', 'm11 18-6-6 6-6'],
   mic: ['M12 4.2a2.5 2.5 0 0 1 2.5 2.5v4.8a2.5 2.5 0 0 1-5 0V6.7A2.5 2.5 0 0 1 12 4.2z', 'M6.6 11.2a5.4 5.4 0 0 0 10.8 0', 'M12 16.6v3.2'],
   check: ['M5 13l5 5L20 7'],
-  arrowUp: ['M12 19V5', 'm5 12 7-7 7 7']
+  arrowUp: ['M12 19V5', 'm5 12 7-7 7 7'],
+  loop: ['M20.5 12a8.5 8.5 0 1 1-2.49-6.01', 'M20.5 3.6v4.2h-4.2'],
+  phone: ['M6.6 3.4a1.6 1.6 0 0 1 2.13.43l1.7 2.43a1.6 1.6 0 0 1-.32 2.16l-1.27 1.05a12.7 12.7 0 0 0 4.36 4.36l1.05-1.27a1.6 1.6 0 0 1 2.16-.32l2.43 1.7a1.6 1.6 0 0 1 .43 2.13l-.85 1.32c-.74 1.15-2.2 1.6-3.5 1.08A19 19 0 0 1 5.45 8.1c-.5-1.3-.05-2.76 1.1-3.5z'],
+  bell: ['M18.2 16.4V11a6.2 6.2 0 0 0-12.4 0v5.4L4 19.2h16z', 'M9.9 19.2a2.1 2.1 0 0 0 4.2 0'],
+  msg: ['M20 14.8a2.2 2.2 0 0 1-2.2 2.2H8.6L4.8 20.2V6.6a2.2 2.2 0 0 1 2.2-2.2h10.8A2.2 2.2 0 0 1 20 6.6z'],
+  voicemail: ['M6.6 9.4a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2z', 'M17.4 9.4a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2z', 'M6.6 15.6h10.8'],
+  keypad: ['M5 5h.01', 'M12 5h.01', 'M19 5h.01', 'M5 12h.01', 'M12 12h.01', 'M19 12h.01', 'M5 19h.01', 'M12 19h.01', 'M19 19h.01']
 };
 const WIcon = ({ icon, size = 40, color = INK.text, sw = 2.2 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" style={{ display: 'block' }}>
@@ -59,12 +65,12 @@ const Waveform = ({ T, color = INK.lime, h = 26 }) => (
   </div>
 );
 
-function StatusBar({ dark }) {
+function StatusBar({ dark, padX = 56, h = 96, notchW = 226, notchH = 68, fs = 29 }) {
   const c = dark ? INK.onDark : INK.text;
   return (
-    <div style={{ height: 96, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 56px 0', flex: 'none', position: 'relative' }}>
-      <div style={{ font: `600 29px ${F}`, color: c, letterSpacing: '-0.3px' }}>9:41</div>
-      <div style={{ position: 'absolute', left: '50%', top: 22, transform: 'translateX(-50%)', width: 226, height: 68, borderRadius: 40, background: '#000' }} />
+    <div style={{ height: h, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: `8px ${padX}px 0`, flex: 'none', position: 'relative' }}>
+      <div style={{ font: `600 ${fs}px ${F}`, color: c, letterSpacing: '-0.3px' }}>9:41</div>
+      <div style={{ position: 'absolute', left: '50%', top: 22, transform: 'translateX(-50%)', width: notchW, height: notchH, borderRadius: 40, background: '#000' }} />
       <div style={{ display: 'flex', alignItems: 'center', gap: 13 }}>
         <svg width="34" height="22" viewBox="0 0 18 12">{[3,5.5,8,10.5].map((h, i) => <rect key={i} x={i * 4.6} y={12 - h} width="3" height={h} rx="1" fill={c} />)}</svg>
         <svg width="30" height="22" viewBox="0 0 16 12"><path d="M1 4.5a11 11 0 0 1 14 0M3.5 7.2a7 7 0 0 1 9 0M6 9.9a3.4 3.4 0 0 1 4 0" fill="none" stroke={c} strokeWidth="1.9" strokeLinecap="round"/><circle cx="8" cy="11" r="1.1" fill={c}/></svg>
@@ -78,38 +84,38 @@ function StatusBar({ dark }) {
 // 每句话下面跟一行中文译文 —— 与 CallScreen.swift 里 Transcript 的判断一致。
 const CALL = {
   '中文热线': {
-    name: '东方航空 客服热线', num: '+86 21 9552 0888', initial: '东', caller: '东方航空 客服',
-    typed: '帮我打给东方航空，把周四的 MU5108 改到周六同一时段，要靠走道，顺便问清改签差价',
+    name: '航空公司 客服热线', num: '+86 21 9500 0000', initial: '航', caller: '航空公司 客服',
+    typed: '帮我打给航空公司，把周四的航班改到周六同一时段，要靠走道，顺便问清改签差价',
     queueNote: '语音菜单已过，助理在替您排队',
-    headline: '已改签：周六 14:35 MU5122',
-    rows: [['新航班', '周六 14:35 · MU5122', false], ['座位', '32C 靠走道', false], ['改签差价', '¥180', false], ['话费与时长', '3分12秒 · ¥0.36', true]],
+    headline: '已改签：周六 14:35 起飞',
+    rows: [['新航班', '周六 14:35 · 直飞', false], ['座位', '32C 靠走道', false], ['改签差价', '¥180', false], ['话费与时长', '3分12秒 · ¥0.36', true]],
     noteAt: 4.7,
     lines: [
-      { dt: 0.5, kind: 'agent', h: 200, text: '您好，我要改签一张机票。订单号 8LK2QF，原航班 MU5108，周四 15:20 飞上海。' },
-      { dt: 2.9, kind: 'caller', h: 162, text: '查到了。周六同一时段有 MU5122，14:35 起飞，还有座位。' },
-      { dt: 4.7, kind: 'owner', h: 78, text: '常旅客卡号 CZ8871042' },
-      { dt: 5.5, kind: 'agent', h: 162, text: '请用常旅客卡号 CZ8871042。改签差价多少？还有靠走道的位子吗？' },
+      { dt: 0.5, kind: 'agent', h: 200, text: '您好，我要改签一张机票。订单号 8LK2QF，原航班周四 15:20 飞上海。' },
+      { dt: 2.9, kind: 'caller', h: 162, text: '查到了。周六同一时段有一班，14:35 起飞，还有座位。' },
+      { dt: 4.7, kind: 'owner', h: 78, text: '常旅客卡号 FF8871042' },
+      { dt: 5.5, kind: 'agent', h: 162, text: '请用常旅客卡号 FF8871042。改签差价多少？还有靠走道的位子吗？' },
       { dt: 7.6, kind: 'caller', h: 162, text: '差价 180 元。32C 靠走道，已经帮您留好了。' }
     ]
   },
   '英文热线': {
-    name: 'British Airways 客服热线', num: '+44 344 493 0787', initial: 'B', caller: 'BRITISH AIRWAYS',
-    typed: '帮我打给英国航空，把周四的 BA168 改到周六同一时段，要靠走道，顺便问清改签差价',
+    name: '航空公司 客服热线', num: '+44 20 7946 0958', initial: '航', caller: 'AIRLINE SUPPORT',
+    typed: '帮我打给航空公司，把周四的航班改到周六同一时段，要靠走道，顺便问清改签差价',
     queueNote: '英文语音菜单已过，助理在替您排队',
-    headline: '已改签：周六 14:35 BA172',
-    rows: [['新航班', '周六 14:35 · BA172', false], ['座位', '32C 靠走道', false], ['改签差价', '£62', false], ['话费与时长', '3分12秒 · £0.28', true]],
+    headline: '已改签：周六 14:35 起飞',
+    rows: [['新航班', '周六 14:35 · 直飞', false], ['座位', '32C 靠走道', false], ['改签差价', '£62', false], ['话费与时长', '3分12秒 · £0.28', true]],
     noteAt: 5.0,
     lines: [
       { dt: 0.5, kind: 'agent', h: 292,
-        text: 'Hello \u2014 I\u2019d like to change a booking. Reference 8LK2QF, flight BA168, Thursday 15:20 to London.',
-        sub: '您好，我要改签一张机票。订单号 8LK2QF，原航班 BA168，周四 15:20 飞伦敦。' },
+        text: 'Hello \u2014 I\u2019d like to change a booking. Reference 8LK2QF, Thursday 15:20 to London.',
+        sub: '您好，我要改签一张机票。订单号 8LK2QF，原航班周四 15:20 飞伦敦。' },
       { dt: 3.1, kind: 'caller', h: 220,
-        text: 'Found it. Saturday has BA172 at 14:35, and there are seats left.',
-        sub: '查到了。周六有 BA172，14:35 起飞，还有座位。' },
-      { dt: 5.0, kind: 'owner', h: 78, text: '常旅客卡号 BA8871042' },
+        text: 'Found it. Saturday has a 14:35 departure, and there are seats left.',
+        sub: '查到了。周六有一班 14:35 起飞，还有座位。' },
+      { dt: 5.0, kind: 'owner', h: 78, text: '常旅客卡号 FF8871042' },
       { dt: 5.8, kind: 'agent', h: 292,
-        text: 'Please use frequent-flyer BA8871042. What\u2019s the fare difference, and is an aisle seat free?',
-        sub: '请用常旅客卡号 BA8871042。改签差价多少？还有靠走道的位子吗？' },
+        text: 'Please use frequent-flyer FF8871042. What\u2019s the fare difference, and is an aisle seat free?',
+        sub: '请用常旅客卡号 FF8871042。改签差价多少？还有靠走道的位子吗？' },
       { dt: 8.0, kind: 'caller', h: 220,
         text: 'The difference is \u00a362. Seat 32C on the aisle is held for you.',
         sub: '差价 62 英镑。32C 靠走道，已经帮您留好了。' }
@@ -343,17 +349,219 @@ function Phone({ T, K, cfg }) {
 }
 
 // ── 开场与片尾 ──────────────────────────────────────────────────────────────
-function Hook({ T, K }) {
-  const a = MOTION.enter(T, 0.25, 0.7), aOut = MOTION.slide(T, 1.8, 2.2);
-  const b = MOTION.enter(T, 2.35, 0.7), bOut = MOTION.slide(T, K.ask - 0.35, K.ask + 0.1);
-  const drift = 1 + 0.015 * Math.min(T, 5);
+// 开场（0–3.5s）不再是漂浮的小卡片，而是留学生手机上真实发生的两件事：
+// 拨过去卡在英文语音菜单里绕回原点，或者锁屏上未接来电越堆越高。
+// 全屏、无边框 —— 观众先以为自己在看手机，7 秒后镜头拉开才发现那是 Mynah。
+// 三版由 Tweaks「开场版本」切换，标题文案与原片一字不改。
+const garble = (s, u) => [...s].map((ch, i) =>
+  ch === ' ' ? ' ' : (((i * 97 + 13) % 100) / 100 < u ? '?' : ch)).join('');
+
+const KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'];
+
+// 语音菜单：绕了三层，最后一句把你送回起点。
+const IVR_FULL = [
+  { at: -0.45, text: 'Thank you for calling the airline booking line.' },
+  { at: -0.12, text: 'Please listen carefully — our menu options have changed.' },
+  { at: 0.95, text: 'To change or cancel a flight, press 2.' },
+  { at: 2.00, text: 'Please enter your 6-digit booking reference.' },
+  { at: 2.42, text: 'Sorry — I didn’t catch that.', garbleAt: 2.60 },
+  { at: 2.86, text: 'Returning you to the main menu.', bad: true }
+];
+const IVR_SHORT = [
+  { at: -0.2, text: 'To change or cancel a flight, press 2.' },
+  { at: 0.62, text: 'Please enter your 6-digit booking reference.' },
+  { at: 0.98, text: 'Sorry — I didn’t catch that.', garbleAt: 1.12 },
+  { at: 1.34, text: 'Returning you to the main menu.', bad: true }
+];
+
+function IvrLine({ t, at, text, garbleAt, bad }) {
+  const e = Easing.easeOutCubic(clamp((t - at) / 0.42, 0, 1));
+  const g = garbleAt ? clamp((t - garbleAt) / 0.5, 0, 1) * 0.8 : 0;
+  return (
+    <div style={{
+      opacity: e, transform: `translateY(${(1 - e) * 26}px)`,
+      alignSelf: 'flex-start', maxWidth: 880, marginBottom: 20,
+      padding: '22px 30px', borderRadius: 34,
+      background: bad ? 'rgba(255,209,26,0.17)' : INK.onDarkWash,
+      display: 'flex', alignItems: 'center', gap: 18
+    }}>
+      {bad && <div style={{ flex: 'none', transform: `rotate(${(t - at) * 210}deg)` }}><WIcon icon="loop" size={34} color={INK.warning} /></div>}
+      <div style={{ font: `400 31px/1.42 ${MONO}`, color: bad ? INK.warning : INK.onDarkBody, letterSpacing: '0.2px' }}>
+        {g ? garble(text, g) : text}
+      </div>
+    </div>
+  );
+}
+
+// 版本 A：整屏就是那通打不通的电话。计时器从 47 分钟起走，键盘按下去也没用。
+function IvrScreen({ t, lines, pressAt, label = '自动语音', held0 = 2832 }) {
+  const held = held0 + Math.max(0, t) * 1;
+  const press = clamp((t - pressAt) / 0.26, 0, 1) * (1 - clamp((t - pressAt - 0.3) / 0.4, 0, 1));
+  const shown = lines.filter(l => t >= l.at - 0.02);
+  return (
+    <div style={{ position: 'absolute', inset: 0, background: INK.text, display: 'flex', flexDirection: 'column' }}>
+      <StatusBar dark={true} padX={74} h={124} notchW={300} notchH={88} fs={38} />
+      <div style={{ padding: '20px 74px 0', flex: 'none' }}>
+        <div style={{ font: `700 26px ${F}`, letterSpacing: '2.4px', color: INK.onDarkMute }}>通话中</div>
+        <div style={{ font: `900 62px ${F}`, color: INK.onDark, letterSpacing: '-1.2px', marginTop: 12 }}>航空公司 客服热线</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginTop: 16 }}>
+          <span style={{ font: `400 34px ${MONO}`, color: INK.onDarkMute }}>+44 20 7946 0958</span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '10px 22px', borderRadius: 999, background: 'rgba(255,209,26,0.17)' }}>
+            <PulsingDot T={t} color={INK.warning} size={14} />
+            <span style={{ font: `500 30px ${MONO}`, color: INK.warning }}>{fmt(held)}</span>
+          </span>
+        </div>
+      </div>
+      <div style={{ padding: '46px 74px 0', flex: 1, minHeight: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 18, flex: 'none', marginBottom: 26 }}>
+          <Waveform T={t} color={INK.rim} h={26} />
+          <span style={{ font: `700 24px ${F}`, letterSpacing: '2.2px', color: INK.onDarkMute }}>{label}</span>
+        </div>
+        {shown.map((l, i) => <IvrLine key={l.at} t={t} {...l} />)}
+      </div>
+      <div style={{ padding: '0 74px 74px', flex: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 34 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 136px)', gap: 26 }}>
+          {KEYS.map(k => {
+            const hot = k === '2' ? press : 0;
+            return (
+              <div key={k} style={{
+                height: 136, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                background: hot ? INK.lime : INK.onDarkWash, color: hot ? INK.onLime : INK.onDarkBody,
+                font: `400 50px ${F}`, transform: `scale(${1 - 0.06 * hot})`
+              }}>{k}</div>
+            );
+          })}
+        </div>
+        <div style={{ width: 136, height: 136, borderRadius: '50%', background: INK.negative, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <WIcon icon="phone" size={58} color={INK.onDark} sw={2} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 版本 B：锁屏。未接来电、语音留言、今天截止的提醒一条压一条，最后那通又打进来了。
+const NOTIFS = [
+  { at: 0.00, icon: 'phone', tint: INK.positive, app: '电话', title: '未接来电 · 2 次', body: '航空公司客服  +44 20 7946 0958', when: '09:12' },
+  { at: 0.00, icon: 'voicemail', tint: INK.lime, dark: true, app: '语音留言', title: '1 条未读 · 0:48', body: 'We tried to reach you about booking 8LK2QF…', when: '09:14' },
+  { at: 0.10, icon: 'bell', tint: INK.warning, dark: true, app: '提醒', title: '今天截止', body: '打给航空公司，把周四的航班改到周六', when: '今天' },
+  { at: 0.86, icon: 'phone', tint: INK.positive, app: '电话', title: '未接来电', body: '房东 Mr. Hughes  ·  押金还没退', when: '昨天' },
+  { at: 1.30, icon: 'msg', tint: 'rgba(255,255,255,0.18)', app: '信息', title: '银行', body: '您的银行卡已被锁定，请致电客服解锁', when: '昨天' },
+  { at: 1.74, icon: 'phone', tint: INK.positive, app: '电话', title: '未接来电', body: '学校学费办公室  ·  +44 20 7946 0102', when: '周一' },
+  { at: 2.16, icon: 'voicemail', tint: INK.lime, dark: true, app: '语音留言', title: '1 条未读 · 1:12', body: 'Please call us back regarding your account…', when: '周一' }
+];
+
+function Notif({ t, at, icon, tint, dark, app, title, body, when }) {
+  const e = Easing.easeOutCubic(clamp((t - at) / 0.44, 0, 1));
+  return (
+    <div style={{
+      opacity: e, transform: `translateY(${(1 - e) * 40}px) scale(${0.94 + 0.06 * e})`,
+      background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.13)',
+      borderRadius: 44, padding: '26px 30px', display: 'flex', alignItems: 'flex-start', gap: 24, marginBottom: 20
+    }}>
+      <div style={{ width: 76, height: 76, borderRadius: 22, background: tint, display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 'none' }}>
+        <WIcon icon={icon} size={40} color={dark ? INK.onLime : INK.onDark} />
+      </div>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 16 }}>
+          <span style={{ font: `700 25px ${F}`, letterSpacing: '1.8px', color: INK.onDarkMute }}>{app}</span>
+          <span style={{ font: `400 25px ${MONO}`, color: INK.onDarkMute, flex: 'none' }}>{when}</span>
+        </div>
+        <div style={{ font: `700 34px ${F}`, color: INK.onDark, marginTop: 10 }}>{title}</div>
+        <div style={{ font: `400 29px/1.4 ${F}`, color: INK.onDarkBody, marginTop: 6, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{body}</div>
+      </div>
+    </div>
+  );
+}
+
+function IncomingBanner({ t, at }) {
+  const e = Easing.easeOutBack(clamp((t - at) / 0.5, 0, 1));
+  const buzz = t > at ? Math.sin((t - at) * 46) * 4 * Math.max(0, 1 - (t - at) / 0.9) : 0;
+  return (
+    <div style={{
+      position: 'absolute', left: 56, right: 56, top: 150,
+      opacity: clamp((t - at) / 0.2, 0, 1), transform: `translate(${buzz}px, ${(1 - e) * -90}px)`,
+      background: INK.card, borderRadius: 52, padding: '30px 34px', boxShadow: '0 40px 90px rgba(0,0,0,0.45)',
+      display: 'flex', alignItems: 'center', gap: 26
+    }}>
+      <div style={{ width: 100, height: 100, borderRadius: '50%', background: INK.text, color: INK.onDark, font: `900 40px ${F}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 'none' }}>航</div>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ font: `700 24px ${F}`, letterSpacing: '2px', color: INK.mute }}>来电</div>
+        <div style={{ font: `800 40px ${F}`, color: INK.text, marginTop: 6, letterSpacing: '-0.5px' }}>航空公司客服</div>
+      </div>
+      <div style={{ display: 'flex', gap: 18, flex: 'none' }}>
+        <div style={{ width: 104, height: 104, borderRadius: '50%', background: INK.negative, display: 'flex', alignItems: 'center', justifyContent: 'center', transform: 'rotate(135deg)' }}>
+          <WIcon icon="phone" size={46} color={INK.onDark} />
+        </div>
+        <div style={{ width: 104, height: 104, borderRadius: '50%', background: INK.positive, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <WIcon icon="phone" size={46} color={INK.onDark} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LockScreen({ t, notifs, callAt, focus }) {
+  const shift = Math.max(0, notifs.filter(n => t >= n.at).length * 194 - 1080);
+  const fz = focus ? Easing.easeInOutCubic(clamp((t - focus) / 0.85, 0, 1)) : 0;
+  return (
+    <div style={{ position: 'absolute', inset: 0, background: INK.text, overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(120% 60% at 50% -8%, rgba(159,232,112,0.13), rgba(14,15,12,0) 70%)' }} />
+      <div style={{ position: 'absolute', inset: 0, transform: `scale(${1 + 0.07 * fz}) translateY(${-150 * fz}px)`, transformOrigin: '540px 900px', display: 'flex', flexDirection: 'column' }}>
+        <StatusBar dark={true} padX={74} h={124} notchW={300} notchH={88} fs={38} />
+        <div style={{ textAlign: 'center', flex: 'none', paddingTop: 6 }}>
+          <div style={{ font: `400 38px ${F}`, color: INK.onDarkBody }}>8月18日 星期二</div>
+          <div style={{ font: `600 196px ${F}`, color: INK.onDark, letterSpacing: '-8px', lineHeight: 1 }}>9:41</div>
+        </div>
+        <div style={{ padding: '54px 56px 0', flex: 1, minHeight: 0, overflow: 'hidden' }}>
+          <div style={{ transform: `translateY(${-shift}px)` }}>
+            {notifs.map((n, i) => <Notif key={i} t={t} {...n} />)}
+          </div>
+        </div>
+      </div>
+      {callAt !== undefined && t >= callAt - 0.1 && <IncomingBanner t={t} at={callAt} />}
+    </div>
+  );
+}
+
+function Noise({ T, variant = 'A' }) {
+  const out = Easing.easeInCubic ? Easing.easeInCubic(clamp((T - 3.05) / 0.42, 0, 1)) : Easing.easeInOutCubic(clamp((T - 3.05) / 0.42, 0, 1));
+  const push = Easing.easeInOutSine(clamp(T / 3.2, 0, 1));
+  const cut = 1.62;
+  return (
+    <div style={{
+      position: 'absolute', inset: 0, overflow: 'hidden', textAlign: 'left',
+      opacity: 1 - out * out, transform: `translateY(${-260 * out}px) scale(${(1 + 0.042 * push) * (1 - 0.05 * out)})`,
+      transformOrigin: '540px 960px'
+    }}>
+      {variant === 'B' && <LockScreen t={T} notifs={NOTIFS} callAt={2.5} />}
+      {variant === 'A' && <IvrScreen t={T} lines={IVR_FULL} pressAt={1.72} />}
+      {variant === 'C' && (
+        <div style={{ position: 'absolute', inset: 0 }}>
+          <Shot from={0} to={cut}>
+            <LockScreen t={T} notifs={NOTIFS.slice(0, 4)} focus={0.7} />
+          </Shot>
+          <Shot from={cut} to={99}>
+            <IvrScreen t={T - cut} lines={IVR_SHORT} pressAt={0.5} label="自动语音 · 第 3 层菜单" held0={502} />
+          </Shot>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Hook({ T, K, variant }) {
+  const a = MOTION.enter(T, 3.24, 0.7), aOut = MOTION.slide(T, 5.1, 5.5);
+  const b = MOTION.enter(T, 5.5, 0.7), bOut = MOTION.slide(T, K.ask - 0.35, K.ask + 0.1);
+  const drift = 1 + 0.015 * clamp(T - 3.24, 0, 3.5);
   return (
     <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: 100 }}>
+      <Noise T={T} variant={variant} />
       <div style={{ position: 'absolute', opacity: a.opacity * (1 - aOut), transform: `${a.transform} translateY(${-40 * aOut}px) scale(${drift})`, font: `900 104px/1.24 ${F}`, color: INK.text, letterSpacing: '-2px', maxWidth: 820 }}>
-        没人喜欢<br />打客服电话。
+        没人喜欢<br />打客服电话
       </div>
       <div style={{ position: 'absolute', opacity: b.opacity * (1 - bOut), transform: `${b.transform} scale(${drift})`, font: `900 104px/1.3 ${F}`, color: INK.text, letterSpacing: '-2px', maxWidth: 880 }}>
-        所以让 <span style={{ background: INK.lime, borderRadius: 22, padding: '4px 20px', whiteSpace: 'nowrap' }}>Mynah</span><br />替你打。
+        所以让 <span style={{ background: INK.lime, borderRadius: 22, padding: '4px 20px', whiteSpace: 'nowrap' }}>Mynah</span><br />替你打
       </div>
     </div>
   );
@@ -370,7 +578,7 @@ function EndCard({ T, K }) {
         ))}
       </div>
       <div style={{ ...MOTION.enter(T, K.end - 0.1), font: `900 128px ${F}`, color: INK.text, letterSpacing: '-4px', marginTop: 34 }}>Mynah</div>
-      <div style={{ ...MOTION.enter(T, K.end + 0.15), font: `500 42px ${F}`, color: INK.body, marginTop: 18 }}>打电话的事，交给助理</div>
+      <div style={{ ...MOTION.enter(T, K.end + 0.15), font: `500 42px ${F}`, color: INK.body, marginTop: 18 }}>打电话的事 交给助理</div>
       {/* 官方徽标原样使用，不改比例、不加圆角。App Store 108.85×40；Google Play 图内含官方留白，
           按 250/192 放大以让两枚黑底胶囊同高。 */}
       <div style={{ ...MOTION.enter(T, K.end + 0.45), display: 'flex', alignItems: 'center', gap: 28, marginTop: 68 }}>
@@ -399,19 +607,20 @@ function Piece({ tweaks }) {
   const cfg = CALL[mode];
   const bilingual = mode === '英文热线';
 
+  // 字幕不带标点：句读靠空格断，末尾不收句号 —— 竖版短片上更干净。
   const captions = [
-    { at: K.ask + 0.5, until: K.dial - 0.4, text: '一句话说清就行。' },
-    { at: K.dial + 0.3, until: K.dial + 1.5, text: bilingual ? '英文语音菜单，它自己过。' : '语音菜单，它自己过。' },
-    { at: K.dial + 1.6, until: K.call + 0.3, text: '排队等着的是它，不是你。' },
-    { at: K.call + 0.8, until: K.call + 4.4, text: bilingual ? '英文通话，中文字幕跟着走。' : '每句话，实时显示。' },
-    { at: K.call + 4.6, until: K.call + 7.2, text: '想补一句？随时插话。' },
-    { at: K.call + 7.4, until: K.done + 0.5, text: '细节都替你记下来。' },
-    { at: K.done + 0.9, until: K.done + 3.4, text: '办完了 —— 你一次都没拿起电话。' }
+    { at: K.ask + 0.5, until: K.dial - 0.4, text: '一句话说清就行' },
+    { at: K.dial + 0.3, until: K.dial + 1.5, text: bilingual ? '英文语音菜单 它自己过' : '语音菜单 它自己过' },
+    { at: K.dial + 1.6, until: K.call + 0.3, text: '排队等着的是它 不是你' },
+    { at: K.call + 0.8, until: K.call + 4.4, text: bilingual ? '英文通话 中文字幕跟着走' : '每句话 实时显示' },
+    { at: K.call + 4.6, until: K.call + 7.2, text: '想补一句 随时插话' },
+    { at: K.call + 7.4, until: K.done + 0.5, text: '细节都替你记下来' },
+    { at: K.done + 0.9, until: K.done + 3.4, text: '办完了 你一次都没拿起电话' }
   ];
 
   return (
     <div style={{ position: 'absolute', inset: 0, background: INK.canvas, fontFamily: F, overflow: 'hidden' }}>
-      <Shot from={0} to={K.ask + 0.5}><Hook T={T} K={K} /></Shot>
+      <Shot from={0} to={K.ask + 0.5}><Hook T={T} K={K} variant={tweaks.opening || 'A'} /></Shot>
       <div style={{ position: 'absolute', inset: 0, transform: `translateY(${ty}px) scale(${s})`, transformOrigin: '540px 740px' }}>
         <Phone T={T} K={K} cfg={cfg} />
       </div>
@@ -435,6 +644,8 @@ function MynahAd() {
       <TweaksPanel>
         <TweakSection label="动效" />
         <TweakToggle label="时间轴编辑器" value={t.motionEditor} onChange={v => setTweak('motionEditor', v)} />
+        <TweakSection label="开场" />
+        <TweakRadio label="开场版本" value={t.opening} options={['A', 'B', 'C']} onChange={v => setTweak('opening', v)} />
         <TweakSection label="内容" />
         <TweakRadio label="对方说什么语言" value={t.callLanguage} options={['中文热线', '英文热线']} onChange={v => setTweak('callLanguage', v)} />
       </TweaksPanel>
