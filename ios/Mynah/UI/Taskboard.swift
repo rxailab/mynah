@@ -265,6 +265,7 @@ struct TaskTabBar: View {
                     .foregroundStyle(composeEnabled ? Ink.onLime : Ink.mute)
                     .frame(width: 56, height: 56)
                     .background(composeEnabled ? Ink.lime : Ink.canvasSoft, in: Circle())
+                    .contentShape(Circle())
             }
             .buttonStyle(.plain)
             .frame(maxWidth: .infinity)
@@ -291,7 +292,15 @@ struct TaskTabBar: View {
                     .wise(Type.fine)
                     .foregroundStyle(on ? Ink.text : Ink.mute)
             }
-            .frame(maxWidth: .infinity)
+            // Both lines matter. maxWidth spreads the column across its share of
+            // the bar, but layout is not hit testing: without a content shape the
+            // only things that answer a finger are the glyph's own strokes and
+            // the letters — so a tap inside the house outline, in the gap above
+            // the label, or anywhere in the surrounding space lands on nothing.
+            // 44 is the smallest target iOS considers reachable; the column's
+            // natural height is about 39.
+            .frame(maxWidth: .infinity, minHeight: 44)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
     }
