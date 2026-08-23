@@ -44,7 +44,26 @@ export function relayTwiml(call) {
   return `<?xml version="1.0" encoding="UTF-8"?><Response><Connect><ConversationRelay ${relay}/></Connect></Response>`
 }
 
-/** Replaces whatever the call is doing with a bridge to the account holder. */
+/**
+ * Hands the live call to the account holder, and keeps a way back.
+ *
+ * `<Dial>` is not a terminal verb: when the dialled party's leg ends, control
+ * returns to the document. The first version of this had nothing after the
+ * `<Dial>`, so the account holder hanging up ended the whole call — and getting
+ * the assistant involved again meant redialling the business, queueing again,
+ * and reaching a different agent who had never heard any of it. On a bank line
+ * that is most of the call's cost paid twice.
+ *
+ * With an `action` URL, the same moment becomes a question we get to answer:
+ * the business is still on the line, so we hand the leg back to the relay and
+ * the assistant carries on. Nothing about the billing changes — no conference,
+ * no third participant, nobody idling.
+ *
+ * The stretch in between is recorded because the assistant is not there to hear
+ * it, and a call whose record has a hole in exactly the part where a person
+ * agreed something is worse than no record. See the resume route for what is
+ * and is not possible to do with it in time.
+ */
 export function transferTwiml(call, reason, language = 'en') {
   const { ownerPhone } = profileForCall(call)
   // No name here either — by this point the other party knows they are being
@@ -53,11 +72,27 @@ export function transferTwiml(call, reason, language = 'en') {
   const line = zh
     ? `我现在把本人接进来，请稍等。${reason ? ` ${reason}` : ''}`
     : `I'm bringing the account holder onto the line now. One moment.${reason ? ` ${reason}` : ''}`
+  const ref = encodeURIComponent(call.id)
   return (
     `<?xml version="1.0" encoding="UTF-8"?><Response>` +
     `<Say${zh ? ' language="zh-CN"' : ''}>${esc(line)}</Say>` +
-    `<Dial ${attrs({ callerId: config.twilioFromNumber, timeout: 30 })}>` +
-    `<Number>${esc(ownerPhone)}</Number>` +
+    `<Dial ${attrs({
+      callerId: config.twilioFromNumber,
+      timeout: 30,
+      action: `https://${config.publicHost}/twilio/after-handover?ref=${ref}`,
+      method: 'POST',
+      record: 'record-from-answer-dual',
+      recordingStatusCallback: `https://${config.publicHost}/twilio/handover-recording?ref=${ref}`,
+      recordingStatusCallbackEvent: 'completed',
+    })}>` +
+    // The child leg's SID arrives here, which is what lets the app end the
+    // owner's leg on a button press rather than making them hang up on a call
+    // they can hear is still running.
+    `<Number ${attrs({
+      statusCallback: `https://${config.publicHost}/twilio/owner-leg?ref=${ref}`,
+      statusCallbackEvent: 'answered',
+      statusCallbackMethod: 'POST',
+    })}>${esc(ownerPhone)}</Number>` +
     `</Dial>` +
     `</Response>`
   )

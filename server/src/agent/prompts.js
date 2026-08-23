@@ -186,6 +186,26 @@ const callbackNote = (call, ownerName) =>
       `has chosen to take that call themselves.\n`
     : ''
 
+/**
+ * What to tell the assistant when it comes back to a call it was taken off.
+ *
+ * The account holder was handed the line, spoke to them, and has given it back.
+ * The assistant has no memory of any of it — the relay was not connected — and
+ * the failure that matters is not that it lacks the information, it is that it
+ * does not know it lacks it. Left to itself it carries on from the last thing
+ * it remembers, which may be a plan the two of them have already replaced.
+ */
+const handoverNote = (call) => {
+  const seconds = call.handoverGapSeconds
+  if (!seconds) return ''
+  return `\n\n## You were off the line
+The account holder took this call over for about ${Math.round(seconds)} seconds and has just handed it back. You did not hear any of it, and neither did anything you can read.
+
+Whatever they discussed, you do not know it. Do not carry on as though your last exchange is still where things stand — it may have been settled, changed, or abandoned in the part you missed. Do not repeat a request they may have just made, do not re-confirm something they may have just agreed, and above all do not report an outcome you did not hear reached.
+
+Say something short that admits the gap without narrating the mechanics — "sorry, where had we got to?" is the whole thing. Then follow their answer. If the person you represent types you a line about what was agreed, that is authoritative and it replaces this note entirely.`
+}
+
 export function buildSystemPrompt(call) {
   const { ownerName } = profileForCall(call)
   const constraints = call.constraints?.length
@@ -202,7 +222,7 @@ This call is in English. If the other party clearly cannot continue in English, 
     BASE,
     languageNote,
     TEMPLATE_NOTES[call.template] || TEMPLATE_NOTES.custom,
-    `## Your task
+    handoverNote(call) + `## Your task
 You are calling ${call.businessName} on behalf of ${ownerName}.
 
 Goal: ${call.goal}

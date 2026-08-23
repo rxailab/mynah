@@ -163,6 +163,37 @@ api.post('/caller-id/verify', wrap(async (req, res) => {
   }
 }))
 
+/**
+ * Give the call back to the assistant.
+ *
+ * Ends the account holder's own leg, which is what the `action` on the transfer
+ * `<Dial>` is waiting for: Twilio then asks the server what to do next and the
+ * leg goes back to the relay, with the business never having left the line.
+ *
+ * Doing it this way rather than telling people to hang up is the whole point of
+ * keeping the leg's SID. Hanging up on a call you can hear is still running is
+ * not something anyone does willingly, and the ones who try it hang up the
+ * wrong leg.
+ */
+api.post('/calls/:id/hand-back', wrap(async (req, res) => {
+  const call = ownedCall(req, res)
+  if (!call) return
+  if (call.status !== CallStatus.TRANSFERRING) {
+    return res.status(409).json({ error: 'That call is not with you right now.' })
+  }
+  if (!call.ownerLegSid) {
+    return res.status(409).json({ error: 'Still connecting you — try again in a moment.' })
+  }
+  try {
+    await hangUp(call.ownerLegSid)
+    log.info('api', `call ${call.id}: handing back to the assistant`)
+    res.json({ ok: true })
+  } catch (err) {
+    log.error('api', 'could not hand the call back', err.message)
+    res.status(502).json({ error: `Could not hand the call back: ${err.message}` })
+  }
+}))
+
 /** Stop presenting their number, and give it back to Twilio. */
 api.delete('/caller-id', wrap(async (req, res) => {
   await releaseCallerId(req.user.callerIdSid)
