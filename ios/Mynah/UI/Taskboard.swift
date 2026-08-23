@@ -171,6 +171,73 @@ struct NeedsYouRow: View {
     }
 }
 
+
+/// The squash-and-stretch a tab icon does when it is tapped.
+///
+/// Six keyframes lifted from the design, with its timings and its curves: dip,
+/// launch, land flat, rebound, settle. The numbers are in the icon's own 24-unit
+/// grid — the same space the path data is written in — so ``lift`` is scaled to
+/// whatever size the icon is finally drawn at rather than being a point value
+/// that only looks right at one size.
+///
+/// The whole thing lasts 640ms and is anchored at the bottom, because a house
+/// that squashes around its middle looks like it is being crushed rather than
+/// landing on something.
+private struct TapBounce: Equatable {
+    var lift: CGFloat = 0
+    var wide: CGFloat = 1
+    var tall: CGFloat = 1
+}
+
+private extension View {
+    /// - Parameter size: the drawn size of the icon, used to put the design's
+    ///   24-grid offsets into points.
+    func tapBounce(trigger: Int, size: CGFloat) -> some View {
+        keyframeAnimator(initialValue: TapBounce(), trigger: trigger) { view, v in
+            view
+                .scaleEffect(x: v.wide, y: v.tall, anchor: .bottom)
+                .offset(y: v.lift * size / 24)
+        } keyframes: { _ in
+            // CSS puts the easing on the keyframe that starts a segment; SwiftUI
+            // puts it on the one that ends it. Every curve below is therefore
+            // shifted one keyframe later than in the source.
+            KeyframeTrack(\.lift) {
+                LinearKeyframe(0.9, duration: 0.102, timingCurve: .bezier(
+                    startControlPoint: UnitPoint(x: 0.55, y: 0), endControlPoint: UnitPoint(x: 0.7, y: 1)))
+                LinearKeyframe(-4.4, duration: 0.179, timingCurve: .bezier(
+                    startControlPoint: UnitPoint(x: 0.2, y: 0.7), endControlPoint: UnitPoint(x: 0.3, y: 1)))
+                LinearKeyframe(0.5, duration: 0.115, timingCurve: .bezier(
+                    startControlPoint: UnitPoint(x: 0.55, y: 0), endControlPoint: UnitPoint(x: 0.75, y: 1)))
+                LinearKeyframe(-1.1, duration: 0.115, timingCurve: .bezier(
+                    startControlPoint: UnitPoint(x: 0.2, y: 0.7), endControlPoint: UnitPoint(x: 0.3, y: 1)))
+                LinearKeyframe(0, duration: 0.128, timingCurve: .easeOut)
+            }
+            KeyframeTrack(\.wide) {
+                LinearKeyframe(1.13, duration: 0.102, timingCurve: .bezier(
+                    startControlPoint: UnitPoint(x: 0.55, y: 0), endControlPoint: UnitPoint(x: 0.7, y: 1)))
+                LinearKeyframe(0.93, duration: 0.179, timingCurve: .bezier(
+                    startControlPoint: UnitPoint(x: 0.2, y: 0.7), endControlPoint: UnitPoint(x: 0.3, y: 1)))
+                LinearKeyframe(1.11, duration: 0.115, timingCurve: .bezier(
+                    startControlPoint: UnitPoint(x: 0.55, y: 0), endControlPoint: UnitPoint(x: 0.75, y: 1)))
+                LinearKeyframe(0.99, duration: 0.115, timingCurve: .bezier(
+                    startControlPoint: UnitPoint(x: 0.2, y: 0.7), endControlPoint: UnitPoint(x: 0.3, y: 1)))
+                LinearKeyframe(1, duration: 0.128, timingCurve: .easeOut)
+            }
+            KeyframeTrack(\.tall) {
+                LinearKeyframe(0.84, duration: 0.102, timingCurve: .bezier(
+                    startControlPoint: UnitPoint(x: 0.55, y: 0), endControlPoint: UnitPoint(x: 0.7, y: 1)))
+                LinearKeyframe(1.08, duration: 0.179, timingCurve: .bezier(
+                    startControlPoint: UnitPoint(x: 0.2, y: 0.7), endControlPoint: UnitPoint(x: 0.3, y: 1)))
+                LinearKeyframe(0.87, duration: 0.115, timingCurve: .bezier(
+                    startControlPoint: UnitPoint(x: 0.55, y: 0), endControlPoint: UnitPoint(x: 0.75, y: 1)))
+                LinearKeyframe(1.02, duration: 0.115, timingCurve: .bezier(
+                    startControlPoint: UnitPoint(x: 0.2, y: 0.7), endControlPoint: UnitPoint(x: 0.3, y: 1)))
+                LinearKeyframe(1, duration: 0.128, timingCurve: .easeOut)
+            }
+        }
+    }
+}
+
 /// The bar at the foot: two destinations and, between them, the only way to
 /// start a call. The middle is a button rather than a third tab because it does
 /// not take you somewhere you can come back from — it begins something.
@@ -183,6 +250,11 @@ struct TaskTabBar: View {
     /// Greyed when the account cannot place calls yet; still tappable, because
     /// the route it opens is where the missing thing gets fixed.
     var composeEnabled = true
+
+    /// One counter per tab, bumped on every tap. Re-tapping the tab you are
+    /// already on replays it — the bounce answers the finger, it does not
+    /// report that the screen changed.
+    @State private var taps: [Tab: Int] = [:]
 
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
@@ -207,9 +279,14 @@ struct TaskTabBar: View {
 
     private func tab(_ which: Tab, _ icon: VectorIcon, _ label: String) -> some View {
         let on = selected == which
-        return Button { onSelect(which) } label: {
+        return Button {
+            taps[which, default: 0] += 1
+            onSelect(which)
+        } label: {
             VStack(spacing: 4) {
-                Icon(icon, size: 21).foregroundStyle(on ? Ink.text : Ink.mute)
+                Icon(icon, size: 21)
+                    .foregroundStyle(on ? Ink.text : Ink.mute)
+                    .tapBounce(trigger: taps[which] ?? 0, size: 21)
                 Text(label)
                     .wise(Type.fine)
                     .foregroundStyle(on ? Ink.text : Ink.mute)
