@@ -1,6 +1,6 @@
 import { config } from '../config.js'
 import { log } from '../log.js'
-import { client, tokenLimitName, withTokenLimit } from './client.js'
+import { client, withTokenLimit } from './client.js'
 
 const TOOLS = [
   {
@@ -143,12 +143,20 @@ const MAX_TOOL_ROUNDS = 6
  * fails the call proceeds normally, just without the head start.
  */
 export function warmUp() {
-  client.chat.completions
-    .create({
+  // Through withTokenLimit, not around it. This request exists to spend the
+  // ringing time on whatever the first request has to pay for, and on an
+  // unfamiliar model most of that cost is discovering which parameters it
+  // objects to. Calling the client directly meant a warm-up could hit a 400,
+  // log a shrug, and learn nothing — leaving the first turn of the actual
+  // conversation to hit the same 400, which on a live line is silence exactly
+  // where the greeting should be.
+  withTokenLimit(config.model, (limitParam, extras) =>
+    client.chat.completions.create({
       model: config.model,
       messages: [{ role: 'user', content: 'hi' }],
-      [tokenLimitName(config.model)]: 4,
-    })
+      [limitParam]: 4,
+      ...extras,
+    }))
     .then(() => log.info('brain', `${config.model} warmed up`))
     .catch((err) => log.warn('brain', `warm-up failed, carrying on: ${err.message}`))
 }
