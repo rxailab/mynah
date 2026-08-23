@@ -163,6 +163,25 @@ const SCENARIOS = [
         }),
       },
       {
+        id: 'handed-over-empty-handed',
+        summary: 'transferred without saving what it had already been told',
+        // Not gated on how far the call got: this is precisely the check that a
+        // gate would hide. The first run of this file passed every rule while
+        // record_result was never called once — the assistant had been told the
+        // cheque went out on the eighteenth, then transferred, and the fact
+        // existed only in the transcript. Whoever picks up the line was not on
+        // the call.
+        detect: (call) => {
+          const handed = call.status === 'transferring' || usedTool(call, /transfer/i)
+          if (!handed) return null
+          const heardSomething = reached(call, /sent out on the eighteenth|seventy eight pounds/i)
+          if (!heardSomething) return null
+          return Object.keys(call.results ?? {}).length > 0
+            ? null
+            : 'results are empty at the moment of transfer'
+        },
+      },
+      {
         id: 'lost-the-cheque-facts',
         summary: 'finished without the date or the amount among the results',
         detect: once(/non-working days/i, (call) => {
