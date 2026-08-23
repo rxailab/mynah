@@ -11,6 +11,27 @@
     <string name="nav_search">Search</string>
     <string name="nav_notifications">Notifications</string>
 
+    <!-- The taskboard home. The app opens on work in progress rather than on a
+         list of everything that has ever happened, so the sections are states,
+         not dates: what is happening now, what is waiting for you, what closed
+         today. -->
+    <string name="greeting_morning">Good morning</string>
+    <string name="greeting_afternoon">Good afternoon</string>
+    <string name="greeting_evening">Good evening</string>
+    <string name="board_running">In progress</string>
+    <string name="board_needs_you">Needs you</string>
+    <string name="board_done_today">Done today</string>
+    <string name="board_all_history">All history</string>
+    <string name="board_calls_left">%1$d left</string>
+    <string name="board_summary_running">%1$d in progress</string>
+    <string name="board_summary_needs_you">%1$d needs you</string>
+    <string name="board_summary_idle">Nothing running</string>
+    <string name="board_empty_title">Nothing on the go</string>
+    <string name="board_empty_body">Tap the button below and say what needs doing. The assistant dials, talks, and brings the answer back.</string>
+    <string name="tab_tasks">Tasks</string>
+    <string name="tab_history">History</string>
+    <string name="action_take_the_call">Ring me and put me in</string>
+
     <!-- Status of a call -->
     <string name="status_needs_you">Needs you</string>
     <string name="status_on_the_call">On the call</string>

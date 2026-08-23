@@ -158,7 +158,7 @@ struct VoiceCallApp: View {
                 onOpenDetail: { path.append(.detail($0)) },
                 onCompose: { path.append(.compose) },
                 onSearch: { path.append(.search) },
-                onNotifications: { path.append(.notifications) },
+                onUsage: { path.append(.usage) },
                 onSettings: { path.append(.settings) },
                 onHistory: { path.append(.history) }
             )
