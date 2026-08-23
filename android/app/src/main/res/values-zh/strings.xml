@@ -23,6 +23,10 @@
     <string name="board_summary_idle">暂无进行中的通话</string>
     <string name="board_empty_title">还没有进行中的事</string>
     <string name="board_empty_body">点下面的按钮，说一句要办的事。助理会拨号、沟通，并把结果带回来。</string>
+
+    <string name="board_example_booking">订位</string>
+    <string name="board_example_reschedule">改约</string>
+    <string name="board_example_parcel">查快递</string>
     <string name="tab_tasks">任务</string>
     <string name="tab_history">记录</string>
     <string name="action_take_the_call">回拨接管我</string>

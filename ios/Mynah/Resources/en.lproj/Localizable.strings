@@ -20,6 +20,9 @@
 "board_summary_idle" = "Nothing running";
 "board_empty_title" = "Nothing on the go";
 "board_empty_body" = "Tap the button below and say what needs doing. The assistant dials, talks, and brings the answer back.";
+"board_example_booking" = "Book a table";
+"board_example_reschedule" = "Move an appointment";
+"board_example_parcel" = "Chase a parcel";
 "tab_tasks" = "Tasks";
 "tab_history" = "History";
 "action_take_the_call" = "Ring me and put me in";

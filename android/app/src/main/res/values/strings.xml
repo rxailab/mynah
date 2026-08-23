@@ -28,6 +28,13 @@
     <string name="board_summary_idle">Nothing running</string>
     <string name="board_empty_title">Nothing on the go</string>
     <string name="board_empty_body">Tap the button below and say what needs doing. The assistant dials, talks, and brings the answer back.</string>
+
+    <!-- The three examples on the empty board. Tapping one prefills the
+         composer, so they are written as something a person would actually
+         say, not as feature names. -->
+    <string name="board_example_booking">Book a table</string>
+    <string name="board_example_reschedule">Move an appointment</string>
+    <string name="board_example_parcel">Chase a parcel</string>
     <string name="tab_tasks">Tasks</string>
     <string name="tab_history">History</string>
     <string name="action_take_the_call">Ring me and put me in</string>

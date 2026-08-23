@@ -20,6 +20,9 @@
 "board_summary_idle" = "暂无进行中的通话";
 "board_empty_title" = "还没有进行中的事";
 "board_empty_body" = "点下面的按钮，说一句要办的事。助理会拨号、沟通，并把结果带回来。";
+"board_example_booking" = "订位";
+"board_example_reschedule" = "改约";
+"board_example_parcel" = "查快递";
 "tab_tasks" = "任务";
 "tab_history" = "记录";
 "action_take_the_call" = "回拨接管我";

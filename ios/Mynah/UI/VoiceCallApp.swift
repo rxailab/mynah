@@ -157,6 +157,13 @@ struct VoiceCallApp: View {
                 onOpenCall: { path.append(.call($0)) },
                 onOpenDetail: { path.append(.detail($0)) },
                 onCompose: { path.append(.compose) },
+                // Same door as a template: the composer opens with the sentence
+                // already in it, so the first screen is a thing to edit rather
+                // than a blank box asking you to think of something.
+                onComposeWith: { seed in
+                    model.seedComposer(seed)
+                    path.append(.compose)
+                },
                 onSearch: { path.append(.search) },
                 onUsage: { path.append(.usage) },
                 onSettings: { path.append(.settings) },
