@@ -401,6 +401,7 @@
 
     <!-- History -->
     <string name="history_title">Call history</string>
+    <string name="history_this_month">%1$d placed this month</string>
     <string name="history_empty">Nothing yet</string>
     <string name="history_empty_body">Ask the assistant to call someone and it will show up here while it runs.</string>
     <string name="action_redial">Redial</string>

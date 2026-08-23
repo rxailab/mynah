@@ -21,6 +21,7 @@ struct HomeScreen: View {
     let onSearch: () -> Void
     let onUsage: () -> Void
     let onSettings: () -> Void
+    /// Switches to the History tab rather than pushing it — see ``RootTabs``.
     let onHistory: () -> Void
 
     /// Only ticks while something is actually on a call — the elapsed time on
@@ -66,16 +67,6 @@ struct HomeScreen: View {
             } else {
                 board
             }
-
-            // Offline is the one case where the middle button really is dead:
-            // composing starts by asking the server to read the request, so
-            // there is nothing behind it to reach.
-            TaskTabBar(
-                selected: .tasks,
-                onSelect: { if $0 == .history { onHistory() } },
-                onCompose: { if !offline { onCompose() } },
-                composeEnabled: !offline
-            )
         }
         .task {
             model.refresh(quiet: true)

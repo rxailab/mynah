@@ -17,7 +17,6 @@ enum Route: Hashable {
     case resetCode
     case newPassword
     case scheduleTime
-    case history
     case settings
     case confirm
     case verifyNumber
@@ -152,7 +151,7 @@ struct VoiceCallApp: View {
 
     private var main: some View {
         NavigationStack(path: $path) {
-            HomeScreen(
+            RootTabs(
                 model: model,
                 onOpenCall: { path.append(.call($0)) },
                 onOpenDetail: { path.append(.detail($0)) },
@@ -166,8 +165,7 @@ struct VoiceCallApp: View {
                 },
                 onSearch: { path.append(.search) },
                 onUsage: { path.append(.usage) },
-                onSettings: { path.append(.settings) },
-                onHistory: { path.append(.history) }
+                onSettings: { path.append(.settings) }
             )
             .edgeSwipeBack()
             .navigationDestination(for: Route.self) { route in
@@ -289,14 +287,6 @@ struct VoiceCallApp: View {
                 // and check steps left behind.
                 path = [.scheduled]
             })
-
-        case .history:
-            HistoryScreen(
-                model: model,
-                onBack: pop,
-                onSearch: { path.append(.search) },
-                onOpen: { id, live in path.append(live ? .call(id) : .detail(id)) }
-            )
 
         case .settings:
             SettingsScreen(

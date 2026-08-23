@@ -323,6 +323,7 @@
 "action_view_record" = "View record";
 "action_finish" = "Finish";
 "history_title" = "Call history";
+"history_this_month" = "%1$d placed this month";
 "history_empty" = "Nothing yet";
 "history_empty_body" = "Ask the assistant to call someone and it will show up here while it runs.";
 "action_redial" = "Redial";

@@ -363,6 +363,7 @@
     <string name="action_finish">完成</string>
 
     <string name="history_title">通话记录</string>
+    <string name="history_this_month">本月已拨 %1$d 通</string>
     <string name="history_empty">还没有通话</string>
     <string name="history_empty_body">请助理拨打电话后，进行中的通话将显示在此处。</string>
     <string name="action_redial">重拨</string>

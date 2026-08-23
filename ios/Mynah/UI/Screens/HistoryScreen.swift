@@ -34,7 +34,6 @@ private enum HistoryFilter: CaseIterable {
 /// feed answers that — but "how much of this have I been doing".
 struct HistoryScreen: View {
     @ObservedObject var model: CallsViewModel
-    let onBack: () -> Void
     let onSearch: () -> Void
     let onOpen: (String, Bool) -> Void
 
@@ -49,10 +48,20 @@ struct HistoryScreen: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            ScreenHeader(title: t("history_title"), onBack: onBack) {
-                IconCircle(icon: Wise.search, action: onSearch, iconSize: 19)
+            HStack(alignment: .top, spacing: 0) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(t("history_title")).wise(Type.title).foregroundStyle(Ink.text)
+                    Text(t("history_this_month", model.usage.used))
+                        .wise(Type.caption).foregroundStyle(Ink.mute)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                IconCircle(icon: Wise.search, action: onSearch, size: 36, iconSize: 18)
                     .accessibilityLabel(t("nav_search"))
             }
+            .padding(.leading, 20)
+            .padding(.trailing, 12)
+            .padding(.top, 12)
+            .padding(.bottom, 4)
 
             HStack(spacing: 8) {
                 ForEach(Array(HistoryFilter.allCases.enumerated()), id: \.offset) { _, option in
@@ -123,14 +132,16 @@ struct HistoryScreen: View {
             }
             .refreshable { model.refresh(quiet: true) }
         }
-        .navigationBarBackButtonHidden()
         .confirmsDeletingCall(
             Binding(get: { deleting != nil }, set: { if !$0 { deleting = nil } })
         ) {
             if let id = deleting { model.deleteCall(id) }
             deleting = nil
         }
-        .onAppear { model.refresh() }
+        .onAppear {
+            model.refresh()
+            model.loadUsage()
+        }
         .task(id: anyLive) {
             while anyLive, !Task.isCancelled {
                 now = Int(Date().timeIntervalSince1970 * 1000)
