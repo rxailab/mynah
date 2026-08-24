@@ -365,6 +365,7 @@
     <string name="confirm_step" translatable="false">2 / 2</string>
     <string name="field_who">Who to call</string>
     <string name="field_when">When</string>
+    <string name="confirm_add_when">Add a time</string>
     <string name="field_notes">Notes</string>
     <string name="field_call_language">Call language</string>
     <string name="field_auto_language">Chosen from the number</string>

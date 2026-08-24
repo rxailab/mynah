@@ -47,8 +47,13 @@ const BRIEF_TOOL = {
         when: {
           type: 'string',
           description:
-            'The date, time and party size as a short display string, e.g. "Friday 19:30 · 4 people". ' +
-            'Omit if they did not say when.',
+            'Only when the request is about a moment in time — a booking, an appointment, a ' +
+            'delivery slot. A short display string in the words they used: "Friday 19:30 · 4 people", ' +
+            '"Tuesday afternoon", "before the weekend". ' +
+            'Most calls have no time in them at all: chasing a parcel, querying a charge, asking ' +
+            'whether something is in stock. Leave this out entirely for those. An empty When on the ' +
+            'check screen is a question the caller has to read and dismiss, about a call that was ' +
+            'never about time.',
         },
         constraints: {
           type: 'array',

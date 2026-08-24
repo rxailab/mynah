@@ -291,6 +291,7 @@
 "confirm_step" = "2 / 2";
 "field_who" = "Who to call";
 "field_when" = "When";
+"confirm_add_when" = "Add a time";
 "field_notes" = "Notes";
 "field_call_language" = "Call language";
 "field_auto_language" = "Chosen from the number";

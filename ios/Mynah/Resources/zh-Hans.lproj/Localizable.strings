@@ -291,6 +291,7 @@
 "confirm_step" = "2 / 2";
 "field_who" = "打给谁";
 "field_when" = "时间";
+"confirm_add_when" = "加一个时间";
 "field_notes" = "备注";
 "field_call_language" = "通话语言";
 "field_auto_language" = "根据号码自动选择";

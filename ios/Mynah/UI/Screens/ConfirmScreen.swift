@@ -17,6 +17,10 @@ struct ConfirmScreen: View {
     /// overriding it.
     @State private var languageTouched = false
     @State private var pickingContact = false
+    /// Set once the caller asks for a When row on a call that did not come
+    /// with one. Sticky: a row that appeared because you tapped for it must
+    /// not disappear again when you clear what you typed.
+    @State private var whenAsked = false
 
     var body: some View {
         if let brief = model.parse.brief {
@@ -52,10 +56,27 @@ struct ConfirmScreen: View {
                                 bold: true,
                                 text: field(brief, { $0.businessName.orEmpty }, set: { $0.businessName = $1.nilIfBlank })
                             )
-                            LabelledBox(
-                                label: t("field_when"),
-                                text: field(brief, { $0.when.orEmpty }, set: { $0.when = $1.nilIfBlank })
-                            )
+                            // Only when the request had a time in it. Most calls
+                            // do not: chasing a parcel, querying a charge, asking
+                            // whether something is in stock. A permanent empty
+                            // When is a question about a call that was never
+                            // about time, and every row here is one more thing
+                            // to read before the number can be dialled.
+                            //
+                            // Once it is on screen it stays for the rest of the
+                            // check, so typing into it cannot make it vanish
+                            // mid-sentence.
+                            if brief.when?.isNotBlank == true || whenAsked {
+                                LabelledBox(
+                                    label: t("field_when"),
+                                    text: field(brief, { $0.when.orEmpty }, set: { $0.when = $1.nilIfBlank })
+                                )
+                            } else {
+                                LinkText(t("confirm_add_when"), style: Type.linkSmall, colour: Ink.deep) {
+                                    whenAsked = true
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            }
                             LabelledBox(
                                 label: t("field_notes"),
                                 text: field(brief) { $0.constraints.joined(separator: " · ") } set: { current, text in
