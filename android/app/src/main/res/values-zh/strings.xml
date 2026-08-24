@@ -364,6 +364,12 @@
 
     <string name="history_title">通话记录</string>
     <string name="history_this_month">本月已拨 %1$d 通</string>
+
+    <string name="siri_intent_title">打个电话</string>
+    <string name="siri_intent_description">说一句要办的事，助理会把这通电话准备好，等您核对。</string>
+    <string name="siri_errand_title">要办什么事</string>
+    <string name="siri_ask_errand">要让助理打电话办什么事？</string>
+    <string name="siri_handing_over">已为您打开，请核对。</string>
     <string name="history_empty">还没有通话</string>
     <string name="history_empty_body">请助理拨打电话后，进行中的通话将显示在此处。</string>
     <string name="action_redial">重拨</string>

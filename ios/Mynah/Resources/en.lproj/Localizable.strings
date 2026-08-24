@@ -324,6 +324,11 @@
 "action_finish" = "Finish";
 "history_title" = "Call history";
 "history_this_month" = "%1$d placed this month";
+"siri_intent_title" = "Make a call";
+"siri_intent_description" = "Say what needs doing and the assistant will get the call ready for you to check.";
+"siri_errand_title" = "What needs doing";
+"siri_ask_errand" = "What should the assistant call about?";
+"siri_handing_over" = "Opening it for you to check.";
 "history_empty" = "Nothing yet";
 "history_empty_body" = "Ask the assistant to call someone and it will show up here while it runs.";
 "action_redial" = "Redial";

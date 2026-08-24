@@ -98,6 +98,16 @@ struct VoiceCallApp: View {
             NavigationStack(path: $signInPath) {
                 SignInScreen(model: model) { signInPath.append(.email) }
                     .edgeSwipeBack()
+            // A phrase said to Siri lands here. Claimed on appear and again
+            // when the app comes back to the front: the first covers a cold
+            // launch, the second covers the app having been in the background,
+            // where onAppear does not fire again.
+            .onAppear { claimSiriErrand() }
+            .onReceive(
+                NotificationCenter.default.publisher(
+                    for: UIApplication.didBecomeActiveNotification
+                )
+            ) { _ in claimSiriErrand() }
                     .navigationDestination(for: SignInRoute.self) { route in
                         signInScreen(route)
                     }
@@ -147,6 +157,21 @@ struct VoiceCallApp: View {
                 onDone: {}
             )
         }
+    }
+
+    /// Takes whatever Siri parked and opens the composer on it.
+    ///
+    /// Straight to the composer rather than dialling: the sentence still has to
+    /// go through parsing and the check step, which is where a misheard number
+    /// or a wrong day gets caught. Siri saves the typing, not the checking.
+    private func claimSiriErrand() {
+        guard let errand = PendingSiriCall.shared.claim() else { return }
+        guard model.settings.isSignedIn else { return }
+        model.seedComposer(errand)
+        // Replace rather than append: arriving from Siri should not leave a
+        // stack of screens behind the composer for someone who was never in
+        // the app to begin with.
+        path = [.compose]
     }
 
     private var main: some View {

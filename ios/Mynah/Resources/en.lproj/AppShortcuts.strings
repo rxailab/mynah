@@ -1,0 +1,5 @@
+/* Siri phrases. The keys are the literals in Siri/PlaceCallIntent.swift; see
+   the Chinese file for why the phrases live here rather than in the source. */
+"Make a call with ${applicationName}" = "Make a call with ${applicationName}";
+"Call someone with ${applicationName}" = "Call someone with ${applicationName}";
+"Ask ${applicationName} to call" = "Ask ${applicationName} to call";

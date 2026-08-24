@@ -402,6 +402,15 @@
     <!-- History -->
     <string name="history_title">Call history</string>
     <string name="history_this_month">%1$d placed this month</string>
+
+    <!-- Siri. The phrase has to contain the app name (Apple requires it), and
+         the intent deliberately hands over to the app rather than dialling:
+         nothing is placed until the check step has been seen. -->
+    <string name="siri_intent_title">Make a call</string>
+    <string name="siri_intent_description">Say what needs doing and the assistant will get the call ready for you to check.</string>
+    <string name="siri_errand_title">What needs doing</string>
+    <string name="siri_ask_errand">What should the assistant call about?</string>
+    <string name="siri_handing_over">Opening it for you to check.</string>
     <string name="history_empty">Nothing yet</string>
     <string name="history_empty_body">Ask the assistant to call someone and it will show up here while it runs.</string>
     <string name="action_redial">Redial</string>
