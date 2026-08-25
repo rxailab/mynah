@@ -1,12 +1,14 @@
-/* Siri phrases, one language per file.
+/* Siri phrases. The keys are the English literals in Siri/PlaceCallIntent.swift;
+   these are what someone actually says. Written here rather than in the source
+   because Xcode's phrase extractor strips non-ASCII out of a literal.
 
-   The keys are the English literals in Siri/PlaceCallIntent.swift; these are
-   what someone actually says. Written here rather than in the source because
-   Xcode's extractor strips non-ASCII out of a phrase literal — see the note
-   on MynahShortcuts.
-
-   ${applicationName} is substituted by the system from the bundle name, and
-   Apple requires it in every phrase. */
+   Every phrase is Chinese in this file and the English file carries both
+   languages: the .lproj the system reads follows the device language, not
+   Siri's, so a Chinese phrase that exists only here is unreachable on a phone
+   set to English. */
 "Make a call with ${applicationName}" = "用 ${applicationName} 打电话";
 "Call someone with ${applicationName}" = "让 ${applicationName} 打个电话";
 "Ask ${applicationName} to call" = "${applicationName} 帮我打电话";
+"${applicationName} phone call" = "用 ${applicationName} 拨个电话";
+"${applicationName} ring someone" = "${applicationName} 打个电话给别人";
+"${applicationName} dial for me" = "${applicationName} 替我拨号";

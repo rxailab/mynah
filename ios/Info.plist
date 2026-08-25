@@ -22,6 +22,28 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<!-- Both languages ship in the app. Settings lets the interface language be
 	     picked independently of the phone's, so neither can be stripped. -->
+	<!-- What Siri will accept as this app's name when it is spoken.
+
+	     The shortcut phrases contain the app name, and Chinese Siri has to pick
+	     "Mynah" out of a Chinese sentence — an English word in the middle of
+	     Mandarin is exactly where speech recognition drops it, and a phrase whose
+	     app name was not heard is a phrase that did not match. These give it
+	     names it can hear. The home screen still says Mynah. -->
+	<key>INAlternativeAppNames</key>
+	<array>
+		<dict>
+			<key>INAlternativeAppName</key>
+			<string>鹩哥</string>
+		</dict>
+		<dict>
+			<key>INAlternativeAppName</key>
+			<string>麦纳</string>
+		</dict>
+		<dict>
+			<key>INAlternativeAppName</key>
+			<string>米娜</string>
+		</dict>
+	</array>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>en</string>

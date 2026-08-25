@@ -91,6 +91,16 @@ struct MynahShortcuts: AppShortcutsProvider {
                 "Make a call with \(.applicationName)",
                 "Call someone with \(.applicationName)",
                 "Ask \(.applicationName) to call",
+                // Three more slots, carrying the Chinese phrases in every
+                // localisation rather than only in zh-Hans. Which .lproj the
+                // system reads is decided by the device's language, not by
+                // Siri's: a phone set to English with Siri set to Chinese gets
+                // the English file, and the Chinese phrases are then nowhere —
+                // Siri hears the app name, finds no matching action, and says
+                // the app does not support it. Which is what happened.
+                "\(.applicationName) phone call",
+                "\(.applicationName) ring someone",
+                "\(.applicationName) dial for me",
             ],
             shortTitle: "Make a call",
             systemImageName: "phone.arrow.up.right"

@@ -1,5 +1,12 @@
-/* Siri phrases. The keys are the literals in Siri/PlaceCallIntent.swift; see
-   the Chinese file for why the phrases live here rather than in the source. */
+/* Siri phrases, English first and then the Chinese ones.
+
+   The Chinese phrases are here as well as in zh-Hans because the system picks
+   the .lproj by device language while Siri matches in its own: an English phone
+   with Chinese Siri reads this file, and without these three it has no Chinese
+   phrase to match at all. */
 "Make a call with ${applicationName}" = "Make a call with ${applicationName}";
 "Call someone with ${applicationName}" = "Call someone with ${applicationName}";
 "Ask ${applicationName} to call" = "Ask ${applicationName} to call";
+"${applicationName} phone call" = "用 ${applicationName} 打电话";
+"${applicationName} ring someone" = "让 ${applicationName} 打个电话";
+"${applicationName} dial for me" = "${applicationName} 帮我打电话";
