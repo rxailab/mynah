@@ -1,14 +1,17 @@
-/* Siri phrases. The keys are the English literals in Siri/PlaceCallIntent.swift;
-   these are what someone actually says. Written here rather than in the source
-   because Xcode's phrase extractor strips non-ASCII out of a literal.
+/* Siri 短语。键是 Siri/PlaceCallIntent.swift 里的英文字面量，值才是真正说出口
+   的话——写在这里而不是源码里，因为 Xcode 的短语提取会把字面量里的非 ASCII
+   字符剥掉。
 
-   Every phrase is Chinese in this file and the English file carries both
-   languages: the .lproj the system reads follows the device language, not
-   Siri's, so a Chinese phrase that exists only here is unreachable on a phone
-   set to English. */
-"Make a call with ${applicationName}" = "用 ${applicationName} 打电话";
-"Call someone with ${applicationName}" = "让 ${applicationName} 打个电话";
-"Ask ${applicationName} to call" = "${applicationName} 帮我打电话";
-"${applicationName} phone call" = "用 ${applicationName} 拨个电话";
-"${applicationName} ring someone" = "${applicationName} 打个电话给别人";
-"${applicationName} dial for me" = "${applicationName} 替我拨号";
+   刻意不含「打电话」。那三个字会把整句话送进 Siri 自己的通话域，于是问题变成
+   「这个 app 是不是电话 app」，答案是否，Siri 就回「还不支持」——它根本没看
+   这些短语。这里问的是「办件事」，也更贴近实情：要开始的是一件待核对的事，
+   不是一通要拨的电话。
+
+   两份 .strings 都填满六个槽位：系统按设备语言挑 .lproj，Siri 按自己的语言
+   匹配，只存在于这里的中文短语在英文手机上够不着。 */
+"Start an errand with ${applicationName}" = "用 ${applicationName} 办件事";
+"New errand with ${applicationName}" = "让 ${applicationName} 跑一趟";
+"Ask ${applicationName} to sort something out" = "${applicationName} 帮我办件事";
+"${applicationName} errand" = "${applicationName} 办事";
+"${applicationName} handle something" = "让 ${applicationName} 处理一件事";
+"${applicationName} do something for me" = "${applicationName} 替我办事";

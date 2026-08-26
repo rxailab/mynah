@@ -1,12 +1,17 @@
 /* Siri phrases, English first and then the Chinese ones.
 
-   The Chinese phrases are here as well as in zh-Hans because the system picks
-   the .lproj by device language while Siri matches in its own: an English phone
-   with Chinese Siri reads this file, and without these three it has no Chinese
+   Nothing here says "call". Those words route into the telephony domain Siri
+   already owns, where the app is judged on whether it is a phone app — it is
+   not, so Siri answers that the action is unsupported without ever consulting
+   these phrases.
+
+   The Chinese phrases sit in this file as well as in zh-Hans because the system
+   picks the .lproj by device language while Siri matches in its own: an English
+   phone with Chinese Siri reads this file, and without them it has no Chinese
    phrase to match at all. */
-"Make a call with ${applicationName}" = "Make a call with ${applicationName}";
-"Call someone with ${applicationName}" = "Call someone with ${applicationName}";
-"Ask ${applicationName} to call" = "Ask ${applicationName} to call";
-"${applicationName} phone call" = "用 ${applicationName} 打电话";
-"${applicationName} ring someone" = "让 ${applicationName} 打个电话";
-"${applicationName} dial for me" = "${applicationName} 帮我打电话";
+"Start an errand with ${applicationName}" = "Start an errand with ${applicationName}";
+"New errand with ${applicationName}" = "New errand with ${applicationName}";
+"Ask ${applicationName} to sort something out" = "Ask ${applicationName} to sort something out";
+"${applicationName} errand" = "用 ${applicationName} 办件事";
+"${applicationName} handle something" = "让 ${applicationName} 跑一趟";
+"${applicationName} do something for me" = "${applicationName} 帮我办件事";

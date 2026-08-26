@@ -75,6 +75,17 @@ enum PendingSiriCall {
 /// Apple requires the app name in every phrase and substitutes it from the
 /// bundle, so `applicationName` is what appears rather than a name written here.
 ///
+/// None of them say "call", and that is the point. "Make a call with Mynah" and
+/// its Chinese twin "用 Mynah 打电话" both land in the telephony domain Siri
+/// already owns — the one behind "call Mum on WhatsApp" — where the question
+/// becomes whether this app is a phone app, which it is not. Siri hears the
+/// name, decides the app cannot do the thing, and answers that it is not
+/// supported yet. It was never looking at these phrases.
+///
+/// So the vocabulary here avoids call, dial, phone and 打电话 entirely, and
+/// asks for an errand instead. That is closer to the truth anyway: what is
+/// being started is a job to check, not a call to place.
+///
 /// English only in this file, and deliberately. Xcode's phrase extractor drops
 /// non-ASCII from a literal: three Chinese phrases written here came out of the
 /// build as `"\n ${applicationName} \n"` — the app name and the whitespace
@@ -88,21 +99,19 @@ struct MynahShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: PlaceCallIntent(),
             phrases: [
-                "Make a call with \(.applicationName)",
-                "Call someone with \(.applicationName)",
-                "Ask \(.applicationName) to call",
-                // Three more slots, carrying the Chinese phrases in every
-                // localisation rather than only in zh-Hans. Which .lproj the
-                // system reads is decided by the device's language, not by
-                // Siri's: a phone set to English with Siri set to Chinese gets
-                // the English file, and the Chinese phrases are then nowhere —
-                // Siri hears the app name, finds no matching action, and says
-                // the app does not support it. Which is what happened.
-                "\(.applicationName) phone call",
-                "\(.applicationName) ring someone",
-                "\(.applicationName) dial for me",
+                "Start an errand with \(.applicationName)",
+                "New errand with \(.applicationName)",
+                "Ask \(.applicationName) to sort something out",
+                // Three more slots carrying the Chinese phrases. Both .strings
+                // files fill all six, because the system picks the .lproj by
+                // device language while Siri matches in its own: a phone set to
+                // English with Siri set to Chinese reads en.lproj, and a Chinese
+                // phrase that exists only in zh-Hans is unreachable there.
+                "\(.applicationName) errand",
+                "\(.applicationName) handle something",
+                "\(.applicationName) do something for me",
             ],
-            shortTitle: "Make a call",
+            shortTitle: "Start an errand",
             systemImageName: "phone.arrow.up.right"
         )
     }
