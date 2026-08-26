@@ -2,16 +2,14 @@
    的话——写在这里而不是源码里，因为 Xcode 的短语提取会把字面量里的非 ASCII
    字符剥掉。
 
-   刻意不含「打电话」。那三个字会把整句话送进 Siri 自己的通话域，于是问题变成
-   「这个 app 是不是电话 app」，答案是否，Siri 就回「还不支持」——它根本没看
-   这些短语。这里问的是「办件事」，也更贴近实情：要开始的是一件待核对的事，
-   不是一通要拨的电话。
+   「打电话」和「办件事」两套都留着：前者是人真正会说的，后者是撞不上 Siri
+   通话域的稳妥说法。
 
    两份 .strings 都填满六个槽位：系统按设备语言挑 .lproj，Siri 按自己的语言
    匹配，只存在于这里的中文短语在英文手机上够不着。 */
 "Start an errand with ${applicationName}" = "用 ${applicationName} 办件事";
 "New errand with ${applicationName}" = "让 ${applicationName} 跑一趟";
 "Ask ${applicationName} to sort something out" = "${applicationName} 帮我办件事";
-"${applicationName} errand" = "${applicationName} 办事";
-"${applicationName} handle something" = "让 ${applicationName} 处理一件事";
-"${applicationName} do something for me" = "${applicationName} 替我办事";
+"${applicationName} errand" = "用 ${applicationName} 打电话";
+"${applicationName} handle something" = "让 ${applicationName} 打个电话";
+"${applicationName} do something for me" = "${applicationName} 帮我打电话";

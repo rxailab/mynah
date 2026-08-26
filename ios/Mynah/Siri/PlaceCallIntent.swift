@@ -1,7 +1,7 @@
 import AppIntents
 import SwiftUI
 
-/// "Hey Siri, make a call with Mynah — book a table for four on Friday."
+/// "Hey Siri, start an errand with Mynah" — and the composer is open, waiting.
 ///
 /// The intent deliberately does not place the call. It carries the sentence
 /// into the app and stops at the check step, which is the same rule the rest of
@@ -26,11 +26,22 @@ struct PlaceCallIntent: AppIntent {
     /// than the app does is worse than not confirming it at all.
     static var openAppWhenRun = true
 
-    @Parameter(
-        title: "What needs doing",
-        requestValueDialog: "What should the assistant call about?"
-    )
-    var errand: String
+    /// Optional, and that is the whole reason Siri works at all.
+    ///
+    /// It was required, with a `requestValueDialog` to ask for it. Tapping the
+    /// shortcut was fine — Shortcuts puts up a text field — but by voice Siri
+    /// would only ever answer that the app does not support this yet. A spoken
+    /// run has to resolve every required parameter before it can start, and
+    /// this intent opens the app the moment it starts, so there is no point at
+    /// which Siri can hold the line and ask. An intent it cannot complete is
+    /// one it declines to offer.
+    ///
+    /// Nothing is lost by letting it be empty. The errand was never going to be
+    /// dialled off the back of one spoken sentence: it lands on the check
+    /// screen either way, and an empty one opens the composer with the keyboard
+    /// up, which is where the sentence was going to be typed anyway.
+    @Parameter(title: "What needs doing")
+    var errand: String?
 
     @MainActor
     func perform() async throws -> some IntentResult {
@@ -53,15 +64,22 @@ enum PendingSiriCall {
     struct Store {
         private let key = "pendingSiriErrand"
 
-        func hand(over errand: String) {
-            let trimmed = errand.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !trimmed.isEmpty else { return }
+        /// Always writes, even for an empty errand. The mark is what tells the
+        /// app it was started by a phrase rather than by a tap on the icon, and
+        /// that is worth knowing on its own: someone who said "start an errand"
+        /// should land on the composer with the keyboard up, not on the board
+        /// wondering whether Siri heard them. The text, when there is any, is a
+        /// head start on top of that.
+        func hand(over errand: String?) {
+            let trimmed = errand?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
             UserDefaults.standard.set(trimmed, forKey: key)
         }
 
         /// Reads and clears in one step: a phrase is acted on once. Without the
         /// clear, every later launch would reopen the composer with a sentence
-        /// the person said days ago.
+        /// the person said days ago. An empty string is a real answer here —
+        /// "they came from Siri and said nothing more" — so only a missing key
+        /// means no.
         func claim() -> String? {
             guard let errand = UserDefaults.standard.string(forKey: key) else { return nil }
             UserDefaults.standard.removeObject(forKey: key)
@@ -75,16 +93,13 @@ enum PendingSiriCall {
 /// Apple requires the app name in every phrase and substitutes it from the
 /// bundle, so `applicationName` is what appears rather than a name written here.
 ///
-/// None of them say "call", and that is the point. "Make a call with Mynah" and
-/// its Chinese twin "用 Mynah 打电话" both land in the telephony domain Siri
-/// already owns — the one behind "call Mum on WhatsApp" — where the question
-/// becomes whether this app is a phone app, which it is not. Siri hears the
-/// name, decides the app cannot do the thing, and answers that it is not
-/// supported yet. It was never looking at these phrases.
-///
-/// So the vocabulary here avoids call, dial, phone and 打电话 entirely, and
-/// asks for an errand instead. That is closer to the truth anyway: what is
-/// being started is a job to check, not a call to place.
+/// Two vocabularies on purpose. "Call" is what people reach for, and "errand"
+/// is what this actually is — but the reason both are here is that a phrase
+/// built on "call" may collide with the telephony domain Siri already owns, the
+/// one behind "call Mum on WhatsApp", where the question becomes whether this
+/// is a phone app. That was a guess that turned out not to be the blocker; it
+/// is still a real risk, so the errand wording stays as the path that cannot
+/// collide, and the call wording stays because it is what gets said out loud.
 ///
 /// English only in this file, and deliberately. Xcode's phrase extractor drops
 /// non-ASCII from a literal: three Chinese phrases written here came out of the

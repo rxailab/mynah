@@ -167,7 +167,10 @@ struct VoiceCallApp: View {
     private func claimSiriErrand() {
         guard let errand = PendingSiriCall.shared.claim() else { return }
         guard model.settings.isSignedIn else { return }
-        model.seedComposer(errand)
+        // Empty is allowed: it means they reached the composer by voice without
+        // saying what for. Seeding "" would clear a draft they had already
+        // started, so only a real sentence is planted.
+        if !errand.isEmpty { model.seedComposer(errand) }
         // Replace rather than append: arriving from Siri should not leave a
         // stack of screens behind the composer for someone who was never in
         // the app to begin with.
